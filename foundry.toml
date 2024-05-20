@@ -3,7 +3,7 @@
 # This takes precedence over `auto_detect_solc`, if a version is set then this overrides auto-detection.
 solc-version = "0.8.25"
 # The source directory
-src = 'src'
+src = 'src1'
 # The test directory
 test = 'test'
 # The script directory
