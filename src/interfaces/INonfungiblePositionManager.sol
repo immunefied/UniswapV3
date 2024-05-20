@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 interface NonfungiblePositionManager {
+
     struct CollectParams {
         uint256 tokenId;
         address recipient;
@@ -125,4 +126,5 @@ interface NonfungiblePositionManager {
     function transferFrom(address from, address to, uint256 tokenId) external;
     function uniswapV3MintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes memory data) external;
     function unwrapWETH9(uint256 amountMinimum, address recipient) external payable;
+
 }

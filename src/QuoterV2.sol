@@ -4,11 +4,13 @@ pragma solidity >=0.5.0;
 /// @title Immutable state
 /// @notice Functions that return immutable state of the router
 interface IPeripheryImmutableState {
+
     /// @return Returns the address of the Uniswap V3 factory
     function factory() external view returns (address);
 
     /// @return Returns the address of WETH9
     function WETH9() external view returns (address);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -21,6 +23,7 @@ pragma abicoder v2;
 /// @dev These functions are not marked view because they rely on calling non-view functions and reverting
 /// to compute the result. They are also not gas efficient and should not be called on-chain.
 interface IQuoterV2 {
+
     /// @notice Returns the amount out received for a given exact input swap without executing the swap
     /// @param path The path of the swap, i.e. each token pair and the pool fee
     /// @param amountIn The amount of the first token to swap
@@ -58,12 +61,7 @@ interface IQuoterV2 {
     /// @return gasEstimate The estimate of the gas that the swap consumes
     function quoteExactInputSingle(QuoteExactInputSingleParams memory params)
         external
-        returns (
-            uint256 amountOut,
-            uint160 sqrtPriceX96After,
-            uint32 initializedTicksCrossed,
-            uint256 gasEstimate
-        );
+        returns (uint256 amountOut, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256 gasEstimate);
 
     /// @notice Returns the amount in required for a given exact output swap without executing the swap
     /// @param path The path of the swap, i.e. each token pair and the pool fee. Path must be provided in reverse order
@@ -102,12 +100,8 @@ interface IQuoterV2 {
     /// @return gasEstimate The estimate of the gas that the swap consumes
     function quoteExactOutputSingle(QuoteExactOutputSingleParams memory params)
         external
-        returns (
-            uint256 amountIn,
-            uint160 sqrtPriceX96After,
-            uint32 initializedTicksCrossed,
-            uint256 gasEstimate
-        );
+        returns (uint256 amountIn, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256 gasEstimate);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -115,6 +109,7 @@ pragma solidity >=0.5.0;
 
 /// @title Provides functions for deriving a pool address from the factory, tokens, and the fee
 library PoolAddress {
+
     bytes32 internal constant POOL_INIT_CODE_HASH = 0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54;
 
     /// @notice The identifying key of the pool
@@ -129,11 +124,7 @@ library PoolAddress {
     /// @param tokenB The second token of a pool, unsorted
     /// @param fee The fee level of the pool
     /// @return Poolkey The pool details with ordered token0 and token1 assignments
-    function getPoolKey(
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) internal pure returns (PoolKey memory) {
+    function getPoolKey(address tokenA, address tokenB, uint24 fee) internal pure returns (PoolKey memory) {
         if (tokenA > tokenB) (tokenA, tokenB) = (tokenB, tokenA);
         return PoolKey({token0: tokenA, token1: tokenB, fee: fee});
     }
@@ -148,26 +139,25 @@ library PoolAddress {
             uint256(
                 keccak256(
                     abi.encodePacked(
-                        hex'ff',
-                        factory,
-                        keccak256(abi.encode(key.token0, key.token1, key.fee)),
-                        POOL_INIT_CODE_HASH
+                        hex"ff", factory, keccak256(abi.encode(key.token0, key.token1, key.fee)), POOL_INIT_CODE_HASH
                     )
                 )
             )
         );
     }
+
 }
 
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity >=0.5.0;
 
-import './BitMath.sol';
+import "./BitMath.sol";
 
 /// @title Packed tick initialized state library
 /// @notice Stores a packed mapping of tick index to its initialized state
 /// @dev The mapping uses int16 for keys since ticks are represented as int24 and there are 256 (2^8) values per word.
 library TickBitmap {
+
     /// @notice Computes the position in the mapping where the initialized bit for a tick lives
     /// @param tick The tick for which to compute the position
     /// @return wordPos The key in the mapping containing the word in which the bit is stored
@@ -181,11 +171,7 @@ library TickBitmap {
     /// @param self The mapping in which to flip the tick
     /// @param tick The tick to flip
     /// @param tickSpacing The spacing between usable ticks
-    function flipTick(
-        mapping(int16 => uint256) storage self,
-        int24 tick,
-        int24 tickSpacing
-    ) internal {
+    function flipTick(mapping(int16 => uint256) storage self, int24 tick, int24 tickSpacing) internal {
         require(tick % tickSpacing == 0); // ensure that the tick is spaced
         (int16 wordPos, uint8 bitPos) = position(tick / tickSpacing);
         uint256 mask = 1 << bitPos;
@@ -236,6 +222,7 @@ library TickBitmap {
                 : (compressed + 1 + int24(type(uint8).max - bitPos)) * tickSpacing;
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -244,6 +231,7 @@ pragma solidity >=0.5.0;
 /// @title Safe casting methods
 /// @notice Contains methods for safely casting between types
 library SafeCast {
+
     /// @notice Cast a uint256 to a uint160, revert on overflow
     /// @param y The uint256 to be downcasted
     /// @return z The downcasted integer, now type uint160
@@ -262,20 +250,21 @@ library SafeCast {
     /// @param y The uint256 to be casted
     /// @return z The casted integer, now type int256
     function toInt256(uint256 y) internal pure returns (int256 z) {
-        require(y < 2**255);
+        require(y < 2 ** 255);
         z = int256(y);
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-import './pool/IUniswapV3PoolImmutables.sol';
-import './pool/IUniswapV3PoolState.sol';
-import './pool/IUniswapV3PoolDerivedState.sol';
-import './pool/IUniswapV3PoolActions.sol';
-import './pool/IUniswapV3PoolOwnerActions.sol';
-import './pool/IUniswapV3PoolEvents.sol';
+import "./pool/IUniswapV3PoolImmutables.sol";
+import "./pool/IUniswapV3PoolState.sol";
+import "./pool/IUniswapV3PoolDerivedState.sol";
+import "./pool/IUniswapV3PoolActions.sol";
+import "./pool/IUniswapV3PoolOwnerActions.sol";
+import "./pool/IUniswapV3PoolEvents.sol";
 
 /// @title The interface for a Uniswap V3 Pool
 /// @notice A Uniswap pool facilitates swapping and automated market making between any two assets that strictly conform
@@ -288,30 +277,28 @@ interface IUniswapV3Pool is
     IUniswapV3PoolActions,
     IUniswapV3PoolOwnerActions,
     IUniswapV3PoolEvents
-{
-
-}
+{}
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
-import './PoolAddress.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import "./PoolAddress.sol";
 
 /// @notice Provides validation for callbacks from Uniswap V3 Pools
 library CallbackValidation {
+
     /// @notice Returns the address of a valid Uniswap V3 Pool
     /// @param factory The contract address of the Uniswap V3 factory
     /// @param tokenA The contract address of either token0 or token1
     /// @param tokenB The contract address of the other token
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
     /// @return pool The V3 pool contract address
-    function verifyCallback(
-        address factory,
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) internal view returns (IUniswapV3Pool pool) {
+    function verifyCallback(address factory, address tokenA, address tokenB, uint24 fee)
+        internal
+        view
+        returns (IUniswapV3Pool pool)
+    {
         return verifyCallback(factory, PoolAddress.getPoolKey(tokenA, tokenB, fee));
     }
 
@@ -327,23 +314,25 @@ library CallbackValidation {
         pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
         require(msg.sender == address(pool));
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.6.0;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 
 library PoolTicksCounter {
+
     /// @dev This function counts the number of initialized ticks that would incur a gas cost between tickBefore and tickAfter.
     /// When tickBefore and/or tickAfter themselves are initialized, the logic over whether we should count them depends on the
     /// direction of the swap. If we are swapping upwards (tickAfter > tickBefore) we don't want to count tickBefore but we do
     /// want to count tickAfter. The opposite is true if we are swapping downwards.
-    function countInitializedTicksCrossed(
-        IUniswapV3Pool self,
-        int24 tickBefore,
-        int24 tickAfter
-    ) internal view returns (uint32 initializedTicksCrossed) {
+    function countInitializedTicksCrossed(IUniswapV3Pool self, int24 tickBefore, int24 tickAfter)
+        internal
+        view
+        returns (uint32 initializedTicksCrossed)
+    {
         int16 wordPosLower;
         int16 wordPosHigher;
         uint8 bitPosLower;
@@ -363,17 +352,13 @@ library PoolTicksCounter {
             // If the initializable tick after the swap is initialized, our original tickAfter is a
             // multiple of tick spacing, and we are swapping downwards we know that tickAfter is initialized
             // and we shouldn't count it.
-            tickAfterInitialized =
-                ((self.tickBitmap(wordPosAfter) & (1 << bitPosAfter)) > 0) &&
-                ((tickAfter % self.tickSpacing()) == 0) &&
-                (tickBefore > tickAfter);
+            tickAfterInitialized = ((self.tickBitmap(wordPosAfter) & (1 << bitPosAfter)) > 0)
+                && ((tickAfter % self.tickSpacing()) == 0) && (tickBefore > tickAfter);
 
             // In the case where tickBefore is initialized, we only want to count it if we are swapping upwards.
             // Use the same logic as above to decide whether we should count tickBefore or not.
-            tickBeforeInitialized =
-                ((self.tickBitmap(wordPos) & (1 << bitPos)) > 0) &&
-                ((tickBefore % self.tickSpacing()) == 0) &&
-                (tickBefore < tickAfter);
+            tickBeforeInitialized = ((self.tickBitmap(wordPos) & (1 << bitPos)) > 0)
+                && ((tickBefore % self.tickSpacing()) == 0) && (tickBefore < tickAfter);
 
             if (wordPos < wordPosAfter || (wordPos == wordPosAfter && bitPos <= bitPosAfter)) {
                 wordPosLower = wordPos;
@@ -424,30 +409,32 @@ library PoolTicksCounter {
         }
         return bits;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@uniswap/v3-periphery/contracts/base/PeripheryImmutableState.sol';
-import '@uniswap/v3-core/contracts/libraries/SafeCast.sol';
-import '@uniswap/v3-core/contracts/libraries/TickMath.sol';
-import '@uniswap/v3-core/contracts/libraries/TickBitmap.sol';
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
-import '@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol';
-import '@uniswap/v3-periphery/contracts/libraries/Path.sol';
-import '@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol';
-import '@uniswap/v3-periphery/contracts/libraries/CallbackValidation.sol';
+import "@uniswap/v3-periphery/contracts/base/PeripheryImmutableState.sol";
+import "@uniswap/v3-core/contracts/libraries/SafeCast.sol";
+import "@uniswap/v3-core/contracts/libraries/TickMath.sol";
+import "@uniswap/v3-core/contracts/libraries/TickBitmap.sol";
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
+import "@uniswap/v3-periphery/contracts/libraries/Path.sol";
+import "@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol";
+import "@uniswap/v3-periphery/contracts/libraries/CallbackValidation.sol";
 
-import '../interfaces/IQuoterV2.sol';
-import '../libraries/PoolTicksCounter.sol';
+import "../interfaces/IQuoterV2.sol";
+import "../libraries/PoolTicksCounter.sol";
 
 /// @title Provides quotes for swaps
 /// @notice Allows getting the expected amount out or amount in for a given swap without executing the swap
 /// @dev These functions are not gas efficient and should _not_ be called on chain. Instead, optimistically execute
 /// the swap and check the amounts in the callback.
 contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState {
+
     using Path for bytes;
     using SafeCast for uint256;
     using PoolTicksCounter for IUniswapV3Pool;
@@ -457,31 +444,26 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
 
     constructor(address _factory, address _WETH9) PeripheryImmutableState(_factory, _WETH9) {}
 
-    function getPool(
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) private view returns (IUniswapV3Pool) {
+    function getPool(address tokenA, address tokenB, uint24 fee) private view returns (IUniswapV3Pool) {
         return IUniswapV3Pool(PoolAddress.computeAddress(factory, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
     }
 
     /// @inheritdoc IUniswapV3SwapCallback
-    function uniswapV3SwapCallback(
-        int256 amount0Delta,
-        int256 amount1Delta,
-        bytes memory path
-    ) external view override {
+    function uniswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes memory path)
+        external
+        view
+        override
+    {
         require(amount0Delta > 0 || amount1Delta > 0); // swaps entirely within 0-liquidity regions are not supported
         (address tokenIn, address tokenOut, uint24 fee) = path.decodeFirstPool();
         CallbackValidation.verifyCallback(factory, tokenIn, tokenOut, fee);
 
-        (bool isExactInput, uint256 amountToPay, uint256 amountReceived) =
-            amount0Delta > 0
-                ? (tokenIn < tokenOut, uint256(amount0Delta), uint256(-amount1Delta))
-                : (tokenOut < tokenIn, uint256(amount1Delta), uint256(-amount0Delta));
+        (bool isExactInput, uint256 amountToPay, uint256 amountReceived) = amount0Delta > 0
+            ? (tokenIn < tokenOut, uint256(amount0Delta), uint256(-amount1Delta))
+            : (tokenOut < tokenIn, uint256(amount1Delta), uint256(-amount0Delta));
 
         IUniswapV3Pool pool = getPool(tokenIn, tokenOut, fee);
-        (uint160 sqrtPriceX96After, int24 tickAfter, , , , , ) = pool.slot0();
+        (uint160 sqrtPriceX96After, int24 tickAfter,,,,,) = pool.slot0();
 
         if (isExactInput) {
             assembly {
@@ -508,14 +490,10 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
     function parseRevertReason(bytes memory reason)
         private
         pure
-        returns (
-            uint256 amount,
-            uint160 sqrtPriceX96After,
-            int24 tickAfter
-        )
+        returns (uint256 amount, uint160 sqrtPriceX96After, int24 tickAfter)
     {
         if (reason.length != 96) {
-            if (reason.length < 68) revert('Unexpected error');
+            if (reason.length < 68) revert("Unexpected error");
             assembly {
                 reason := add(reason, 0x04)
             }
@@ -524,23 +502,14 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
         return abi.decode(reason, (uint256, uint160, int24));
     }
 
-    function handleRevert(
-        bytes memory reason,
-        IUniswapV3Pool pool,
-        uint256 gasEstimate
-    )
+    function handleRevert(bytes memory reason, IUniswapV3Pool pool, uint256 gasEstimate)
         private
         view
-        returns (
-            uint256 amount,
-            uint160 sqrtPriceX96After,
-            uint32 initializedTicksCrossed,
-            uint256
-        )
+        returns (uint256 amount, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256)
     {
         int24 tickBefore;
         int24 tickAfter;
-        (, tickBefore, , , , , ) = pool.slot0();
+        (, tickBefore,,,,,) = pool.slot0();
         (amount, sqrtPriceX96After, tickAfter) = parseRevertReason(reason);
 
         initializedTicksCrossed = pool.countInitializedTicksCrossed(tickBefore, tickAfter);
@@ -551,28 +520,21 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
     function quoteExactInputSingle(QuoteExactInputSingleParams memory params)
         public
         override
-        returns (
-            uint256 amountOut,
-            uint160 sqrtPriceX96After,
-            uint32 initializedTicksCrossed,
-            uint256 gasEstimate
-        )
+        returns (uint256 amountOut, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256 gasEstimate)
     {
         bool zeroForOne = params.tokenIn < params.tokenOut;
         IUniswapV3Pool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
 
         uint256 gasBefore = gasleft();
-        try
-            pool.swap(
-                address(this), // address(0) might cause issues with some tokens
-                zeroForOne,
-                params.amountIn.toInt256(),
-                params.sqrtPriceLimitX96 == 0
-                    ? (zeroForOne ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1)
-                    : params.sqrtPriceLimitX96,
-                abi.encodePacked(params.tokenIn, params.fee, params.tokenOut)
-            )
-        {} catch (bytes memory reason) {
+        try pool.swap(
+            address(this), // address(0) might cause issues with some tokens
+            zeroForOne,
+            params.amountIn.toInt256(),
+            params.sqrtPriceLimitX96 == 0
+                ? (zeroForOne ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1)
+                : params.sqrtPriceLimitX96,
+            abi.encodePacked(params.tokenIn, params.fee, params.tokenOut)
+        ) {} catch (bytes memory reason) {
             gasEstimate = gasBefore - gasleft();
             return handleRevert(reason, pool, gasEstimate);
         }
@@ -597,15 +559,15 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
 
             // the outputs of prior swaps become the inputs to subsequent ones
             (uint256 _amountOut, uint160 _sqrtPriceX96After, uint32 _initializedTicksCrossed, uint256 _gasEstimate) =
-                quoteExactInputSingle(
-                    QuoteExactInputSingleParams({
-                        tokenIn: tokenIn,
-                        tokenOut: tokenOut,
-                        fee: fee,
-                        amountIn: amountIn,
-                        sqrtPriceLimitX96: 0
-                    })
-                );
+            quoteExactInputSingle(
+                QuoteExactInputSingleParams({
+                    tokenIn: tokenIn,
+                    tokenOut: tokenOut,
+                    fee: fee,
+                    amountIn: amountIn,
+                    sqrtPriceLimitX96: 0
+                })
+            );
 
             sqrtPriceX96AfterList[i] = _sqrtPriceX96After;
             initializedTicksCrossedList[i] = _initializedTicksCrossed;
@@ -625,12 +587,7 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
     function quoteExactOutputSingle(QuoteExactOutputSingleParams memory params)
         public
         override
-        returns (
-            uint256 amountIn,
-            uint160 sqrtPriceX96After,
-            uint32 initializedTicksCrossed,
-            uint256 gasEstimate
-        )
+        returns (uint256 amountIn, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256 gasEstimate)
     {
         bool zeroForOne = params.tokenIn < params.tokenOut;
         IUniswapV3Pool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
@@ -638,17 +595,15 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
         // if no price limit has been specified, cache the output amount for comparison in the swap callback
         if (params.sqrtPriceLimitX96 == 0) amountOutCached = params.amount;
         uint256 gasBefore = gasleft();
-        try
-            pool.swap(
-                address(this), // address(0) might cause issues with some tokens
-                zeroForOne,
-                -params.amount.toInt256(),
-                params.sqrtPriceLimitX96 == 0
-                    ? (zeroForOne ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1)
-                    : params.sqrtPriceLimitX96,
-                abi.encodePacked(params.tokenOut, params.fee, params.tokenIn)
-            )
-        {} catch (bytes memory reason) {
+        try pool.swap(
+            address(this), // address(0) might cause issues with some tokens
+            zeroForOne,
+            -params.amount.toInt256(),
+            params.sqrtPriceLimitX96 == 0
+                ? (zeroForOne ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1)
+                : params.sqrtPriceLimitX96,
+            abi.encodePacked(params.tokenOut, params.fee, params.tokenIn)
+        ) {} catch (bytes memory reason) {
             gasEstimate = gasBefore - gasleft();
             if (params.sqrtPriceLimitX96 == 0) delete amountOutCached; // clear cache
             return handleRevert(reason, pool, gasEstimate);
@@ -674,15 +629,15 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
 
             // the inputs of prior swaps become the outputs of subsequent ones
             (uint256 _amountIn, uint160 _sqrtPriceX96After, uint32 _initializedTicksCrossed, uint256 _gasEstimate) =
-                quoteExactOutputSingle(
-                    QuoteExactOutputSingleParams({
-                        tokenIn: tokenIn,
-                        tokenOut: tokenOut,
-                        amount: amountOut,
-                        fee: fee,
-                        sqrtPriceLimitX96: 0
-                    })
-                );
+            quoteExactOutputSingle(
+                QuoteExactOutputSingleParams({
+                    tokenIn: tokenIn,
+                    tokenOut: tokenOut,
+                    amount: amountOut,
+                    fee: fee,
+                    sqrtPriceLimitX96: 0
+                })
+            );
 
             sqrtPriceX96AfterList[i] = _sqrtPriceX96After;
             initializedTicksCrossedList[i] = _initializedTicksCrossed;
@@ -698,6 +653,7 @@ contract QuoterV2 is IQuoterV2, IUniswapV3SwapCallback, PeripheryImmutableState 
             }
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -707,15 +663,16 @@ pragma solidity >=0.5.0;
 /// @notice Computes sqrt price for ticks of size 1.0001, i.e. sqrt(1.0001^tick) as fixed point Q64.96 numbers. Supports
 /// prices between 2**-128 and 2**128
 library TickMath {
+
     /// @dev The minimum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**-128
-    int24 internal constant MIN_TICK = -887272;
+    int24 internal constant MIN_TICK = -887_272;
     /// @dev The maximum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**128
     int24 internal constant MAX_TICK = -MIN_TICK;
 
     /// @dev The minimum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MIN_TICK)
-    uint160 internal constant MIN_SQRT_RATIO = 4295128739;
+    uint160 internal constant MIN_SQRT_RATIO = 4_295_128_739;
     /// @dev The maximum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MAX_TICK)
-    uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
+    uint160 internal constant MAX_SQRT_RATIO = 1_461_446_703_485_210_103_287_273_052_203_988_822_378_723_970_342;
 
     /// @notice Calculates sqrt(1.0001^tick) * 2^96
     /// @dev Throws if |tick| > max tick
@@ -724,7 +681,7 @@ library TickMath {
     /// at the given tick
     function getSqrtRatioAtTick(int24 tick) internal pure returns (uint160 sqrtPriceX96) {
         uint256 absTick = tick < 0 ? uint256(-int256(tick)) : uint256(int256(tick));
-        require(absTick <= uint256(MAX_TICK), 'T');
+        require(absTick <= uint256(MAX_TICK), "T");
 
         uint256 ratio = absTick & 0x1 != 0 ? 0xfffcb933bd6fad37aa2d162d1a594001 : 0x100000000000000000000000000000000;
         if (absTick & 0x2 != 0) ratio = (ratio * 0xfff97272373d413259a46990580e213a) >> 128;
@@ -762,7 +719,7 @@ library TickMath {
     /// @return tick The greatest tick for which the ratio is less than or equal to the input ratio
     function getTickAtSqrtRatio(uint160 sqrtPriceX96) internal pure returns (int24 tick) {
         // second inequality must be < because the price can never reach the price at the max tick
-        require(sqrtPriceX96 >= MIN_SQRT_RATIO && sqrtPriceX96 < MAX_SQRT_RATIO, 'R');
+        require(sqrtPriceX96 >= MIN_SQRT_RATIO && sqrtPriceX96 < MAX_SQRT_RATIO, "R");
         uint256 ratio = uint256(sqrtPriceX96) << 32;
 
         uint256 r = ratio;
@@ -897,13 +854,14 @@ library TickMath {
             log_2 := or(log_2, shl(50, f))
         }
 
-        int256 log_sqrt10001 = log_2 * 255738958999603826347141; // 128.128 number
+        int256 log_sqrt10001 = log_2 * 255_738_958_999_603_826_347_141; // 128.128 number
 
-        int24 tickLow = int24((log_sqrt10001 - 3402992956809132418596140100660247210) >> 128);
-        int24 tickHi = int24((log_sqrt10001 + 291339464771989622907027621153398088495) >> 128);
+        int24 tickLow = int24((log_sqrt10001 - 3_402_992_956_809_132_418_596_140_100_660_247_210) >> 128);
+        int24 tickHi = int24((log_sqrt10001 + 291_339_464_771_989_622_907_027_621_153_398_088_495) >> 128);
 
         tick = tickLow == tickHi ? tickLow : getSqrtRatioAtTick(tickHi) <= sqrtPriceX96 ? tickHi : tickLow;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -913,6 +871,7 @@ pragma solidity >=0.5.0;
 /// @notice These methods compose the pool's state, and can change with any frequency including multiple times
 /// per transaction
 interface IUniswapV3PoolState {
+
     /// @notice The 0th storage slot in the pool stores many values, and is exposed as a single method to save gas
     /// when accessed externally.
     /// @return sqrtPriceX96 The current price of the pool as a sqrt(token1/token0) Q64.96 value
@@ -1021,6 +980,7 @@ interface IUniswapV3PoolState {
             uint160 secondsPerLiquidityCumulativeX128,
             bool initialized
         );
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1034,75 +994,70 @@ interface IUniswapV3PoolState {
 pragma solidity >=0.5.0 <0.8.0;
 
 library BytesLib {
-    function slice(
-        bytes memory _bytes,
-        uint256 _start,
-        uint256 _length
-    ) internal pure returns (bytes memory) {
-        require(_length + 31 >= _length, 'slice_overflow');
-        require(_start + _length >= _start, 'slice_overflow');
-        require(_bytes.length >= _start + _length, 'slice_outOfBounds');
+
+    function slice(bytes memory _bytes, uint256 _start, uint256 _length) internal pure returns (bytes memory) {
+        require(_length + 31 >= _length, "slice_overflow");
+        require(_start + _length >= _start, "slice_overflow");
+        require(_bytes.length >= _start + _length, "slice_outOfBounds");
 
         bytes memory tempBytes;
 
         assembly {
             switch iszero(_length)
-                case 0 {
-                    // Get a location of some free memory and store it in tempBytes as
-                    // Solidity does for memory variables.
-                    tempBytes := mload(0x40)
+            case 0 {
+                // Get a location of some free memory and store it in tempBytes as
+                // Solidity does for memory variables.
+                tempBytes := mload(0x40)
 
-                    // The first word of the slice result is potentially a partial
-                    // word read from the original array. To read it, we calculate
-                    // the length of that partial word and start copying that many
-                    // bytes into the array. The first word we copy will start with
-                    // data we don't care about, but the last `lengthmod` bytes will
-                    // land at the beginning of the contents of the new array. When
-                    // we're done copying, we overwrite the full first word with
-                    // the actual length of the slice.
-                    let lengthmod := and(_length, 31)
+                // The first word of the slice result is potentially a partial
+                // word read from the original array. To read it, we calculate
+                // the length of that partial word and start copying that many
+                // bytes into the array. The first word we copy will start with
+                // data we don't care about, but the last `lengthmod` bytes will
+                // land at the beginning of the contents of the new array. When
+                // we're done copying, we overwrite the full first word with
+                // the actual length of the slice.
+                let lengthmod := and(_length, 31)
 
-                    // The multiplication in the next line is necessary
-                    // because when slicing multiples of 32 bytes (lengthmod == 0)
-                    // the following copy loop was copying the origin's length
-                    // and then ending prematurely not copying everything it should.
-                    let mc := add(add(tempBytes, lengthmod), mul(0x20, iszero(lengthmod)))
-                    let end := add(mc, _length)
+                // The multiplication in the next line is necessary
+                // because when slicing multiples of 32 bytes (lengthmod == 0)
+                // the following copy loop was copying the origin's length
+                // and then ending prematurely not copying everything it should.
+                let mc := add(add(tempBytes, lengthmod), mul(0x20, iszero(lengthmod)))
+                let end := add(mc, _length)
 
-                    for {
-                        // The multiplication in the next line has the same exact purpose
-                        // as the one above.
-                        let cc := add(add(add(_bytes, lengthmod), mul(0x20, iszero(lengthmod))), _start)
-                    } lt(mc, end) {
-                        mc := add(mc, 0x20)
-                        cc := add(cc, 0x20)
-                    } {
-                        mstore(mc, mload(cc))
-                    }
+                for {
+                    // The multiplication in the next line has the same exact purpose
+                    // as the one above.
+                    let cc := add(add(add(_bytes, lengthmod), mul(0x20, iszero(lengthmod))), _start)
+                } lt(mc, end) {
+                    mc := add(mc, 0x20)
+                    cc := add(cc, 0x20)
+                } { mstore(mc, mload(cc)) }
 
-                    mstore(tempBytes, _length)
+                mstore(tempBytes, _length)
 
-                    //update free-memory pointer
-                    //allocating the array padded to 32 bytes like the compiler does now
-                    mstore(0x40, and(add(mc, 31), not(31)))
-                }
-                //if we want a zero-length slice let's just return a zero-length array
-                default {
-                    tempBytes := mload(0x40)
-                    //zero out the 32 bytes slice we are about to return
-                    //we need to do it because Solidity does not garbage collect
-                    mstore(tempBytes, 0)
+                //update free-memory pointer
+                //allocating the array padded to 32 bytes like the compiler does now
+                mstore(0x40, and(add(mc, 31), not(31)))
+            }
+            //if we want a zero-length slice let's just return a zero-length array
+            default {
+                tempBytes := mload(0x40)
+                //zero out the 32 bytes slice we are about to return
+                //we need to do it because Solidity does not garbage collect
+                mstore(tempBytes, 0)
 
-                    mstore(0x40, add(tempBytes, 0x20))
-                }
+                mstore(0x40, add(tempBytes, 0x20))
+            }
         }
 
         return tempBytes;
     }
 
     function toAddress(bytes memory _bytes, uint256 _start) internal pure returns (address) {
-        require(_start + 20 >= _start, 'toAddress_overflow');
-        require(_bytes.length >= _start + 20, 'toAddress_outOfBounds');
+        require(_start + 20 >= _start, "toAddress_overflow");
+        require(_bytes.length >= _start + 20, "toAddress_outOfBounds");
         address tempAddress;
 
         assembly {
@@ -1113,8 +1068,8 @@ library BytesLib {
     }
 
     function toUint24(bytes memory _bytes, uint256 _start) internal pure returns (uint24) {
-        require(_start + 3 >= _start, 'toUint24_overflow');
-        require(_bytes.length >= _start + 3, 'toUint24_outOfBounds');
+        require(_start + 3 >= _start, "toUint24_overflow");
+        require(_bytes.length >= _start + 3, "toUint24_outOfBounds");
         uint24 tempUint;
 
         assembly {
@@ -1123,6 +1078,7 @@ library BytesLib {
 
         return tempUint;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1131,6 +1087,7 @@ pragma solidity >=0.5.0;
 /// @title Callback for IUniswapV3PoolActions#swap
 /// @notice Any contract that calls IUniswapV3PoolActions#swap must implement this interface
 interface IUniswapV3SwapCallback {
+
     /// @notice Called to `msg.sender` after executing a swap via IUniswapV3Pool#swap.
     /// @dev In the implementation you must pay the pool tokens owed for the swap.
     /// The caller of this method must be checked to be a UniswapV3Pool deployed by the canonical UniswapV3Factory.
@@ -1140,11 +1097,8 @@ interface IUniswapV3SwapCallback {
     /// @param amount1Delta The amount of token1 that was sent (negative) or must be received (positive) by the pool by
     /// the end of the swap. If positive, the callback must send that amount of token1 to the pool.
     /// @param data Any data passed through by the caller via the IUniswapV3PoolActions#swap call
-    function uniswapV3SwapCallback(
-        int256 amount0Delta,
-        int256 amount1Delta,
-        bytes calldata data
-    ) external;
+    function uniswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes calldata data) external;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1154,6 +1108,7 @@ pragma solidity >=0.5.0;
 /// @notice Contains view functions to provide information about the pool that is computed rather than stored on the
 /// blockchain. The functions here may have variable gas costs.
 interface IUniswapV3PoolDerivedState {
+
     /// @notice Returns the cumulative tick and liquidity as of each timestamp `secondsAgo` from the current block timestamp
     /// @dev To get a time weighted average tick or liquidity-in-range, you must call this with two values, one representing
     /// the beginning of the period and another for the end of the period. E.g., to get the last hour time-weighted average tick,
@@ -1181,21 +1136,19 @@ interface IUniswapV3PoolDerivedState {
     function snapshotCumulativesInside(int24 tickLower, int24 tickUpper)
         external
         view
-        returns (
-            int56 tickCumulativeInside,
-            uint160 secondsPerLiquidityInsideX128,
-            uint32 secondsInside
-        );
+        returns (int56 tickCumulativeInside, uint160 secondsPerLiquidityInsideX128, uint32 secondsInside);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '../interfaces/IPeripheryImmutableState.sol';
+import "../interfaces/IPeripheryImmutableState.sol";
 
 /// @title Immutable state
 /// @notice Immutable state used by periphery contracts
 abstract contract PeripheryImmutableState is IPeripheryImmutableState {
+
     /// @inheritdoc IPeripheryImmutableState
     address public immutable override factory;
     /// @inheritdoc IPeripheryImmutableState
@@ -1205,6 +1158,7 @@ abstract contract PeripheryImmutableState is IPeripheryImmutableState {
         factory = _factory;
         WETH9 = _WETH9;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1213,6 +1167,7 @@ pragma solidity >=0.5.0;
 /// @title Permissionless pool actions
 /// @notice Contains pool methods that can be called by anyone
 interface IUniswapV3PoolActions {
+
     /// @notice Sets the initial price for the pool
     /// @dev Price is represented as a sqrt(amountToken1/amountToken0) Q64.96 value
     /// @param sqrtPriceX96 the initial sqrt price of the pool as a Q64.96
@@ -1229,13 +1184,9 @@ interface IUniswapV3PoolActions {
     /// @param data Any data that should be passed through to the callback
     /// @return amount0 The amount of token0 that was paid to mint the given amount of liquidity. Matches the value in the callback
     /// @return amount1 The amount of token1 that was paid to mint the given amount of liquidity. Matches the value in the callback
-    function mint(
-        address recipient,
-        int24 tickLower,
-        int24 tickUpper,
-        uint128 amount,
-        bytes calldata data
-    ) external returns (uint256 amount0, uint256 amount1);
+    function mint(address recipient, int24 tickLower, int24 tickUpper, uint128 amount, bytes calldata data)
+        external
+        returns (uint256 amount0, uint256 amount1);
 
     /// @notice Collects tokens owed to a position
     /// @dev Does not recompute fees earned, which must be done either via mint or burn of any amount of liquidity.
@@ -1265,11 +1216,9 @@ interface IUniswapV3PoolActions {
     /// @param amount How much liquidity to burn
     /// @return amount0 The amount of token0 sent to the recipient
     /// @return amount1 The amount of token1 sent to the recipient
-    function burn(
-        int24 tickLower,
-        int24 tickUpper,
-        uint128 amount
-    ) external returns (uint256 amount0, uint256 amount1);
+    function burn(int24 tickLower, int24 tickUpper, uint128 amount)
+        external
+        returns (uint256 amount0, uint256 amount1);
 
     /// @notice Swap token0 for token1, or token1 for token0
     /// @dev The caller of this method receives a callback in the form of IUniswapV3SwapCallback#uniswapV3SwapCallback
@@ -1297,18 +1246,14 @@ interface IUniswapV3PoolActions {
     /// @param amount0 The amount of token0 to send
     /// @param amount1 The amount of token1 to send
     /// @param data Any data to be passed through to the callback
-    function flash(
-        address recipient,
-        uint256 amount0,
-        uint256 amount1,
-        bytes calldata data
-    ) external;
+    function flash(address recipient, uint256 amount0, uint256 amount1, bytes calldata data) external;
 
     /// @notice Increase the maximum number of price and liquidity observations that this pool will store
     /// @dev This method is no-op if the pool already has an observationCardinalityNext greater than or equal to
     /// the input observationCardinalityNext.
     /// @param observationCardinalityNext The desired minimum number of observations for the pool to store
     function increaseObservationCardinalityNext(uint16 observationCardinalityNext) external;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1317,6 +1262,7 @@ pragma solidity >=0.5.0;
 /// @title Pool state that never changes
 /// @notice These parameters are fixed for a pool forever, i.e., the methods will always return the same values
 interface IUniswapV3PoolImmutables {
+
     /// @notice The contract that deployed the pool, which must adhere to the IUniswapV3Factory interface
     /// @return The contract address
     function factory() external view returns (address);
@@ -1345,6 +1291,7 @@ interface IUniswapV3PoolImmutables {
     /// also prevents out-of-range liquidity from being used to prevent adding in-range liquidity to a pool
     /// @return The max amount of liquidity per tick
     function maxLiquidityPerTick() external view returns (uint128);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1353,6 +1300,7 @@ pragma solidity >=0.5.0;
 /// @title Permissioned pool actions
 /// @notice Contains pool methods that may only be called by the factory owner
 interface IUniswapV3PoolOwnerActions {
+
     /// @notice Set the denominator of the protocol's % share of the fees
     /// @param feeProtocol0 new protocol fee for token0 of the pool
     /// @param feeProtocol1 new protocol fee for token1 of the pool
@@ -1364,11 +1312,10 @@ interface IUniswapV3PoolOwnerActions {
     /// @param amount1Requested The maximum amount of token1 to send, can be 0 to collect fees in only token0
     /// @return amount0 The protocol fee collected in token0
     /// @return amount1 The protocol fee collected in token1
-    function collectProtocol(
-        address recipient,
-        uint128 amount0Requested,
-        uint128 amount1Requested
-    ) external returns (uint128 amount0, uint128 amount1);
+    function collectProtocol(address recipient, uint128 amount0Requested, uint128 amount1Requested)
+        external
+        returns (uint128 amount0, uint128 amount1);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1377,6 +1324,7 @@ pragma solidity >=0.5.0;
 /// @title BitMath
 /// @dev This library provides functionality for computing bit properties of an unsigned integer
 library BitMath {
+
     /// @notice Returns the index of the most significant bit of the number,
     ///     where the least significant bit is at index 0 and the most significant bit is at index 255
     /// @dev The function satisfies the property:
@@ -1464,15 +1412,17 @@ library BitMath {
         }
         if (x & 0x1 > 0) r -= 1;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.6.0;
 
-import './BytesLib.sol';
+import "./BytesLib.sol";
 
 /// @title Functions for manipulating path data for multihop swaps
 library Path {
+
     using BytesLib for bytes;
 
     /// @dev The length of the bytes encoded address
@@ -1507,15 +1457,7 @@ library Path {
     /// @return tokenA The first token of the given pool
     /// @return tokenB The second token of the given pool
     /// @return fee The fee level of the pool
-    function decodeFirstPool(bytes memory path)
-        internal
-        pure
-        returns (
-            address tokenA,
-            address tokenB,
-            uint24 fee
-        )
-    {
+    function decodeFirstPool(bytes memory path) internal pure returns (address tokenA, address tokenB, uint24 fee) {
         tokenA = path.toAddress(0);
         fee = path.toUint24(ADDR_SIZE);
         tokenB = path.toAddress(NEXT_OFFSET);
@@ -1534,6 +1476,7 @@ library Path {
     function skipToken(bytes memory path) internal pure returns (bytes memory) {
         return path.slice(NEXT_OFFSET, path.length - NEXT_OFFSET);
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1542,6 +1485,7 @@ pragma solidity >=0.5.0;
 /// @title Events emitted by a pool
 /// @notice Contains all events emitted by the pool
 interface IUniswapV3PoolEvents {
+
     /// @notice Emitted exactly once by a pool when #initialize is first called on the pool
     /// @dev Mint/Burn/Swap cannot be emitted by the pool before Initialize
     /// @param sqrtPriceX96 The initial sqrt price of the pool, as a Q64.96
@@ -1639,8 +1583,7 @@ interface IUniswapV3PoolEvents {
     /// @param observationCardinalityNextOld The previous value of the next observation cardinality
     /// @param observationCardinalityNextNew The updated value of the next observation cardinality
     event IncreaseObservationCardinalityNext(
-        uint16 observationCardinalityNextOld,
-        uint16 observationCardinalityNextNew
+        uint16 observationCardinalityNextOld, uint16 observationCardinalityNextNew
     );
 
     /// @notice Emitted when the protocol fee is changed by the pool
@@ -1656,5 +1599,5 @@ interface IUniswapV3PoolEvents {
     /// @param amount0 The amount of token0 protocol fees that is withdrawn
     /// @param amount0 The amount of token1 protocol fees that is withdrawn
     event CollectProtocol(address indexed sender, address indexed recipient, uint128 amount0, uint128 amount1);
-}
 
+}

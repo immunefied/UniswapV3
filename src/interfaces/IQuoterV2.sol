@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 interface QuoterV2 {
+
     struct QuoteExactInputSingleParams {
         address tokenIn;
         address tokenOut;
@@ -43,4 +44,5 @@ interface QuoterV2 {
         external
         returns (uint256 amountIn, uint160 sqrtPriceX96After, uint32 initializedTicksCrossed, uint256 gasEstimate);
     function uniswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes memory path) external view;
+
 }

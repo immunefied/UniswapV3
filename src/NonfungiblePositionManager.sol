@@ -2,31 +2,28 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol';
-import '@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol';
-import '@uniswap/v3-core/contracts/libraries/TickMath.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol";
+import "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol";
+import "@uniswap/v3-core/contracts/libraries/TickMath.sol";
 
-import '../libraries/PoolAddress.sol';
-import '../libraries/CallbackValidation.sol';
-import '../libraries/LiquidityAmounts.sol';
+import "../libraries/PoolAddress.sol";
+import "../libraries/CallbackValidation.sol";
+import "../libraries/LiquidityAmounts.sol";
 
-import './PeripheryPayments.sol';
-import './PeripheryImmutableState.sol';
+import "./PeripheryPayments.sol";
+import "./PeripheryImmutableState.sol";
 
 /// @title Liquidity management functions
 /// @notice Internal functions for safely managing liquidity in Uniswap V3
 abstract contract LiquidityManagement is IUniswapV3MintCallback, PeripheryImmutableState, PeripheryPayments {
+
     struct MintCallbackData {
         PoolAddress.PoolKey poolKey;
         address payer;
     }
 
     /// @inheritdoc IUniswapV3MintCallback
-    function uniswapV3MintCallback(
-        uint256 amount0Owed,
-        uint256 amount1Owed,
-        bytes calldata data
-    ) external override {
+    function uniswapV3MintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes calldata data) external override {
         MintCallbackData memory decoded = abi.decode(data, (MintCallbackData));
         CallbackValidation.verifyCallback(factory, decoded.poolKey);
 
@@ -50,12 +47,7 @@ abstract contract LiquidityManagement is IUniswapV3MintCallback, PeripheryImmuta
     /// @notice Add liquidity to an initialized pool
     function addLiquidity(AddLiquidityParams memory params)
         internal
-        returns (
-            uint128 liquidity,
-            uint256 amount0,
-            uint256 amount1,
-            IUniswapV3Pool pool
-        )
+        returns (uint128 liquidity, uint256 amount0, uint256 amount1, IUniswapV3Pool pool)
     {
         PoolAddress.PoolKey memory poolKey =
             PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee});
@@ -64,16 +56,12 @@ abstract contract LiquidityManagement is IUniswapV3MintCallback, PeripheryImmuta
 
         // compute the liquidity amount
         {
-            (uint160 sqrtPriceX96, , , , , , ) = pool.slot0();
+            (uint160 sqrtPriceX96,,,,,,) = pool.slot0();
             uint160 sqrtRatioAX96 = TickMath.getSqrtRatioAtTick(params.tickLower);
             uint160 sqrtRatioBX96 = TickMath.getSqrtRatioAtTick(params.tickUpper);
 
             liquidity = LiquidityAmounts.getLiquidityForAmounts(
-                sqrtPriceX96,
-                sqrtRatioAX96,
-                sqrtRatioBX96,
-                params.amount0Desired,
-                params.amount1Desired
+                sqrtPriceX96, sqrtRatioAX96, sqrtRatioBX96, params.amount0Desired, params.amount1Desired
             );
         }
 
@@ -85,8 +73,9 @@ abstract contract LiquidityManagement is IUniswapV3MintCallback, PeripheryImmuta
             abi.encode(MintCallbackData({poolKey: poolKey, payer: msg.sender}))
         );
 
-        require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, 'Price slippage check');
+        require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, "Price slippage check");
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -95,6 +84,7 @@ pragma solidity >=0.5.0;
 /// @title Interface for permit
 /// @notice Interface used by DAI/CHAI for permit
 interface IERC20PermitAllowed {
+
     /// @notice Approve the spender to spend some tokens via the holder signature
     /// @dev This is the permit interface used by DAI and CHAI
     /// @param holder The address of the token holder, the token owner
@@ -115,6 +105,7 @@ interface IERC20PermitAllowed {
         bytes32 r,
         bytes32 s
     ) external;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -131,6 +122,7 @@ pragma solidity ^0.7.0;
  * For an implementation, see {ERC165}.
  */
 interface IERC165 {
+
     /**
      * @dev Returns true if this contract implements the interface defined by
      * `interfaceId`. See the corresponding
@@ -140,6 +132,7 @@ interface IERC165 {
      * This function call must use less than 30 000 gas.
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -160,6 +153,7 @@ pragma solidity ^0.7.0;
  * class of bugs, so it's recommended to use it always.
  */
 library SafeMath {
+
     /**
      * @dev Returns the addition of two unsigned integers, with an overflow flag.
      *
@@ -355,6 +349,7 @@ library SafeMath {
         require(b > 0, errorMessage);
         return a % b;
     }
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -370,6 +365,7 @@ pragma solidity >=0.6.0 <0.8.0;
  * need to send a transaction, and thus is not required to hold Ether at all.
  */
 interface IERC20Permit {
+
     /**
      * @dev Sets `value` as the allowance of `spender` over `owner`'s tokens,
      * given `owner`'s signed approval.
@@ -391,7 +387,8 @@ interface IERC20Permit {
      * https://eips.ethereum.org/EIPS/eip-2612#specification[relevant EIP
      * section].
      */
-    function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external;
+    function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external;
 
     /**
      * @dev Returns the current nonce for `owner`. This value must be
@@ -407,20 +404,23 @@ interface IERC20Permit {
      */
     // solhint-disable-next-line func-name-mixedcase
     function DOMAIN_SEPARATOR() external view returns (bytes32);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /// @title Interface for WETH9
 interface IWETH9 is IERC20 {
+
     /// @notice Deposit ether to get wrapped ether
     function deposit() external payable;
 
     /// @notice Withdraw wrapped ether to get ether
     function withdraw(uint256) external;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -438,6 +438,7 @@ pragma solidity >=0.6.0 <0.8.0;
  * This contract is only required for intermediate, library-like contracts.
  */
 abstract contract Context {
+
     function _msgSender() internal view virtual returns (address payable) {
         return msg.sender;
     }
@@ -446,29 +447,33 @@ abstract contract Context {
         this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import './BlockTimestamp.sol';
+import "./BlockTimestamp.sol";
 
 abstract contract PeripheryValidation is BlockTimestamp {
+
     modifier checkDeadline(uint256 deadline) {
-        require(_blockTimestamp() <= deadline, 'Transaction too old');
+        require(_blockTimestamp() <= deadline, "Transaction too old");
         _;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '../interfaces/IMulticall.sol';
+import "../interfaces/IMulticall.sol";
 
 /// @title Multicall
 /// @notice Enables calling multiple methods in a single call to the contract
 abstract contract Multicall is IMulticall {
+
     /// @inheritdoc IMulticall
     function multicall(bytes[] calldata data) external payable override returns (bytes[] memory results) {
         results = new bytes[](data.length);
@@ -487,6 +492,7 @@ abstract contract Multicall is IMulticall {
             results[i] = result;
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -496,6 +502,7 @@ pragma solidity >=0.5.0;
 /// @notice Interface that verifies provided signature for the data
 /// @dev Interface defined by EIP-1271
 interface IERC1271 {
+
     /// @notice Returns whether the provided signature is valid for the provided data
     /// @dev MUST return the bytes4 magic value 0x1626ba7e when function passes.
     /// MUST NOT modify state (using STATICCALL for solc < 0.5, view modifier for solc > 0.5).
@@ -504,6 +511,7 @@ interface IERC1271 {
     /// @param signature Signature byte array associated with _data
     /// @return magicValue The bytes4 magic value 0x1626ba7e
     function isValidSignature(bytes32 hash, bytes memory signature) external view returns (bytes4 magicValue);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -513,6 +521,7 @@ pragma solidity >=0.5.0;
 /// @notice Contains view functions to provide information about the pool that is computed rather than stored on the
 /// blockchain. The functions here may have variable gas costs.
 interface IUniswapV3PoolDerivedState {
+
     /// @notice Returns the cumulative tick and liquidity as of each timestamp `secondsAgo` from the current block timestamp
     /// @dev To get a time weighted average tick or liquidity-in-range, you must call this with two values, one representing
     /// the beginning of the period and another for the end of the period. E.g., to get the last hour time-weighted average tick,
@@ -540,11 +549,8 @@ interface IUniswapV3PoolDerivedState {
     function snapshotCumulativesInside(int24 tickLower, int24 tickUpper)
         external
         view
-        returns (
-            int56 tickCumulativeInside,
-            uint160 secondsPerLiquidityInsideX128,
-            uint32 secondsInside
-        );
+        returns (int56 tickCumulativeInside, uint160 secondsPerLiquidityInsideX128, uint32 secondsInside);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -553,6 +559,7 @@ pragma solidity >=0.7.5;
 /// @title Periphery Payments
 /// @notice Functions to ease deposits and withdrawals of ETH
 interface IPeripheryPayments {
+
     /// @notice Unwraps the contract's WETH9 balance and sends it to recipient as ETH.
     /// @dev The amountMinimum parameter prevents malicious contracts from stealing WETH9 from users.
     /// @param amountMinimum The minimum amount of WETH9 to unwrap
@@ -569,32 +576,29 @@ interface IPeripheryPayments {
     /// @param token The contract address of the token which will be transferred to `recipient`
     /// @param amountMinimum The minimum amount of token required for a transfer
     /// @param recipient The destination address of the token
-    function sweepToken(
-        address token,
-        uint256 amountMinimum,
-        address recipient
-    ) external payable;
+    function sweepToken(address token, uint256 amountMinimum, address recipient) external payable;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
-import '@uniswap/v3-core/contracts/libraries/FixedPoint128.sol';
-import '@uniswap/v3-core/contracts/libraries/FullMath.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import "@uniswap/v3-core/contracts/libraries/FixedPoint128.sol";
+import "@uniswap/v3-core/contracts/libraries/FullMath.sol";
 
-import './interfaces/INonfungiblePositionManager.sol';
-import './interfaces/INonfungibleTokenPositionDescriptor.sol';
-import './libraries/PositionKey.sol';
-import './libraries/PoolAddress.sol';
-import './base/LiquidityManagement.sol';
-import './base/PeripheryImmutableState.sol';
-import './base/Multicall.sol';
-import './base/ERC721Permit.sol';
-import './base/PeripheryValidation.sol';
-import './base/SelfPermit.sol';
-import './base/PoolInitializer.sol';
+import "./interfaces/INonfungiblePositionManager.sol";
+import "./interfaces/INonfungibleTokenPositionDescriptor.sol";
+import "./libraries/PositionKey.sol";
+import "./libraries/PoolAddress.sol";
+import "./base/LiquidityManagement.sol";
+import "./base/PeripheryImmutableState.sol";
+import "./base/Multicall.sol";
+import "./base/ERC721Permit.sol";
+import "./base/PeripheryValidation.sol";
+import "./base/SelfPermit.sol";
+import "./base/PoolInitializer.sol";
 
 /// @title NFT positions
 /// @notice Wraps Uniswap V3 positions in the ERC721 non-fungible token interface
@@ -608,6 +612,7 @@ contract NonfungiblePositionManager is
     PeripheryValidation,
     SelfPermit
 {
+
     // details about the uniswap position
     struct Position {
         // the nonce for permits
@@ -646,11 +651,10 @@ contract NonfungiblePositionManager is
     /// @dev The address of the token descriptor contract, which handles generating token URIs for position tokens
     address private immutable _tokenDescriptor;
 
-    constructor(
-        address _factory,
-        address _WETH9,
-        address _tokenDescriptor_
-    ) ERC721Permit('Uniswap V3 Positions NFT-V1', 'UNI-V3-POS', '1') PeripheryImmutableState(_factory, _WETH9) {
+    constructor(address _factory, address _WETH9, address _tokenDescriptor_)
+        ERC721Permit("Uniswap V3 Positions NFT-V1", "UNI-V3-POS", "1")
+        PeripheryImmutableState(_factory, _WETH9)
+    {
         _tokenDescriptor = _tokenDescriptor_;
     }
 
@@ -675,7 +679,7 @@ contract NonfungiblePositionManager is
         )
     {
         Position memory position = _positions[tokenId];
-        require(position.poolId != 0, 'Invalid token ID');
+        require(position.poolId != 0, "Invalid token ID");
         PoolAddress.PoolKey memory poolKey = _poolIdToPoolKey[position.poolId];
         return (
             position.nonce,
@@ -708,12 +712,7 @@ contract NonfungiblePositionManager is
         payable
         override
         checkDeadline(params.deadline)
-        returns (
-            uint256 tokenId,
-            uint128 liquidity,
-            uint256 amount0,
-            uint256 amount1
-        )
+        returns (uint256 tokenId, uint128 liquidity, uint256 amount0, uint256 amount1)
     {
         IUniswapV3Pool pool;
         (liquidity, amount0, amount1, pool) = addLiquidity(
@@ -734,14 +733,12 @@ contract NonfungiblePositionManager is
         _mint(params.recipient, (tokenId = _nextId++));
 
         bytes32 positionKey = PositionKey.compute(address(this), params.tickLower, params.tickUpper);
-        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) = pool.positions(positionKey);
+        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128,,) = pool.positions(positionKey);
 
         // idempotent set
-        uint80 poolId =
-            cachePoolKey(
-                address(pool),
-                PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee})
-            );
+        uint80 poolId = cachePoolKey(
+            address(pool), PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee})
+        );
 
         _positions[tokenId] = Position({
             nonce: 0,
@@ -760,7 +757,7 @@ contract NonfungiblePositionManager is
     }
 
     modifier isAuthorizedForToken(uint256 tokenId) {
-        require(_isApprovedOrOwner(msg.sender, tokenId), 'Not approved');
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Not approved");
         _;
     }
 
@@ -778,11 +775,7 @@ contract NonfungiblePositionManager is
         payable
         override
         checkDeadline(params.deadline)
-        returns (
-            uint128 liquidity,
-            uint256 amount0,
-            uint256 amount1
-        )
+        returns (uint128 liquidity, uint256 amount0, uint256 amount1)
     {
         Position storage position = _positions[params.tokenId];
 
@@ -807,20 +800,16 @@ contract NonfungiblePositionManager is
         bytes32 positionKey = PositionKey.compute(address(this), position.tickLower, position.tickUpper);
 
         // this is now updated to the current transaction
-        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) = pool.positions(positionKey);
+        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128,,) = pool.positions(positionKey);
 
         position.tokensOwed0 += uint128(
             FullMath.mulDiv(
-                feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
-                position.liquidity,
-                FixedPoint128.Q128
+                feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128, position.liquidity, FixedPoint128.Q128
             )
         );
         position.tokensOwed1 += uint128(
             FullMath.mulDiv(
-                feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
-                position.liquidity,
-                FixedPoint128.Q128
+                feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128, position.liquidity, FixedPoint128.Q128
             )
         );
 
@@ -850,28 +839,22 @@ contract NonfungiblePositionManager is
         IUniswapV3Pool pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
         (amount0, amount1) = pool.burn(position.tickLower, position.tickUpper, params.liquidity);
 
-        require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, 'Price slippage check');
+        require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, "Price slippage check");
 
         bytes32 positionKey = PositionKey.compute(address(this), position.tickLower, position.tickUpper);
         // this is now updated to the current transaction
-        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) = pool.positions(positionKey);
+        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128,,) = pool.positions(positionKey);
 
-        position.tokensOwed0 +=
-            uint128(amount0) +
-            uint128(
+        position.tokensOwed0 += uint128(amount0)
+            + uint128(
                 FullMath.mulDiv(
-                    feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
-                    positionLiquidity,
-                    FixedPoint128.Q128
+                    feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128, positionLiquidity, FixedPoint128.Q128
                 )
             );
-        position.tokensOwed1 +=
-            uint128(amount1) +
-            uint128(
+        position.tokensOwed1 += uint128(amount1)
+            + uint128(
                 FullMath.mulDiv(
-                    feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
-                    positionLiquidity,
-                    FixedPoint128.Q128
+                    feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128, positionLiquidity, FixedPoint128.Q128
                 )
             );
 
@@ -906,21 +889,17 @@ contract NonfungiblePositionManager is
         // trigger an update of the position fees owed and fee growth snapshots if it has any liquidity
         if (position.liquidity > 0) {
             pool.burn(position.tickLower, position.tickUpper, 0);
-            (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) =
+            (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128,,) =
                 pool.positions(PositionKey.compute(address(this), position.tickLower, position.tickUpper));
 
             tokensOwed0 += uint128(
                 FullMath.mulDiv(
-                    feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
-                    position.liquidity,
-                    FixedPoint128.Q128
+                    feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128, position.liquidity, FixedPoint128.Q128
                 )
             );
             tokensOwed1 += uint128(
                 FullMath.mulDiv(
-                    feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
-                    position.liquidity,
-                    FixedPoint128.Q128
+                    feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128, position.liquidity, FixedPoint128.Q128
                 )
             );
 
@@ -929,20 +908,14 @@ contract NonfungiblePositionManager is
         }
 
         // compute the arguments to give to the pool#collect method
-        (uint128 amount0Collect, uint128 amount1Collect) =
-            (
-                params.amount0Max > tokensOwed0 ? tokensOwed0 : params.amount0Max,
-                params.amount1Max > tokensOwed1 ? tokensOwed1 : params.amount1Max
-            );
+        (uint128 amount0Collect, uint128 amount1Collect) = (
+            params.amount0Max > tokensOwed0 ? tokensOwed0 : params.amount0Max,
+            params.amount1Max > tokensOwed1 ? tokensOwed1 : params.amount1Max
+        );
 
         // the actual amounts collected are returned
-        (amount0, amount1) = pool.collect(
-            recipient,
-            position.tickLower,
-            position.tickUpper,
-            amount0Collect,
-            amount1Collect
-        );
+        (amount0, amount1) =
+            pool.collect(recipient, position.tickLower, position.tickUpper, amount0Collect, amount1Collect);
 
         // sometimes there will be a few less wei than expected due to rounding down in core, but we just subtract the full amount expected
         // instead of the actual amount so we can burn the token
@@ -954,7 +927,7 @@ contract NonfungiblePositionManager is
     /// @inheritdoc INonfungiblePositionManager
     function burn(uint256 tokenId) external payable override isAuthorizedForToken(tokenId) {
         Position storage position = _positions[tokenId];
-        require(position.liquidity == 0 && position.tokensOwed0 == 0 && position.tokensOwed1 == 0, 'Not cleared');
+        require(position.liquidity == 0 && position.tokensOwed0 == 0 && position.tokensOwed1 == 0, "Not cleared");
         delete _positions[tokenId];
         _burn(tokenId);
     }
@@ -965,7 +938,7 @@ contract NonfungiblePositionManager is
 
     /// @inheritdoc IERC721
     function getApproved(uint256 tokenId) public view override(ERC721, IERC721) returns (address) {
-        require(_exists(tokenId), 'ERC721: approved query for nonexistent token');
+        require(_exists(tokenId), "ERC721: approved query for nonexistent token");
 
         return _positions[tokenId].operator;
     }
@@ -975,17 +948,18 @@ contract NonfungiblePositionManager is
         _positions[tokenId].operator = to;
         emit Approval(ownerOf(tokenId), to, tokenId);
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-import './pool/IUniswapV3PoolImmutables.sol';
-import './pool/IUniswapV3PoolState.sol';
-import './pool/IUniswapV3PoolDerivedState.sol';
-import './pool/IUniswapV3PoolActions.sol';
-import './pool/IUniswapV3PoolOwnerActions.sol';
-import './pool/IUniswapV3PoolEvents.sol';
+import "./pool/IUniswapV3PoolImmutables.sol";
+import "./pool/IUniswapV3PoolState.sol";
+import "./pool/IUniswapV3PoolDerivedState.sol";
+import "./pool/IUniswapV3PoolActions.sol";
+import "./pool/IUniswapV3PoolOwnerActions.sol";
+import "./pool/IUniswapV3PoolEvents.sol";
 
 /// @title The interface for a Uniswap V3 Pool
 /// @notice A Uniswap pool facilitates swapping and automated market making between any two assets that strictly conform
@@ -998,19 +972,18 @@ interface IUniswapV3Pool is
     IUniswapV3PoolActions,
     IUniswapV3PoolOwnerActions,
     IUniswapV3PoolEvents
-{
-
-}
+{}
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-import '@uniswap/v3-core/contracts/libraries/FullMath.sol';
-import '@uniswap/v3-core/contracts/libraries/FixedPoint96.sol';
+import "@uniswap/v3-core/contracts/libraries/FullMath.sol";
+import "@uniswap/v3-core/contracts/libraries/FixedPoint96.sol";
 
 /// @title Liquidity amount functions
 /// @notice Provides functions for computing liquidity amounts from token amounts and prices
 library LiquidityAmounts {
+
     /// @notice Downcasts uint256 to uint128
     /// @param x The uint258 to be downcasted
     /// @return y The passed value, downcasted to uint128
@@ -1024,11 +997,11 @@ library LiquidityAmounts {
     /// @param sqrtRatioBX96 A sqrt price representing the second tick boundary
     /// @param amount0 The amount0 being sent in
     /// @return liquidity The amount of returned liquidity
-    function getLiquidityForAmount0(
-        uint160 sqrtRatioAX96,
-        uint160 sqrtRatioBX96,
-        uint256 amount0
-    ) internal pure returns (uint128 liquidity) {
+    function getLiquidityForAmount0(uint160 sqrtRatioAX96, uint160 sqrtRatioBX96, uint256 amount0)
+        internal
+        pure
+        returns (uint128 liquidity)
+    {
         if (sqrtRatioAX96 > sqrtRatioBX96) (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96);
         uint256 intermediate = FullMath.mulDiv(sqrtRatioAX96, sqrtRatioBX96, FixedPoint96.Q96);
         return toUint128(FullMath.mulDiv(amount0, intermediate, sqrtRatioBX96 - sqrtRatioAX96));
@@ -1040,11 +1013,11 @@ library LiquidityAmounts {
     /// @param sqrtRatioBX96 A sqrt price representing the second tick boundary
     /// @param amount1 The amount1 being sent in
     /// @return liquidity The amount of returned liquidity
-    function getLiquidityForAmount1(
-        uint160 sqrtRatioAX96,
-        uint160 sqrtRatioBX96,
-        uint256 amount1
-    ) internal pure returns (uint128 liquidity) {
+    function getLiquidityForAmount1(uint160 sqrtRatioAX96, uint160 sqrtRatioBX96, uint256 amount1)
+        internal
+        pure
+        returns (uint128 liquidity)
+    {
         if (sqrtRatioAX96 > sqrtRatioBX96) (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96);
         return toUint128(FullMath.mulDiv(amount1, FixedPoint96.Q96, sqrtRatioBX96 - sqrtRatioAX96));
     }
@@ -1083,19 +1056,16 @@ library LiquidityAmounts {
     /// @param sqrtRatioBX96 A sqrt price representing the second tick boundary
     /// @param liquidity The liquidity being valued
     /// @return amount0 The amount of token0
-    function getAmount0ForLiquidity(
-        uint160 sqrtRatioAX96,
-        uint160 sqrtRatioBX96,
-        uint128 liquidity
-    ) internal pure returns (uint256 amount0) {
+    function getAmount0ForLiquidity(uint160 sqrtRatioAX96, uint160 sqrtRatioBX96, uint128 liquidity)
+        internal
+        pure
+        returns (uint256 amount0)
+    {
         if (sqrtRatioAX96 > sqrtRatioBX96) (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96);
 
-        return
-            FullMath.mulDiv(
-                uint256(liquidity) << FixedPoint96.RESOLUTION,
-                sqrtRatioBX96 - sqrtRatioAX96,
-                sqrtRatioBX96
-            ) / sqrtRatioAX96;
+        return FullMath.mulDiv(
+            uint256(liquidity) << FixedPoint96.RESOLUTION, sqrtRatioBX96 - sqrtRatioAX96, sqrtRatioBX96
+        ) / sqrtRatioAX96;
     }
 
     /// @notice Computes the amount of token1 for a given amount of liquidity and a price range
@@ -1103,11 +1073,11 @@ library LiquidityAmounts {
     /// @param sqrtRatioBX96 A sqrt price representing the second tick boundary
     /// @param liquidity The liquidity being valued
     /// @return amount1 The amount of token1
-    function getAmount1ForLiquidity(
-        uint160 sqrtRatioAX96,
-        uint160 sqrtRatioBX96,
-        uint128 liquidity
-    ) internal pure returns (uint256 amount1) {
+    function getAmount1ForLiquidity(uint160 sqrtRatioAX96, uint160 sqrtRatioBX96, uint128 liquidity)
+        internal
+        pure
+        returns (uint256 amount1)
+    {
         if (sqrtRatioAX96 > sqrtRatioBX96) (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96);
 
         return FullMath.mulDiv(liquidity, sqrtRatioBX96 - sqrtRatioAX96, FixedPoint96.Q96);
@@ -1138,29 +1108,26 @@ library LiquidityAmounts {
             amount1 = getAmount1ForLiquidity(sqrtRatioAX96, sqrtRatioBX96, liquidity);
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.6.0;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 library TransferHelper {
+
     /// @notice Transfers tokens from the targeted address to the given destination
     /// @notice Errors with 'STF' if transfer fails
     /// @param token The contract address of the token to be transferred
     /// @param from The originating address from which the tokens will be transferred
     /// @param to The destination address of the transfer
     /// @param value The amount to be transferred
-    function safeTransferFrom(
-        address token,
-        address from,
-        address to,
-        uint256 value
-    ) internal {
+    function safeTransferFrom(address token, address from, address to, uint256 value) internal {
         (bool success, bytes memory data) =
             token.call(abi.encodeWithSelector(IERC20.transferFrom.selector, from, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), 'STF');
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "STF");
     }
 
     /// @notice Transfers tokens from msg.sender to a recipient
@@ -1168,13 +1135,9 @@ library TransferHelper {
     /// @param token The contract address of the token which will be transferred
     /// @param to The recipient of the transfer
     /// @param value The value of the transfer
-    function safeTransfer(
-        address token,
-        address to,
-        uint256 value
-    ) internal {
+    function safeTransfer(address token, address to, uint256 value) internal {
         (bool success, bytes memory data) = token.call(abi.encodeWithSelector(IERC20.transfer.selector, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), 'ST');
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "ST");
     }
 
     /// @notice Approves the stipulated contract to spend the given allowance in the given token
@@ -1182,13 +1145,9 @@ library TransferHelper {
     /// @param token The contract address of the token to be approved
     /// @param to The target of the approval
     /// @param value The amount of the given token the target will be allowed to spend
-    function safeApprove(
-        address token,
-        address to,
-        uint256 value
-    ) internal {
+    function safeApprove(address token, address to, uint256 value) internal {
         (bool success, bytes memory data) = token.call(abi.encodeWithSelector(IERC20.approve.selector, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), 'SA');
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "SA");
     }
 
     /// @notice Transfers ETH to the recipient address
@@ -1196,9 +1155,10 @@ library TransferHelper {
     /// @param to The destination of the transfer
     /// @param value The value to be transferred
     function safeTransferETH(address to, uint256 value) internal {
-        (bool success, ) = to.call{value: value}(new bytes(0));
-        require(success, 'STE');
+        (bool success,) = to.call{value: value}(new bytes(0));
+        require(success, "STE");
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1206,6 +1166,7 @@ pragma solidity >=0.7.0;
 
 /// @title Function for getting the current chain ID
 library ChainId {
+
     /// @dev Gets the current chain ID
     /// @return chainId The current chain ID
     function get() internal pure returns (uint256 chainId) {
@@ -1213,6 +1174,7 @@ library ChainId {
             chainId := chainid()
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1221,75 +1183,68 @@ pragma solidity =0.7.6;
 /// @title Function for getting block timestamp
 /// @dev Base contract that is overridden for tests
 abstract contract BlockTimestamp {
+
     /// @dev Method that exists purely to be overridden for tests
     /// @return The current block timestamp
     function _blockTimestamp() internal view virtual returns (uint256) {
         return block.timestamp;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@openzeppelin/contracts/drafts/IERC20Permit.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/drafts/IERC20Permit.sol";
 
-import '../interfaces/ISelfPermit.sol';
-import '../interfaces/external/IERC20PermitAllowed.sol';
+import "../interfaces/ISelfPermit.sol";
+import "../interfaces/external/IERC20PermitAllowed.sol";
 
 /// @title Self Permit
 /// @notice Functionality to call permit on any EIP-2612-compliant token for use in the route
 /// @dev These functions are expected to be embedded in multicalls to allow EOAs to approve a contract and call a function
 /// that requires an approval in a single transaction.
 abstract contract SelfPermit is ISelfPermit {
+
     /// @inheritdoc ISelfPermit
-    function selfPermit(
-        address token,
-        uint256 value,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public payable override {
+    function selfPermit(address token, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        public
+        payable
+        override
+    {
         IERC20Permit(token).permit(msg.sender, address(this), value, deadline, v, r, s);
     }
 
     /// @inheritdoc ISelfPermit
-    function selfPermitIfNecessary(
-        address token,
-        uint256 value,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable override {
+    function selfPermitIfNecessary(address token, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable
+        override
+    {
         if (IERC20(token).allowance(msg.sender, address(this)) < value) selfPermit(token, value, deadline, v, r, s);
     }
 
     /// @inheritdoc ISelfPermit
-    function selfPermitAllowed(
-        address token,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public payable override {
+    function selfPermitAllowed(address token, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+        public
+        payable
+        override
+    {
         IERC20PermitAllowed(token).permit(msg.sender, address(this), nonce, expiry, true, v, r, s);
     }
 
     /// @inheritdoc ISelfPermit
-    function selfPermitAllowedIfNecessary(
-        address token,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable override {
-        if (IERC20(token).allowance(msg.sender, address(this)) < type(uint256).max)
+    function selfPermitAllowedIfNecessary(address token, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable
+        override
+    {
+        if (IERC20(token).allowance(msg.sender, address(this)) < type(uint256).max) {
             selfPermitAllowed(token, nonce, expiry, v, r, s);
+        }
     }
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -1321,6 +1276,7 @@ pragma solidity ^0.7.0;
  * supported.
  */
 library EnumerableMap {
+
     // To implement this library for multiple types with as little code
     // repetition as possible, we write it in terms of a generic Map type with
     // bytes32 keys and values.
@@ -1338,10 +1294,9 @@ library EnumerableMap {
     struct Map {
         // Storage of map keys and values
         MapEntry[] _entries;
-
         // Position of the entry defined by a key in the `entries` array, plus 1
         // because index 0 means a key is not in the map.
-        mapping (bytes32 => uint256) _indexes;
+        mapping(bytes32 => uint256) _indexes;
     }
 
     /**
@@ -1355,8 +1310,9 @@ library EnumerableMap {
         // We read and store the key's index to prevent multiple reads from the same storage slot
         uint256 keyIndex = map._indexes[key];
 
-        if (keyIndex == 0) { // Equivalent to !contains(map, key)
-            map._entries.push(MapEntry({ _key: key, _value: value }));
+        if (keyIndex == 0) {
+            // Equivalent to !contains(map, key)
+            map._entries.push(MapEntry({_key: key, _value: value}));
             // The entry is stored at length-1, but we add 1 to all indexes
             // and use 0 as a sentinel value
             map._indexes[key] = map._entries.length;
@@ -1376,7 +1332,8 @@ library EnumerableMap {
         // We read and store the key's index to prevent multiple reads from the same storage slot
         uint256 keyIndex = map._indexes[key];
 
-        if (keyIndex != 0) { // Equivalent to contains(map, key)
+        if (keyIndex != 0) {
+            // Equivalent to contains(map, key)
             // To delete a key-value pair from the _entries array in O(1), we swap the entry to delete with the last one
             // in the array, and then remove the last entry (sometimes called as 'swap and pop').
             // This modifies the order of the array, as noted in {at}.
@@ -1420,16 +1377,16 @@ library EnumerableMap {
         return map._entries.length;
     }
 
-   /**
-    * @dev Returns the key-value pair stored at position `index` in the map. O(1).
-    *
-    * Note that there are no guarantees on the ordering of entries inside the
-    * array, and it may change when more entries are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the key-value pair stored at position `index` in the map. O(1).
+     *
+     * Note that there are no guarantees on the ordering of entries inside the
+     * array, and it may change when more entries are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function _at(Map storage map, uint256 index) private view returns (bytes32, bytes32) {
         require(map._entries.length > index, "EnumerableMap: index out of bounds");
 
@@ -1512,15 +1469,15 @@ library EnumerableMap {
         return _length(map._inner);
     }
 
-   /**
-    * @dev Returns the element stored at position `index` in the set. O(1).
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the element stored at position `index` in the set. O(1).
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function at(UintToAddressMap storage map, uint256 index) internal view returns (uint256, address) {
         (bytes32 key, bytes32 value) = _at(map._inner, index);
         return (uint256(key), address(uint160(uint256(value))));
@@ -1554,9 +1511,14 @@ library EnumerableMap {
      * CAUTION: This function is deprecated because it requires allocating memory for the error
      * message unnecessarily. For custom revert reasons use {tryGet}.
      */
-    function get(UintToAddressMap storage map, uint256 key, string memory errorMessage) internal view returns (address) {
+    function get(UintToAddressMap storage map, uint256 key, string memory errorMessage)
+        internal
+        view
+        returns (address)
+    {
         return address(uint160(uint256(_get(map._inner, bytes32(key), errorMessage))));
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1567,6 +1529,7 @@ pragma abicoder v2;
 /// @notice Provides a method for creating and initializing a pool, if necessary, for bundling with other methods that
 /// require the pool to exist.
 interface IPoolInitializer {
+
     /// @notice Creates a new pool if it does not exist, then initializes if not initialized
     /// @dev This method can be bundled with others via IMulticall for the first action (e.g. mint) performed against a pool
     /// @param token0 The contract address of token0 of the pool
@@ -1574,12 +1537,11 @@ interface IPoolInitializer {
     /// @param fee The fee amount of the v3 pool for the specified token pair
     /// @param sqrtPriceX96 The initial square root price of the pool as a Q64.96 value
     /// @return pool Returns the pool address based on the pair of tokens and fee, will return the newly created pool address if necessary
-    function createAndInitializePoolIfNecessary(
-        address token0,
-        address token1,
-        uint24 fee,
-        uint160 sqrtPriceX96
-    ) external payable returns (address pool);
+    function createAndInitializePoolIfNecessary(address token0, address token1, uint24 fee, uint160 sqrtPriceX96)
+        external
+        payable
+        returns (address pool);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1588,6 +1550,7 @@ pragma solidity >=0.5.0;
 /// @title Permissioned pool actions
 /// @notice Contains pool methods that may only be called by the factory owner
 interface IUniswapV3PoolOwnerActions {
+
     /// @notice Set the denominator of the protocol's % share of the fees
     /// @param feeProtocol0 new protocol fee for token0 of the pool
     /// @param feeProtocol1 new protocol fee for token1 of the pool
@@ -1599,11 +1562,10 @@ interface IUniswapV3PoolOwnerActions {
     /// @param amount1Requested The maximum amount of token1 to send, can be 0 to collect fees in only token0
     /// @return amount0 The protocol fee collected in token0
     /// @return amount1 The protocol fee collected in token1
-    function collectProtocol(
-        address recipient,
-        uint128 amount0Requested,
-        uint128 amount1Requested
-    ) external returns (uint128 amount0, uint128 amount1);
+    function collectProtocol(address recipient, uint128 amount0Requested, uint128 amount1Requested)
+        external
+        returns (uint128 amount0, uint128 amount1);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1612,6 +1574,7 @@ pragma solidity >=0.5.0;
 /// @title Events emitted by a pool
 /// @notice Contains all events emitted by the pool
 interface IUniswapV3PoolEvents {
+
     /// @notice Emitted exactly once by a pool when #initialize is first called on the pool
     /// @dev Mint/Burn/Swap cannot be emitted by the pool before Initialize
     /// @param sqrtPriceX96 The initial sqrt price of the pool, as a Q64.96
@@ -1709,8 +1672,7 @@ interface IUniswapV3PoolEvents {
     /// @param observationCardinalityNextOld The previous value of the next observation cardinality
     /// @param observationCardinalityNextNew The updated value of the next observation cardinality
     event IncreaseObservationCardinalityNext(
-        uint16 observationCardinalityNextOld,
-        uint16 observationCardinalityNextNew
+        uint16 observationCardinalityNextOld, uint16 observationCardinalityNextNew
     );
 
     /// @notice Emitted when the protocol fee is changed by the pool
@@ -1726,6 +1688,7 @@ interface IUniswapV3PoolEvents {
     /// @param amount0 The amount of token0 protocol fees that is withdrawn
     /// @param amount0 The amount of token1 protocol fees that is withdrawn
     event CollectProtocol(address indexed sender, address indexed recipient, uint128 amount0, uint128 amount1);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1735,15 +1698,16 @@ pragma solidity >=0.5.0;
 /// @notice Computes sqrt price for ticks of size 1.0001, i.e. sqrt(1.0001^tick) as fixed point Q64.96 numbers. Supports
 /// prices between 2**-128 and 2**128
 library TickMath {
+
     /// @dev The minimum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**-128
-    int24 internal constant MIN_TICK = -887272;
+    int24 internal constant MIN_TICK = -887_272;
     /// @dev The maximum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**128
     int24 internal constant MAX_TICK = -MIN_TICK;
 
     /// @dev The minimum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MIN_TICK)
-    uint160 internal constant MIN_SQRT_RATIO = 4295128739;
+    uint160 internal constant MIN_SQRT_RATIO = 4_295_128_739;
     /// @dev The maximum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MAX_TICK)
-    uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
+    uint160 internal constant MAX_SQRT_RATIO = 1_461_446_703_485_210_103_287_273_052_203_988_822_378_723_970_342;
 
     /// @notice Calculates sqrt(1.0001^tick) * 2^96
     /// @dev Throws if |tick| > max tick
@@ -1752,7 +1716,7 @@ library TickMath {
     /// at the given tick
     function getSqrtRatioAtTick(int24 tick) internal pure returns (uint160 sqrtPriceX96) {
         uint256 absTick = tick < 0 ? uint256(-int256(tick)) : uint256(int256(tick));
-        require(absTick <= uint256(MAX_TICK), 'T');
+        require(absTick <= uint256(MAX_TICK), "T");
 
         uint256 ratio = absTick & 0x1 != 0 ? 0xfffcb933bd6fad37aa2d162d1a594001 : 0x100000000000000000000000000000000;
         if (absTick & 0x2 != 0) ratio = (ratio * 0xfff97272373d413259a46990580e213a) >> 128;
@@ -1790,7 +1754,7 @@ library TickMath {
     /// @return tick The greatest tick for which the ratio is less than or equal to the input ratio
     function getTickAtSqrtRatio(uint160 sqrtPriceX96) internal pure returns (int24 tick) {
         // second inequality must be < because the price can never reach the price at the max tick
-        require(sqrtPriceX96 >= MIN_SQRT_RATIO && sqrtPriceX96 < MAX_SQRT_RATIO, 'R');
+        require(sqrtPriceX96 >= MIN_SQRT_RATIO && sqrtPriceX96 < MAX_SQRT_RATIO, "R");
         uint256 ratio = uint256(sqrtPriceX96) << 32;
 
         uint256 r = ratio;
@@ -1925,13 +1889,14 @@ library TickMath {
             log_2 := or(log_2, shl(50, f))
         }
 
-        int256 log_sqrt10001 = log_2 * 255738958999603826347141; // 128.128 number
+        int256 log_sqrt10001 = log_2 * 255_738_958_999_603_826_347_141; // 128.128 number
 
-        int24 tickLow = int24((log_sqrt10001 - 3402992956809132418596140100660247210) >> 128);
-        int24 tickHi = int24((log_sqrt10001 + 291339464771989622907027621153398088495) >> 128);
+        int24 tickLow = int24((log_sqrt10001 - 3_402_992_956_809_132_418_596_140_100_660_247_210) >> 128);
+        int24 tickHi = int24((log_sqrt10001 + 291_339_464_771_989_622_907_027_621_153_398_088_495) >> 128);
 
         tick = tickLow == tickHi ? tickLow : getSqrtRatioAtTick(tickHi) <= sqrtPriceX96 ? tickHi : tickLow;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1940,16 +1905,19 @@ pragma solidity >=0.4.0;
 /// @title FixedPoint128
 /// @notice A library for handling binary fixed point numbers, see https://en.wikipedia.org/wiki/Q_(number_format)
 library FixedPoint128 {
+
     uint256 internal constant Q128 = 0x100000000000000000000000000000000;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-import './INonfungiblePositionManager.sol';
+import "./INonfungiblePositionManager.sol";
 
 /// @title Describes position NFT tokens via URI
 interface INonfungibleTokenPositionDescriptor {
+
     /// @notice Emitted when a token is given a new priority order in the displayed price ratio
     /// @param token The token being given priority order
     /// @param priority Represents priority in ratio - higher integers get numerator priority
@@ -1964,6 +1932,7 @@ interface INonfungibleTokenPositionDescriptor {
         external
         view
         returns (string memory);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -1973,6 +1942,7 @@ pragma solidity >=0.5.0;
 /// @notice These methods compose the pool's state, and can change with any frequency including multiple times
 /// per transaction
 interface IUniswapV3PoolState {
+
     /// @notice The 0th storage slot in the pool stores many values, and is exposed as a single method to save gas
     /// when accessed externally.
     /// @return sqrtPriceX96 The current price of the pool as a sqrt(token1/token0) Q64.96 value
@@ -2081,6 +2051,7 @@ interface IUniswapV3PoolState {
             uint160 secondsPerLiquidityCumulativeX128,
             bool initialized
         );
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -2089,6 +2060,7 @@ pragma solidity >=0.5.0;
 /// @title Permissionless pool actions
 /// @notice Contains pool methods that can be called by anyone
 interface IUniswapV3PoolActions {
+
     /// @notice Sets the initial price for the pool
     /// @dev Price is represented as a sqrt(amountToken1/amountToken0) Q64.96 value
     /// @param sqrtPriceX96 the initial sqrt price of the pool as a Q64.96
@@ -2105,13 +2077,9 @@ interface IUniswapV3PoolActions {
     /// @param data Any data that should be passed through to the callback
     /// @return amount0 The amount of token0 that was paid to mint the given amount of liquidity. Matches the value in the callback
     /// @return amount1 The amount of token1 that was paid to mint the given amount of liquidity. Matches the value in the callback
-    function mint(
-        address recipient,
-        int24 tickLower,
-        int24 tickUpper,
-        uint128 amount,
-        bytes calldata data
-    ) external returns (uint256 amount0, uint256 amount1);
+    function mint(address recipient, int24 tickLower, int24 tickUpper, uint128 amount, bytes calldata data)
+        external
+        returns (uint256 amount0, uint256 amount1);
 
     /// @notice Collects tokens owed to a position
     /// @dev Does not recompute fees earned, which must be done either via mint or burn of any amount of liquidity.
@@ -2141,11 +2109,9 @@ interface IUniswapV3PoolActions {
     /// @param amount How much liquidity to burn
     /// @return amount0 The amount of token0 sent to the recipient
     /// @return amount1 The amount of token1 sent to the recipient
-    function burn(
-        int24 tickLower,
-        int24 tickUpper,
-        uint128 amount
-    ) external returns (uint256 amount0, uint256 amount1);
+    function burn(int24 tickLower, int24 tickUpper, uint128 amount)
+        external
+        returns (uint256 amount0, uint256 amount1);
 
     /// @notice Swap token0 for token1, or token1 for token0
     /// @dev The caller of this method receives a callback in the form of IUniswapV3SwapCallback#uniswapV3SwapCallback
@@ -2173,18 +2139,14 @@ interface IUniswapV3PoolActions {
     /// @param amount0 The amount of token0 to send
     /// @param amount1 The amount of token1 to send
     /// @param data Any data to be passed through to the callback
-    function flash(
-        address recipient,
-        uint256 amount0,
-        uint256 amount1,
-        bytes calldata data
-    ) external;
+    function flash(address recipient, uint256 amount0, uint256 amount1, bytes calldata data) external;
 
     /// @notice Increase the maximum number of price and liquidity observations that this pool will store
     /// @dev This method is no-op if the pool already has an observationCardinalityNext greater than or equal to
     /// the input observationCardinalityNext.
     /// @param observationCardinalityNext The desired minimum number of observations for the pool to store
     function increaseObservationCardinalityNext(uint16 observationCardinalityNext) external;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -2208,6 +2170,7 @@ import "../../utils/Strings.sol";
  * @dev see https://eips.ethereum.org/EIPS/eip-721
  */
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable {
+
     using SafeMath for uint256;
     using Address for address;
     using EnumerableSet for EnumerableSet.UintSet;
@@ -2219,16 +2182,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
     // Mapping from holder address to their (enumerable) set of owned tokens
-    mapping (address => EnumerableSet.UintSet) private _holderTokens;
+    mapping(address => EnumerableSet.UintSet) private _holderTokens;
 
     // Enumerable mapping from token ids to their owners
     EnumerableMap.UintToAddressMap private _tokenOwners;
 
     // Mapping from token ID to approved address
-    mapping (uint256 => address) private _tokenApprovals;
+    mapping(uint256 => address) private _tokenApprovals;
 
     // Mapping from owner to operator approvals
-    mapping (address => mapping (address => bool)) private _operatorApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     // Token name
     string private _name;
@@ -2237,7 +2200,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     string private _symbol;
 
     // Optional mapping for token URIs
-    mapping (uint256 => string) private _tokenURIs;
+    mapping(uint256 => string) private _tokenURIs;
 
     // Base URI
     string private _baseURI;
@@ -2279,7 +2242,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     /**
      * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
      */
-    constructor (string memory name_, string memory symbol_) {
+    constructor(string memory name_, string memory symbol_) {
         _name = name_;
         _symbol = symbol_;
 
@@ -2340,10 +2303,10 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-    * @dev Returns the base URI set via {_setBaseURI}. This will be
-    * automatically added as a prefix in {tokenURI} to each token's URI, or
-    * to the token ID if no specific URI is set for that token ID.
-    */
+     * @dev Returns the base URI set via {_setBaseURI}. This will be
+     * automatically added as a prefix in {tokenURI} to each token's URI, or
+     * to the token ID if no specific URI is set for that token ID.
+     */
     function baseURI() public view virtual returns (string memory) {
         return _baseURI;
     }
@@ -2367,7 +2330,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      * @dev See {IERC721Enumerable-tokenByIndex}.
      */
     function tokenByIndex(uint256 index) public view virtual override returns (uint256) {
-        (uint256 tokenId, ) = _tokenOwners.at(index);
+        (uint256 tokenId,) = _tokenOwners.at(index);
         return tokenId;
     }
 
@@ -2378,7 +2341,8 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
         address owner = ERC721.ownerOf(tokenId);
         require(to != owner, "ERC721: approval to current owner");
 
-        require(_msgSender() == owner || ERC721.isApprovedForAll(owner, _msgSender()),
+        require(
+            _msgSender() == owner || ERC721.isApprovedForAll(owner, _msgSender()),
             "ERC721: approve caller is not owner nor approved for all"
         );
 
@@ -2488,7 +2452,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      * @dev Safely mints `tokenId` and transfers it to `to`.
      *
      * Requirements:
-     d*
+     *  d*
      * - `tokenId` must not exist.
      * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
      *
@@ -2504,7 +2468,9 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      */
     function _safeMint(address to, uint256 tokenId, bytes memory _data) internal virtual {
         _mint(to, tokenId);
-        require(_checkOnERC721Received(address(0), to, tokenId, _data), "ERC721: transfer to non ERC721Receiver implementer");
+        require(
+            _checkOnERC721Received(address(0), to, tokenId, _data), "ERC721: transfer to non ERC721Receiver implementer"
+        );
     }
 
     /**
@@ -2622,18 +2588,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      * @return bool whether the call correctly returned the expected magic value
      */
     function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory _data)
-        private returns (bool)
+        private
+        returns (bool)
     {
         if (!to.isContract()) {
             return true;
         }
-        bytes memory returndata = to.functionCall(abi.encodeWithSelector(
-            IERC721Receiver(to).onERC721Received.selector,
-            _msgSender(),
-            from,
-            tokenId,
-            _data
-        ), "ERC721: transfer to non ERC721Receiver implementer");
+        bytes memory returndata = to.functionCall(
+            abi.encodeWithSelector(IERC721Receiver(to).onERC721Received.selector, _msgSender(), from, tokenId, _data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
         bytes4 retval = abi.decode(returndata, (bytes4));
         return (retval == _ERC721_RECEIVED);
     }
@@ -2663,7 +2627,8 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual { }
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual {}
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -2674,6 +2639,7 @@ pragma solidity ^0.7.0;
  * @dev Collection of functions related to the address type
  */
 library Address {
+
     /**
      * @dev Returns true if `account` is a contract.
      *
@@ -2698,7 +2664,9 @@ library Address {
 
         uint256 size;
         // solhint-disable-next-line no-inline-assembly
-        assembly { size := extcodesize(account) }
+        assembly {
+            size := extcodesize(account)
+        }
         return size > 0;
     }
 
@@ -2722,7 +2690,7 @@ library Address {
         require(address(this).balance >= amount, "Address: insufficient balance");
 
         // solhint-disable-next-line avoid-low-level-calls, avoid-call-value
-        (bool success, ) = recipient.call{ value: amount }("");
+        (bool success,) = recipient.call{value: amount}("");
         require(success, "Address: unable to send value, recipient may have reverted");
     }
 
@@ -2745,7 +2713,7 @@ library Address {
      * _Available since v3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
-      return functionCall(target, data, "Address: low-level call failed");
+        return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
@@ -2754,7 +2722,10 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+    function functionCall(address target, bytes memory data, string memory errorMessage)
+        internal
+        returns (bytes memory)
+    {
         return functionCallWithValue(target, data, 0, errorMessage);
     }
 
@@ -2779,12 +2750,15 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
+    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage)
+        internal
+        returns (bytes memory)
+    {
         require(address(this).balance >= value, "Address: insufficient balance for call");
         require(isContract(target), "Address: call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success, bytes memory returndata) = target.call{ value: value }(data);
+        (bool success, bytes memory returndata) = target.call{value: value}(data);
         return _verifyCallResult(success, returndata, errorMessage);
     }
 
@@ -2804,7 +2778,11 @@ library Address {
      *
      * _Available since v3.3._
      */
-    function functionStaticCall(address target, bytes memory data, string memory errorMessage) internal view returns (bytes memory) {
+    function functionStaticCall(address target, bytes memory data, string memory errorMessage)
+        internal
+        view
+        returns (bytes memory)
+    {
         require(isContract(target), "Address: static call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -2828,7 +2806,10 @@ library Address {
      *
      * _Available since v3.4._
      */
-    function functionDelegateCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+    function functionDelegateCall(address target, bytes memory data, string memory errorMessage)
+        internal
+        returns (bytes memory)
+    {
         require(isContract(target), "Address: delegate call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -2836,7 +2817,11 @@ library Address {
         return _verifyCallResult(success, returndata, errorMessage);
     }
 
-    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns(bytes memory) {
+    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage)
+        private
+        pure
+        returns (bytes memory)
+    {
         if (success) {
             return returndata;
         } else {
@@ -2854,6 +2839,7 @@ library Address {
             }
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -2861,6 +2847,7 @@ pragma solidity >=0.5.0;
 
 /// @title Provides functions for deriving a pool address from the factory, tokens, and the fee
 library PoolAddress {
+
     bytes32 internal constant POOL_INIT_CODE_HASH = 0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54;
 
     /// @notice The identifying key of the pool
@@ -2875,11 +2862,7 @@ library PoolAddress {
     /// @param tokenB The second token of a pool, unsorted
     /// @param fee The fee level of the pool
     /// @return Poolkey The pool details with ordered token0 and token1 assignments
-    function getPoolKey(
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) internal pure returns (PoolKey memory) {
+    function getPoolKey(address tokenA, address tokenB, uint24 fee) internal pure returns (PoolKey memory) {
         if (tokenA > tokenB) (tokenA, tokenB) = (tokenB, tokenA);
         return PoolKey({token0: tokenA, token1: tokenB, fee: fee});
     }
@@ -2894,25 +2877,24 @@ library PoolAddress {
             uint256(
                 keccak256(
                     abi.encodePacked(
-                        hex'ff',
-                        factory,
-                        keccak256(abi.encode(key.token0, key.token1, key.fee)),
-                        POOL_INIT_CODE_HASH
+                        hex"ff", factory, keccak256(abi.encode(key.token0, key.token1, key.fee)), POOL_INIT_CODE_HASH
                     )
                 )
             )
         );
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.7.5;
 
-import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 /// @title ERC721 with permit
 /// @notice Extension to ERC721 that includes a permit function for signature based approvals
 interface IERC721Permit is IERC721 {
+
     /// @notice The permit typehash used in the permit signature
     /// @return The typehash for the permit
     function PERMIT_TYPEHASH() external pure returns (bytes32);
@@ -2928,14 +2910,10 @@ interface IERC721Permit is IERC721 {
     /// @param v Must produce valid secp256k1 signature from the holder along with `r` and `s`
     /// @param r Must produce valid secp256k1 signature from the holder along with `v` and `s`
     /// @param s Must produce valid secp256k1 signature from the holder along with `r` and `v`
-    function permit(
-        address spender,
-        uint256 tokenId,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable;
+    function permit(address spender, uint256 tokenId, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -2948,6 +2926,7 @@ pragma solidity ^0.7.0;
  * from ERC721 asset contracts.
  */
 interface IERC721Receiver {
+
     /**
      * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
      * by `operator` from `from`, this function is called.
@@ -2957,7 +2936,10 @@ interface IERC721Receiver {
      *
      * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data)
+        external
+        returns (bytes4);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -2966,11 +2948,13 @@ pragma solidity >=0.5.0;
 /// @title Immutable state
 /// @notice Functions that return immutable state of the router
 interface IPeripheryImmutableState {
+
     /// @return Returns the address of the Uniswap V3 factory
     function factory() external view returns (address);
 
     /// @return Returns the address of WETH9
     function WETH9() external view returns (address);
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -2986,6 +2970,7 @@ import "./IERC165.sol";
  * their support of an interface.
  */
 abstract contract ERC165 is IERC165 {
+
     /*
      * bytes4(keccak256('supportsInterface(bytes4)')) == 0x01ffc9a7
      */
@@ -2996,7 +2981,7 @@ abstract contract ERC165 is IERC165 {
      */
     mapping(bytes4 => bool) private _supportedInterfaces;
 
-    constructor () {
+    constructor() {
         // Derived contracts need only register support for their own interfaces,
         // we register support for ERC165 itself here
         _registerInterface(_INTERFACE_ID_ERC165);
@@ -3026,20 +3011,21 @@ abstract contract ERC165 is IERC165 {
         require(interfaceId != 0xffffffff, "ERC165: invalid interface id");
         _supportedInterfaces[interfaceId] = true;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.7.5;
 pragma abicoder v2;
 
-import '@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol';
-import '@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol';
+import "@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol";
 
-import './IPoolInitializer.sol';
-import './IERC721Permit.sol';
-import './IPeripheryPayments.sol';
-import './IPeripheryImmutableState.sol';
-import '../libraries/PoolAddress.sol';
+import "./IPoolInitializer.sol";
+import "./IERC721Permit.sol";
+import "./IPeripheryPayments.sol";
+import "./IPeripheryImmutableState.sol";
+import "../libraries/PoolAddress.sol";
 
 /// @title Non-fungible token for positions
 /// @notice Wraps Uniswap V3 positions in a non-fungible token interface which allows for them to be transferred
@@ -3052,6 +3038,7 @@ interface INonfungiblePositionManager is
     IERC721Enumerable,
     IERC721Permit
 {
+
     /// @notice Emitted when liquidity is increased for a position NFT
     /// @dev Also emitted when a token is minted
     /// @param tokenId The ID of the token for which liquidity was increased
@@ -3131,12 +3118,7 @@ interface INonfungiblePositionManager is
     function mint(MintParams calldata params)
         external
         payable
-        returns (
-            uint256 tokenId,
-            uint128 liquidity,
-            uint256 amount0,
-            uint256 amount1
-        );
+        returns (uint256 tokenId, uint128 liquidity, uint256 amount0, uint256 amount1);
 
     struct IncreaseLiquidityParams {
         uint256 tokenId;
@@ -3160,11 +3142,7 @@ interface INonfungiblePositionManager is
     function increaseLiquidity(IncreaseLiquidityParams calldata params)
         external
         payable
-        returns (
-            uint128 liquidity,
-            uint256 amount0,
-            uint256 amount1
-        );
+        returns (uint128 liquidity, uint256 amount0, uint256 amount1);
 
     struct DecreaseLiquidityParams {
         uint256 tokenId;
@@ -3207,20 +3185,19 @@ interface INonfungiblePositionManager is
     /// must be collected first.
     /// @param tokenId The ID of the token that is being burned
     function burn(uint256 tokenId) external payable;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
 library PositionKey {
+
     /// @dev Returns the key of the position in the core library
-    function compute(
-        address owner,
-        int24 tickLower,
-        int24 tickUpper
-    ) internal pure returns (bytes32) {
+    function compute(address owner, int24 tickLower, int24 tickUpper) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked(owner, tickLower, tickUpper));
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3230,11 +3207,13 @@ pragma abicoder v2;
 /// @title Multicall interface
 /// @notice Enables calling multiple methods in a single call to the contract
 interface IMulticall {
+
     /// @notice Call multiple functions in the current contract and return the data from all of them if they all succeed
     /// @dev The `msg.value` should not be trusted for any method callable from multicall.
     /// @param data The encoded function data for each of the calls to make to this contract
     /// @return results The results from each of the calls passed in via data
     function multicall(bytes[] calldata data) external payable returns (bytes[] memory results);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3244,8 +3223,10 @@ pragma solidity >=0.4.0;
 /// @notice A library for handling binary fixed point numbers, see https://en.wikipedia.org/wiki/Q_(number_format)
 /// @dev Used in SqrtPriceMath.sol
 library FixedPoint96 {
+
     uint8 internal constant RESOLUTION = 96;
     uint256 internal constant Q96 = 0x1000000000000000000000000;
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3254,17 +3235,15 @@ pragma solidity >=0.5.0;
 /// @title Callback for IUniswapV3PoolActions#mint
 /// @notice Any contract that calls IUniswapV3PoolActions#mint must implement this interface
 interface IUniswapV3MintCallback {
+
     /// @notice Called to `msg.sender` after minting liquidity to a position from IUniswapV3Pool#mint.
     /// @dev In the implementation you must pay the pool tokens owed for the minted liquidity.
     /// The caller of this method must be checked to be a UniswapV3Pool deployed by the canonical UniswapV3Factory.
     /// @param amount0Owed The amount of token0 due to the pool for the minted liquidity
     /// @param amount1Owed The amount of token1 due to the pool for the minted liquidity
     /// @param data Any data passed through by the caller via the IUniswapV3PoolActions#mint call
-    function uniswapV3MintCallback(
-        uint256 amount0Owed,
-        uint256 amount1Owed,
-        bytes calldata data
-    ) external;
+    function uniswapV3MintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes calldata data) external;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -3296,6 +3275,7 @@ pragma solidity ^0.7.0;
  * and `uint256` (`UintSet`) are supported.
  */
 library EnumerableSet {
+
     // To implement this library for multiple types with as little code
     // repetition as possible, we write it in terms of a generic Set type with
     // bytes32 values.
@@ -3308,10 +3288,9 @@ library EnumerableSet {
     struct Set {
         // Storage of set values
         bytes32[] _values;
-
         // Position of the value in the `values` array, plus 1 because index 0
         // means a value is not in the set.
-        mapping (bytes32 => uint256) _indexes;
+        mapping(bytes32 => uint256) _indexes;
     }
 
     /**
@@ -3342,7 +3321,8 @@ library EnumerableSet {
         // We read and store the value's index to prevent multiple reads from the same storage slot
         uint256 valueIndex = set._indexes[value];
 
-        if (valueIndex != 0) { // Equivalent to contains(set, value)
+        if (valueIndex != 0) {
+            // Equivalent to contains(set, value)
             // To delete an element from the _values array in O(1), we swap the element to delete with the last one in
             // the array, and then remove the last element (sometimes called as 'swap and pop').
             // This modifies the order of the array, as noted in {at}.
@@ -3386,16 +3366,16 @@ library EnumerableSet {
         return set._values.length;
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
-    *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
+     *
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function _at(Set storage set, uint256 index) private view returns (bytes32) {
         require(set._values.length > index, "EnumerableSet: index out of bounds");
         return set._values[index];
@@ -3441,16 +3421,16 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
-    *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
+     *
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function at(Bytes32Set storage set, uint256 index) internal view returns (bytes32) {
         return _at(set._inner, index);
     }
@@ -3495,20 +3475,19 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
-    *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
+     *
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function at(AddressSet storage set, uint256 index) internal view returns (address) {
         return address(uint160(uint256(_at(set._inner, index))));
     }
-
 
     // UintSet
 
@@ -3550,19 +3529,20 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
-    *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
-    *
-    * Requirements:
-    *
-    * - `index` must be strictly less than {length}.
-    */
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
+     *
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
     function at(UintSet storage set, uint256 index) internal view returns (uint256) {
         return uint256(_at(set._inner, index));
     }
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -3591,6 +3571,7 @@ interface IERC721Metadata is IERC721 {
      * @dev Returns the Uniform Resource Identifier (URI) for `tokenId` token.
      */
     function tokenURI(uint256 tokenId) external view returns (string memory);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3599,6 +3580,7 @@ pragma solidity >=0.5.0;
 /// @title The interface for the Uniswap V3 Factory
 /// @notice The Uniswap V3 Factory facilitates creation of Uniswap V3 pools and control over the protocol fees
 interface IUniswapV3Factory {
+
     /// @notice Emitted when the owner of the factory is changed
     /// @param oldOwner The owner before the owner was changed
     /// @param newOwner The owner after the owner was changed
@@ -3611,11 +3593,7 @@ interface IUniswapV3Factory {
     /// @param tickSpacing The minimum number of ticks between initialized ticks
     /// @param pool The address of the created pool
     event PoolCreated(
-        address indexed token0,
-        address indexed token1,
-        uint24 indexed fee,
-        int24 tickSpacing,
-        address pool
+        address indexed token0, address indexed token1, uint24 indexed fee, int24 tickSpacing, address pool
     );
 
     /// @notice Emitted when a new fee amount is enabled for pool creation via the factory
@@ -3640,11 +3618,7 @@ interface IUniswapV3Factory {
     /// @param tokenB The contract address of the other token
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
     /// @return pool The pool address
-    function getPool(
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) external view returns (address pool);
+    function getPool(address tokenA, address tokenB, uint24 fee) external view returns (address pool);
 
     /// @notice Creates a pool for the given two tokens and fee
     /// @param tokenA One of the two tokens in the desired pool
@@ -3654,11 +3628,7 @@ interface IUniswapV3Factory {
     /// from the fee. The call will revert if the pool already exists, the fee is invalid, or the token arguments
     /// are invalid.
     /// @return pool The address of the newly created pool
-    function createPool(
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) external returns (address pool);
+    function createPool(address tokenA, address tokenB, uint24 fee) external returns (address pool);
 
     /// @notice Updates the owner of the factory
     /// @dev Must be called by the current owner
@@ -3670,6 +3640,7 @@ interface IUniswapV3Factory {
     /// @param fee The fee amount to enable, denominated in hundredths of a bip (i.e. 1e-6)
     /// @param tickSpacing The spacing between ticks to be enforced for all pools created with the given fee amount
     function enableFeeAmount(uint24 fee, int24 tickSpacing) external;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -3680,6 +3651,7 @@ pragma solidity ^0.7.0;
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
 interface IERC20 {
+
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -3748,16 +3720,18 @@ interface IERC20 {
      * a call to {approve}. `value` is the new allowance.
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '../interfaces/IPeripheryImmutableState.sol';
+import "../interfaces/IPeripheryImmutableState.sol";
 
 /// @title Immutable state
 /// @notice Immutable state used by periphery contracts
 abstract contract PeripheryImmutableState is IPeripheryImmutableState {
+
     /// @inheritdoc IPeripheryImmutableState
     address public immutable override factory;
     /// @inheritdoc IPeripheryImmutableState
@@ -3767,6 +3741,7 @@ abstract contract PeripheryImmutableState is IPeripheryImmutableState {
         factory = _factory;
         WETH9 = _WETH9;
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3775,6 +3750,7 @@ pragma solidity >=0.5.0;
 /// @title Pool state that never changes
 /// @notice These parameters are fixed for a pool forever, i.e., the methods will always return the same values
 interface IUniswapV3PoolImmutables {
+
     /// @notice The contract that deployed the pool, which must adhere to the IUniswapV3Factory interface
     /// @return The contract address
     function factory() external view returns (address);
@@ -3803,6 +3779,7 @@ interface IUniswapV3PoolImmutables {
     /// also prevents out-of-range liquidity from being used to prevent adding in-range liquidity to a pool
     /// @return The max amount of liquidity per tick
     function maxLiquidityPerTick() external view returns (uint128);
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -3813,6 +3790,7 @@ pragma solidity ^0.7.0;
  * @dev String operations.
  */
 library Strings {
+
     /**
      * @dev Converts a `uint256` to its ASCII `string` representation.
      */
@@ -3838,26 +3816,28 @@ library Strings {
         }
         return string(buffer);
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol';
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol";
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 
-import './PeripheryImmutableState.sol';
-import '../interfaces/IPoolInitializer.sol';
+import "./PeripheryImmutableState.sol";
+import "../interfaces/IPoolInitializer.sol";
 
 /// @title Creates and initializes V3 Pools
 abstract contract PoolInitializer is IPoolInitializer, PeripheryImmutableState {
+
     /// @inheritdoc IPoolInitializer
-    function createAndInitializePoolIfNecessary(
-        address token0,
-        address token1,
-        uint24 fee,
-        uint160 sqrtPriceX96
-    ) external payable override returns (address pool) {
+    function createAndInitializePoolIfNecessary(address token0, address token1, uint24 fee, uint160 sqrtPriceX96)
+        external
+        payable
+        override
+        returns (address pool)
+    {
         require(token0 < token1);
         pool = IUniswapV3Factory(factory).getPool(token0, token1, fee);
 
@@ -3865,12 +3845,13 @@ abstract contract PoolInitializer is IPoolInitializer, PeripheryImmutableState {
             pool = IUniswapV3Factory(factory).createPool(token0, token1, fee);
             IUniswapV3Pool(pool).initialize(sqrtPriceX96);
         } else {
-            (uint160 sqrtPriceX96Existing, , , , , , ) = IUniswapV3Pool(pool).slot0();
+            (uint160 sqrtPriceX96Existing,,,,,,) = IUniswapV3Pool(pool).slot0();
             if (sqrtPriceX96Existing == 0) {
                 IUniswapV3Pool(pool).initialize(sqrtPriceX96);
             }
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -3879,6 +3860,7 @@ pragma solidity >=0.7.5;
 /// @title Self Permit
 /// @notice Functionality to call permit on any EIP-2612-compliant token for use in the route
 interface ISelfPermit {
+
     /// @notice Permits this contract to spend a given token from `msg.sender`
     /// @dev The `owner` is always msg.sender and the `spender` is always address(this).
     /// @param token The address of the token spent
@@ -3887,14 +3869,9 @@ interface ISelfPermit {
     /// @param v Must produce valid secp256k1 signature from the holder along with `r` and `s`
     /// @param r Must produce valid secp256k1 signature from the holder along with `v` and `s`
     /// @param s Must produce valid secp256k1 signature from the holder along with `r` and `v`
-    function selfPermit(
-        address token,
-        uint256 value,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable;
+    function selfPermit(address token, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable;
 
     /// @notice Permits this contract to spend a given token from `msg.sender`
     /// @dev The `owner` is always msg.sender and the `spender` is always address(this).
@@ -3905,14 +3882,9 @@ interface ISelfPermit {
     /// @param v Must produce valid secp256k1 signature from the holder along with `r` and `s`
     /// @param r Must produce valid secp256k1 signature from the holder along with `v` and `s`
     /// @param s Must produce valid secp256k1 signature from the holder along with `r` and `v`
-    function selfPermitIfNecessary(
-        address token,
-        uint256 value,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable;
+    function selfPermitIfNecessary(address token, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable;
 
     /// @notice Permits this contract to spend the sender's tokens for permit signatures that have the `allowed` parameter
     /// @dev The `owner` is always msg.sender and the `spender` is always address(this)
@@ -3922,14 +3894,9 @@ interface ISelfPermit {
     /// @param v Must produce valid secp256k1 signature from the holder along with `r` and `s`
     /// @param r Must produce valid secp256k1 signature from the holder along with `v` and `s`
     /// @param s Must produce valid secp256k1 signature from the holder along with `r` and `v`
-    function selfPermitAllowed(
-        address token,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable;
+    function selfPermitAllowed(address token, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable;
 
     /// @notice Permits this contract to spend the sender's tokens for permit signatures that have the `allowed` parameter
     /// @dev The `owner` is always msg.sender and the `spender` is always address(this)
@@ -3940,14 +3907,10 @@ interface ISelfPermit {
     /// @param v Must produce valid secp256k1 signature from the holder along with `r` and `s`
     /// @param r Must produce valid secp256k1 signature from the holder along with `v` and `s`
     /// @param s Must produce valid secp256k1 signature from the holder along with `r` and `v`
-    function selfPermitAllowedIfNecessary(
-        address token,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable;
+    function selfPermitAllowedIfNecessary(address token, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable;
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -3957,17 +3920,14 @@ pragma solidity >=0.4.0;
 /// @notice Facilitates multiplication and division that can have overflow of an intermediate value without any loss of precision
 /// @dev Handles "phantom overflow" i.e., allows multiplication and division where an intermediate value overflows 256 bits
 library FullMath {
+
     /// @notice Calculates floor(a×b÷denominator) with full precision. Throws if result overflows a uint256 or denominator == 0
     /// @param a The multiplicand
     /// @param b The multiplier
     /// @param denominator The divisor
     /// @return result The 256-bit result
     /// @dev Credit to Remco Bloemen under MIT license https://xn--2-umb.com/21/muldiv
-    function mulDiv(
-        uint256 a,
-        uint256 b,
-        uint256 denominator
-    ) internal pure returns (uint256 result) {
+    function mulDiv(uint256 a, uint256 b, uint256 denominator) internal pure returns (uint256 result) {
         // 512-bit multiply [prod1 prod0] = a * b
         // Compute the product mod 2**256 and mod 2**256 - 1
         // then use the Chinese Remainder Theorem to reconstruct
@@ -4062,17 +4022,14 @@ library FullMath {
     /// @param b The multiplier
     /// @param denominator The divisor
     /// @return result The 256-bit result
-    function mulDivRoundingUp(
-        uint256 a,
-        uint256 b,
-        uint256 denominator
-    ) internal pure returns (uint256 result) {
+    function mulDivRoundingUp(uint256 a, uint256 b, uint256 denominator) internal pure returns (uint256 result) {
         result = mulDiv(a, b, denominator);
         if (mulmod(a, b, denominator) > 0) {
             require(result < type(uint256).max);
             result++;
         }
     }
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -4103,28 +4060,29 @@ interface IERC721Enumerable is IERC721 {
      * Use along with {totalSupply} to enumerate all tokens.
      */
     function tokenByIndex(uint256 index) external view returns (uint256);
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol';
-import './PoolAddress.sol';
+import "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import "./PoolAddress.sol";
 
 /// @notice Provides validation for callbacks from Uniswap V3 Pools
 library CallbackValidation {
+
     /// @notice Returns the address of a valid Uniswap V3 Pool
     /// @param factory The contract address of the Uniswap V3 factory
     /// @param tokenA The contract address of either token0 or token1
     /// @param tokenB The contract address of the other token
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
     /// @return pool The V3 pool contract address
-    function verifyCallback(
-        address factory,
-        address tokenA,
-        address tokenB,
-        uint24 fee
-    ) internal view returns (IUniswapV3Pool pool) {
+    function verifyCallback(address factory, address tokenA, address tokenB, uint24 fee)
+        internal
+        view
+        returns (IUniswapV3Pool pool)
+    {
         return verifyCallback(factory, PoolAddress.getPoolKey(tokenA, tokenB, fee));
     }
 
@@ -4140,29 +4098,31 @@ library CallbackValidation {
         pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
         require(msg.sender == address(pool));
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.7.5;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-import '../interfaces/IPeripheryPayments.sol';
-import '../interfaces/external/IWETH9.sol';
+import "../interfaces/IPeripheryPayments.sol";
+import "../interfaces/external/IWETH9.sol";
 
-import '../libraries/TransferHelper.sol';
+import "../libraries/TransferHelper.sol";
 
-import './PeripheryImmutableState.sol';
+import "./PeripheryImmutableState.sol";
 
 abstract contract PeripheryPayments is IPeripheryPayments, PeripheryImmutableState {
+
     receive() external payable {
-        require(msg.sender == WETH9, 'Not WETH9');
+        require(msg.sender == WETH9, "Not WETH9");
     }
 
     /// @inheritdoc IPeripheryPayments
     function unwrapWETH9(uint256 amountMinimum, address recipient) external payable override {
         uint256 balanceWETH9 = IWETH9(WETH9).balanceOf(address(this));
-        require(balanceWETH9 >= amountMinimum, 'Insufficient WETH9');
+        require(balanceWETH9 >= amountMinimum, "Insufficient WETH9");
 
         if (balanceWETH9 > 0) {
             IWETH9(WETH9).withdraw(balanceWETH9);
@@ -4171,13 +4131,9 @@ abstract contract PeripheryPayments is IPeripheryPayments, PeripheryImmutableSta
     }
 
     /// @inheritdoc IPeripheryPayments
-    function sweepToken(
-        address token,
-        uint256 amountMinimum,
-        address recipient
-    ) external payable override {
+    function sweepToken(address token, uint256 amountMinimum, address recipient) external payable override {
         uint256 balanceToken = IERC20(token).balanceOf(address(this));
-        require(balanceToken >= amountMinimum, 'Insufficient token');
+        require(balanceToken >= amountMinimum, "Insufficient token");
 
         if (balanceToken > 0) {
             TransferHelper.safeTransfer(token, recipient, balanceToken);
@@ -4193,12 +4149,7 @@ abstract contract PeripheryPayments is IPeripheryPayments, PeripheryImmutableSta
     /// @param payer The entity that must pay
     /// @param recipient The entity that will receive payment
     /// @param value The amount to pay
-    function pay(
-        address token,
-        address payer,
-        address recipient,
-        uint256 value
-    ) internal {
+    function pay(address token, address payer, address recipient, uint256 value) internal {
         if (token == WETH9 && address(this).balance >= value) {
             // pay with WETH9
             IWETH9(WETH9).deposit{value: value}(); // wrap only what is needed to pay
@@ -4211,22 +4162,24 @@ abstract contract PeripheryPayments is IPeripheryPayments, PeripheryImmutableSta
             TransferHelper.safeTransferFrom(token, payer, recipient, value);
         }
     }
+
 }
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '@openzeppelin/contracts/utils/Address.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
 
-import '../libraries/ChainId.sol';
-import '../interfaces/external/IERC1271.sol';
-import '../interfaces/IERC721Permit.sol';
-import './BlockTimestamp.sol';
+import "../libraries/ChainId.sol";
+import "../interfaces/external/IERC1271.sol";
+import "../interfaces/IERC721Permit.sol";
+import "./BlockTimestamp.sol";
 
 /// @title ERC721 with permit
 /// @notice Nonfungible tokens that support an approve via signature, i.e. permit
 abstract contract ERC721Permit is BlockTimestamp, ERC721, IERC721Permit {
+
     /// @dev Gets the current nonce for a token ID and then increments it, returning the original value
     function _getAndIncrementNonce(uint256 tokenId) internal virtual returns (uint256);
 
@@ -4237,28 +4190,23 @@ abstract contract ERC721Permit is BlockTimestamp, ERC721, IERC721Permit {
     bytes32 private immutable versionHash;
 
     /// @notice Computes the nameHash and versionHash
-    constructor(
-        string memory name_,
-        string memory symbol_,
-        string memory version_
-    ) ERC721(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_, string memory version_) ERC721(name_, symbol_) {
         nameHash = keccak256(bytes(name_));
         versionHash = keccak256(bytes(version_));
     }
 
     /// @inheritdoc IERC721Permit
     function DOMAIN_SEPARATOR() public view override returns (bytes32) {
-        return
-            keccak256(
-                abi.encode(
-                    // keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')
-                    0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f,
-                    nameHash,
-                    versionHash,
-                    ChainId.get(),
-                    address(this)
-                )
-            );
+        return keccak256(
+            abi.encode(
+                // keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')
+                0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f,
+                nameHash,
+                versionHash,
+                ChainId.get(),
+                address(this)
+            )
+        );
     }
 
     /// @inheritdoc IERC721Permit
@@ -4267,37 +4215,34 @@ abstract contract ERC721Permit is BlockTimestamp, ERC721, IERC721Permit {
         0x49ecf333e5b8c95c40fdafc95c1ad136e8914a8fb55e9dc8bb01eaa83a2df9ad;
 
     /// @inheritdoc IERC721Permit
-    function permit(
-        address spender,
-        uint256 tokenId,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external payable override {
-        require(_blockTimestamp() <= deadline, 'Permit expired');
+    function permit(address spender, uint256 tokenId, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable
+        override
+    {
+        require(_blockTimestamp() <= deadline, "Permit expired");
 
-        bytes32 digest =
-            keccak256(
-                abi.encodePacked(
-                    '\x19\x01',
-                    DOMAIN_SEPARATOR(),
-                    keccak256(abi.encode(PERMIT_TYPEHASH, spender, tokenId, _getAndIncrementNonce(tokenId), deadline))
-                )
-            );
+        bytes32 digest = keccak256(
+            abi.encodePacked(
+                "\x19\x01",
+                DOMAIN_SEPARATOR(),
+                keccak256(abi.encode(PERMIT_TYPEHASH, spender, tokenId, _getAndIncrementNonce(tokenId), deadline))
+            )
+        );
         address owner = ownerOf(tokenId);
-        require(spender != owner, 'ERC721Permit: approval to current owner');
+        require(spender != owner, "ERC721Permit: approval to current owner");
 
         if (Address.isContract(owner)) {
-            require(IERC1271(owner).isValidSignature(digest, abi.encodePacked(r, s, v)) == 0x1626ba7e, 'Unauthorized');
+            require(IERC1271(owner).isValidSignature(digest, abi.encodePacked(r, s, v)) == 0x1626ba7e, "Unauthorized");
         } else {
             address recoveredAddress = ecrecover(digest, v, r, s);
-            require(recoveredAddress != address(0), 'Invalid signature');
-            require(recoveredAddress == owner, 'Unauthorized');
+            require(recoveredAddress != address(0), "Invalid signature");
+            require(recoveredAddress == owner, "Unauthorized");
         }
 
         _approve(spender, tokenId);
     }
+
 }
 
 // SPDX-License-Identifier: MIT
@@ -4310,6 +4255,7 @@ import "../../introspection/IERC165.sol";
  * @dev Required interface of an ERC721 compliant contract.
  */
 interface IERC721 is IERC165 {
+
     /**
      * @dev Emitted when `tokenId` token is transferred from `from` to `to`.
      */
@@ -4415,18 +4361,18 @@ interface IERC721 is IERC165 {
     function isApprovedForAll(address owner, address operator) external view returns (bool);
 
     /**
-      * @dev Safely transfers `tokenId` token from `from` to `to`.
-      *
-      * Requirements:
-      *
-      * - `from` cannot be the zero address.
-      * - `to` cannot be the zero address.
-      * - `tokenId` token must exist and be owned by `from`.
-      * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
-      * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
-      *
-      * Emits a {Transfer} event.
-      */
+     * @dev Safely transfers `tokenId` token from `from` to `to`.
+     *
+     * Requirements:
+     *
+     * - `from` cannot be the zero address.
+     * - `to` cannot be the zero address.
+     * - `tokenId` token must exist and be owned by `from`.
+     * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
+     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     *
+     * Emits a {Transfer} event.
+     */
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data) external;
-}
 
+}

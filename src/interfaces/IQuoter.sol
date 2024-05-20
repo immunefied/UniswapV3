@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 interface Quoter {
+
     function WETH9() external view returns (address);
     function factory() external view returns (address);
     function quoteExactInput(bytes memory path, uint256 amountIn) external returns (uint256 amountOut);
@@ -21,4 +22,5 @@ interface Quoter {
         uint160 sqrtPriceLimitX96
     ) external returns (uint256 amountIn);
     function uniswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes memory path) external view;
+
 }
