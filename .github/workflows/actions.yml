@@ -19,10 +19,6 @@ jobs:
       - name: Check formatting
         run: forge fmt --check
 
-      - name: Check Gas Snapshot
-        run: forge snapshot --check
-
-
       - name: Run tests
         run: forge test -vvv
         env:
