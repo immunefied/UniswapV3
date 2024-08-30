@@ -3,9 +3,9 @@ pragma solidity ^0.8.10;
 
 import "forge-std/Test.sol";
 import {IERC20} from "forge-std/interfaces/IERC20.sol";
-import {IWETH} from "src/interfaces/IWETH.sol";
-import {IUniswapV3Router02 as ISwapRouter02} from "src/interfaces/IUniswapV3Router02.sol";
-import {IUniswapV3Router02 as ISwapRouter02} from "src/interfaces/IUniswapV3Router02.sol";
+import {IWETH} from "./interfaces/IWETH.sol";
+import {IUniswapV3Router02 as ISwapRouter02} from "./interfaces/IUniswapV3Router02.sol";
+import {IUniswapV3Router02 as ISwapRouter02} from "./interfaces/IUniswapV3Router02.sol";
 
 address constant SWAP_ROUTER_02 = 0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45;
 address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;

@@ -3,8 +3,8 @@ pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
 import {IERC20} from "forge-std/interfaces/IERC20.sol";
-import {IWETH} from "src/interfaces/IWETH.sol";
-import {IUniswapV3Pair as IUniswapV3Pool} from "src/interfaces/IUniswapV3Pair.sol";
+import {IWETH} from "./interfaces/IWETH.sol";
+import {IUniswapV3Pair as IUniswapV3Pool} from "./interfaces/IUniswapV3Pair.sol";
 
 contract UniswapV3Flash {
 
