@@ -217,7 +217,7 @@ quote_style = "double"
 number_underscore = "thousands"
 override_spacing = false
 wrap_comments = false
-ignore = ["src/console.sol", "src/console2.sol"]
+ignore = ["src/**/*.sol"]
 contract_new_lines = true
 
 [fuzz]
