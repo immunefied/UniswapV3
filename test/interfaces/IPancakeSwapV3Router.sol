@@ -1,9 +1,29 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.4;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 
-interface IPancakeV3Router {
+interface IPancakeSwapV3Router {
 
-    type ApprovalType is uint8;
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event SetStableSwap(address indexed factory, address indexed info);
+
+    struct IncreaseLiquidityParams {
+        address token0;
+        address token1;
+        uint256 tokenId;
+        uint256 amount0Min;
+        uint256 amount1Min;
+    }
+
+    struct MintParams {
+        address token0;
+        address token1;
+        uint24 fee;
+        int24 tickLower;
+        int24 tickUpper;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        address recipient;
+    }
 
     struct ExactInputParams {
         bytes path;
@@ -39,30 +59,6 @@ interface IPancakeV3Router {
         uint160 sqrtPriceLimitX96;
     }
 
-    struct IncreaseLiquidityParams {
-        address token0;
-        address token1;
-        uint256 tokenId;
-        uint256 amount0Min;
-        uint256 amount1Min;
-    }
-
-    struct MintParams {
-        address token0;
-        address token1;
-        uint24 fee;
-        int24 tickLower;
-        int24 tickUpper;
-        uint256 amount0Min;
-        uint256 amount1Min;
-        address recipient;
-    }
-
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-    event SetStableSwap(address indexed factory, address indexed info);
-
-    receive() external payable;
-
     function WETH9() external view returns (address);
     function approveMax(address token) external payable;
     function approveMaxMinusOne(address token) external payable;
@@ -97,7 +93,7 @@ interface IPancakeV3Router {
     ) external payable returns (uint256 amountIn);
     function factory() external view returns (address);
     function factoryV2() external view returns (address);
-    function getApprovalType(address token, uint256 amount) external returns (ApprovalType);
+    function getApprovalType(address token, uint256 amount) external returns (uint8);
     function increaseLiquidity(IncreaseLiquidityParams memory params) external payable returns (bytes memory result);
     function mint(MintParams memory params) external payable returns (bytes memory result);
     function multicall(bytes32 previousBlockhash, bytes[] memory data) external payable returns (bytes[] memory);

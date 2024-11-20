@@ -1,6 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-
-pragma solidity >=0.7.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 
 interface IUniswapV3Pair {
 
@@ -42,10 +41,7 @@ interface IUniswapV3Pair {
         uint256 amount0,
         uint256 amount1
     );
-    event SetFeeProtocol(
-        uint32 feeProtocol0Old, uint32 feeProtocol1Old, uint32 feeProtocol0New, uint32 feeProtocol1New
-    );
-    event SetLmPoolEvent(address addr);
+    event SetFeeProtocol(uint8 feeProtocol0Old, uint8 feeProtocol1Old, uint8 feeProtocol0New, uint8 feeProtocol1New);
     event Swap(
         address indexed sender,
         address indexed recipient,
@@ -53,9 +49,7 @@ interface IUniswapV3Pair {
         int256 amount1,
         uint160 sqrtPriceX96,
         uint128 liquidity,
-        int24 tick,
-        uint128 protocolFeesToken0,
-        uint128 protocolFeesToken1
+        int24 tick
     );
 
     function burn(int24 tickLower, int24 tickUpper, uint128 amount)
@@ -79,7 +73,6 @@ interface IUniswapV3Pair {
     function increaseObservationCardinalityNext(uint16 observationCardinalityNext) external;
     function initialize(uint160 sqrtPriceX96) external;
     function liquidity() external view returns (uint128);
-    function lmPool() external view returns (address);
     function maxLiquidityPerTick() external view returns (uint128);
     function mint(address recipient, int24 tickLower, int24 tickUpper, uint128 amount, bytes memory data)
         external
@@ -108,8 +101,7 @@ interface IUniswapV3Pair {
             uint128 tokensOwed1
         );
     function protocolFees() external view returns (uint128 token0, uint128 token1);
-    function setFeeProtocol(uint32 feeProtocol0, uint32 feeProtocol1) external;
-    function setLmPool(address _lmPool) external;
+    function setFeeProtocol(uint8 feeProtocol0, uint8 feeProtocol1) external;
     function slot0()
         external
         view
@@ -119,7 +111,7 @@ interface IUniswapV3Pair {
             uint16 observationIndex,
             uint16 observationCardinality,
             uint16 observationCardinalityNext,
-            uint32 feeProtocol,
+            uint8 feeProtocol,
             bool unlocked
         );
     function snapshotCumulativesInside(int24 tickLower, int24 tickUpper)

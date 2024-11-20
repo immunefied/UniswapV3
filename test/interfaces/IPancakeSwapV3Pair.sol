@@ -1,7 +1,7 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.4;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 
-interface IPancakeV3Pool {
+interface IPancakeSwapV3Pair {
 
     event Burn(
         address indexed owner,

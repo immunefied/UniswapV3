@@ -1,8 +1,6 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 
-pragma solidity >=0.7.0 <0.9.0;
-
-// Named "Swap Router" In Uniswap V3 Docs
 interface IUniswapV3Router {
 
     struct ExactInputParams {
@@ -42,8 +40,6 @@ interface IUniswapV3Router {
         uint256 amountInMaximum;
         uint160 sqrtPriceLimitX96;
     }
-
-    receive() external payable;
 
     function WETH9() external view returns (address);
     function exactInput(ExactInputParams memory params) external payable returns (uint256 amountOut);

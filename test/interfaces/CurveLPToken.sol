@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-interface ICurve3Pool {
+interface CurveLPToken {
 
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
     event SetName(string old_name, string old_symbol, string name, string symbol, address owner, uint256 time);
