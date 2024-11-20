@@ -1,0 +1,1162 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterUniswapV3Factory" {
+  graph [ label = "UniswapV3Factory", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3Factory.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "UniswapV3Factory.createPool" [ label = "createPool", color = "blue" ];
+  "UniswapV3Factory.setOwner" [ label = "setOwner", color = "blue" ];
+  "UniswapV3Factory.enableFeeAmount" [ label = "enableFeeAmount", color = "green" ];
+  "UniswapV3Factory.address" [ label = "address" ];
+  "UniswapV3Factory.deploy" [ label = "deploy" ];
+}
+
+subgraph "clusterIUniswapV3Factory" {
+  graph [ label = "IUniswapV3Factory  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3Factory.owner" [ label = "owner", color = "blue" ];
+  "IUniswapV3Factory.feeAmountTickSpacing" [ label = "feeAmountTickSpacing", color = "blue" ];
+  "IUniswapV3Factory.getPool" [ label = "getPool", color = "blue" ];
+  "IUniswapV3Factory.createPool" [ label = "createPool", color = "blue" ];
+  "IUniswapV3Factory.setOwner" [ label = "setOwner", color = "blue" ];
+  "IUniswapV3Factory.enableFeeAmount" [ label = "enableFeeAmount", color = "blue" ];
+}
+
+subgraph "clusterUniswapV3PoolDeployer" {
+  graph [ label = "UniswapV3PoolDeployer", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3PoolDeployer.deploy" [ label = "deploy", color = "white" ];
+  "UniswapV3PoolDeployer.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV3PoolDeployer" {
+  graph [ label = "IUniswapV3PoolDeployer  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDeployer.parameters" [ label = "parameters", color = "blue" ];
+}
+
+subgraph "clusterUniswapV3Pool" {
+  graph [ label = "UniswapV3Pool", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3Pool.lock" [ label = "lock", color = "yellow" ];
+  "UniswapV3Pool.onlyFactoryOwner" [ label = "onlyFactoryOwner", color = "yellow" ];
+  "UniswapV3Pool.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "UniswapV3Pool.checkTicks" [ label = "checkTicks" ];
+  "UniswapV3Pool._blockTimestamp" [ label = "_blockTimestamp" ];
+  "UniswapV3Pool.balance0" [ label = "balance0", color = "red" ];
+  "UniswapV3Pool.balance1" [ label = "balance1", color = "red" ];
+  "UniswapV3Pool.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+  "UniswapV3Pool.observe" [ label = "observe", color = "blue" ];
+  "UniswapV3Pool.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+  "UniswapV3Pool.initialize" [ label = "initialize", color = "blue" ];
+  "UniswapV3Pool._modifyPosition" [ label = "_modifyPosition", color = "red" ];
+  "UniswapV3Pool._updatePosition" [ label = "_updatePosition" ];
+  "UniswapV3Pool.mint" [ label = "mint", color = "blue" ];
+  "UniswapV3Pool.collect" [ label = "collect", color = "blue" ];
+  "UniswapV3Pool.burn" [ label = "burn", color = "blue" ];
+  "UniswapV3Pool.swap" [ label = "swap", color = "blue" ];
+  "UniswapV3Pool.flash" [ label = "flash", color = "blue" ];
+  "UniswapV3Pool.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "UniswapV3Pool.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+  "UniswapV3Pool.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV3Pool" {
+  graph [ label = "IUniswapV3Pool  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterIUniswapV3PoolImmutables" {
+  graph [ label = "IUniswapV3PoolImmutables  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolImmutables.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV3PoolImmutables.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV3PoolImmutables.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV3PoolImmutables.fee" [ label = "fee", color = "blue" ];
+  "IUniswapV3PoolImmutables.tickSpacing" [ label = "tickSpacing", color = "blue" ];
+  "IUniswapV3PoolImmutables.maxLiquidityPerTick" [ label = "maxLiquidityPerTick", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolState" {
+  graph [ label = "IUniswapV3PoolState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolState.slot0" [ label = "slot0", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal0X128" [ label = "feeGrowthGlobal0X128", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal1X128" [ label = "feeGrowthGlobal1X128", color = "blue" ];
+  "IUniswapV3PoolState.protocolFees" [ label = "protocolFees", color = "blue" ];
+  "IUniswapV3PoolState.liquidity" [ label = "liquidity", color = "blue" ];
+  "IUniswapV3PoolState.ticks" [ label = "ticks", color = "blue" ];
+  "IUniswapV3PoolState.tickBitmap" [ label = "tickBitmap", color = "blue" ];
+  "IUniswapV3PoolState.positions" [ label = "positions", color = "blue" ];
+  "IUniswapV3PoolState.observations" [ label = "observations", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolDerivedState" {
+  graph [ label = "IUniswapV3PoolDerivedState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDerivedState.observe" [ label = "observe", color = "blue" ];
+  "IUniswapV3PoolDerivedState.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolActions" {
+  graph [ label = "IUniswapV3PoolActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolActions.initialize" [ label = "initialize", color = "blue" ];
+  "IUniswapV3PoolActions.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV3PoolActions.collect" [ label = "collect", color = "blue" ];
+  "IUniswapV3PoolActions.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV3PoolActions.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV3PoolActions.flash" [ label = "flash", color = "blue" ];
+  "IUniswapV3PoolActions.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolOwnerActions" {
+  graph [ label = "IUniswapV3PoolOwnerActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolOwnerActions.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "IUniswapV3PoolOwnerActions.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolEvents" {
+  graph [ label = "IUniswapV3PoolEvents  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterNoDelegateCall" {
+  graph [ label = "NoDelegateCall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "NoDelegateCall.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "NoDelegateCall.checkNotDelegateCall" [ label = "checkNotDelegateCall", color = "red" ];
+  "NoDelegateCall.noDelegateCall" [ label = "noDelegateCall", color = "yellow" ];
+  "NoDelegateCall.address" [ label = "address" ];
+}
+
+subgraph "clusterLowGasSafeMath" {
+  graph [ label = "LowGasSafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LowGasSafeMath.add" [ label = "add", color = "white" ];
+  "LowGasSafeMath.sub" [ label = "sub", color = "white" ];
+  "LowGasSafeMath.mul" [ label = "mul", color = "white" ];
+}
+
+subgraph "clusterSafeCast" {
+  graph [ label = "SafeCast  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SafeCast.toUint160" [ label = "toUint160", color = "white" ];
+  "SafeCast.toInt128" [ label = "toInt128", color = "white" ];
+  "SafeCast.toInt256" [ label = "toInt256", color = "white" ];
+}
+
+subgraph "clusterTick" {
+  graph [ label = "Tick  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Tick.tickSpacingToMaxLiquidityPerTick" [ label = "tickSpacingToMaxLiquidityPerTick", color = "white" ];
+  "Tick.getFeeGrowthInside" [ label = "getFeeGrowthInside", color = "white" ];
+  "Tick.update" [ label = "update", color = "white" ];
+  "Tick.clear" [ label = "clear", color = "white" ];
+  "Tick.cross" [ label = "cross", color = "white" ];
+  "Tick.type" [ label = "type" ];
+}
+
+subgraph "clusterTickMath" {
+  graph [ label = "TickMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickMath.getTickAtSqrtRatio" [ label = "getTickAtSqrtRatio", color = "white" ];
+  "TickMath.getSqrtRatioAtTick" [ label = "getSqrtRatioAtTick", color = "white" ];
+  "TickMath.type" [ label = "type" ];
+}
+
+subgraph "clusterLiquidityMath" {
+  graph [ label = "LiquidityMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LiquidityMath.addDelta" [ label = "addDelta", color = "white" ];
+}
+
+subgraph "clusterTickBitmap" {
+  graph [ label = "TickBitmap  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickBitmap.position" [ label = "position" ];
+  "TickBitmap.flipTick" [ label = "flipTick", color = "white" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" [ label = "nextInitializedTickWithinOneWord", color = "white" ];
+  "TickBitmap.type" [ label = "type" ];
+}
+
+subgraph "clusterBitMath" {
+  graph [ label = "BitMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BitMath.mostSignificantBit" [ label = "mostSignificantBit", color = "white" ];
+  "BitMath.leastSignificantBit" [ label = "leastSignificantBit", color = "white" ];
+  "BitMath.type" [ label = "type" ];
+}
+
+subgraph "clusterPosition" {
+  graph [ label = "Position  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Position.get" [ label = "get", color = "white" ];
+  "Position.update" [ label = "update", color = "white" ];
+}
+
+subgraph "clusterFullMath" {
+  graph [ label = "FullMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "FullMath.mulDiv" [ label = "mulDiv", color = "white" ];
+  "FullMath.mulDivRoundingUp" [ label = "mulDivRoundingUp", color = "white" ];
+  "FullMath.type" [ label = "type" ];
+}
+
+subgraph "clusterFixedPoint128" {
+  graph [ label = "FixedPoint128  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterOracle" {
+  graph [ label = "Oracle  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Oracle.transform" [ label = "transform" ];
+  "Oracle.initialize" [ label = "initialize", color = "white" ];
+  "Oracle.write" [ label = "write", color = "white" ];
+  "Oracle.grow" [ label = "grow", color = "white" ];
+  "Oracle.lte" [ label = "lte" ];
+  "Oracle.binarySearch" [ label = "binarySearch", color = "red" ];
+  "Oracle.getSurroundingObservations" [ label = "getSurroundingObservations", color = "red" ];
+  "Oracle.observeSingle" [ label = "observeSingle", color = "white" ];
+  "Oracle.observe" [ label = "observe", color = "white" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "white" ];
+}
+
+subgraph "clusterIERC20Minimal" {
+  graph [ label = "IERC20Minimal  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20Minimal.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC20Minimal.transfer" [ label = "transfer", color = "blue" ];
+  "IERC20Minimal.allowance" [ label = "allowance", color = "blue" ];
+  "IERC20Minimal.approve" [ label = "approve", color = "blue" ];
+  "IERC20Minimal.transferFrom" [ label = "transferFrom", color = "blue" ];
+}
+
+subgraph "clusterSqrtPriceMath" {
+  graph [ label = "SqrtPriceMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SqrtPriceMath.getAmount0Delta" [ label = "getAmount0Delta", color = "white" ];
+  "SqrtPriceMath.getAmount1Delta" [ label = "getAmount1Delta", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ label = "getNextSqrtPriceFromAmount0RoundingUp", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ label = "getNextSqrtPriceFromAmount1RoundingDown", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" [ label = "getNextSqrtPriceFromInput", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" [ label = "getNextSqrtPriceFromOutput", color = "white" ];
+  "SqrtPriceMath.type" [ label = "type" ];
+}
+
+subgraph "clusterUnsafeMath" {
+  graph [ label = "UnsafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UnsafeMath.divRoundingUp" [ label = "divRoundingUp", color = "white" ];
+}
+
+subgraph "clusterFixedPoint96" {
+  graph [ label = "FixedPoint96  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterSwapMath" {
+  graph [ label = "SwapMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapMath.computeSwapStep" [ label = "computeSwapStep", color = "white" ];
+}
+
+subgraph "clusterIUniswapV3MintCallback" {
+  graph [ label = "IUniswapV3MintCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3MintCallback.uniswapV3MintCallback" [ label = "uniswapV3MintCallback", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3FlashCallback" {
+  graph [ label = "IUniswapV3FlashCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3FlashCallback.uniswapV3FlashCallback" [ label = "uniswapV3FlashCallback", color = "blue" ];
+}
+
+subgraph "clustertoken0" {
+  graph [ label = "token0", color = "lightgray" ];
+  "token0.staticcall" [ label = "staticcall" ];
+}
+
+subgraph "clustertoken1" {
+  graph [ label = "token1", color = "lightgray" ];
+  "token1.staticcall" [ label = "staticcall" ];
+}
+
+subgraph "clusterobservations" {
+  graph [ label = "observations", color = "lightgray" ];
+  "observations.observeSingle" [ label = "observeSingle" ];
+  "observations.observe" [ label = "observe" ];
+  "observations.grow" [ label = "grow" ];
+  "observations.initialize" [ label = "initialize" ];
+  "observations.write" [ label = "write" ];
+}
+
+subgraph "clusterpositions" {
+  graph [ label = "positions", color = "lightgray" ];
+  "positions.get" [ label = "get" ];
+}
+
+subgraph "clusterticks" {
+  graph [ label = "ticks", color = "lightgray" ];
+  "ticks.update" [ label = "update" ];
+  "ticks.getFeeGrowthInside" [ label = "getFeeGrowthInside" ];
+  "ticks.clear" [ label = "clear" ];
+  "ticks.cross" [ label = "cross" ];
+}
+
+subgraph "clustertickBitmap" {
+  graph [ label = "tickBitmap", color = "lightgray" ];
+  "tickBitmap.flipTick" [ label = "flipTick" ];
+  "tickBitmap.nextInitializedTickWithinOneWord" [ label = "nextInitializedTickWithinOneWord" ];
+}
+
+subgraph "clusterPosition.Info" {
+  graph [ label = "Position.Info", color = "lightgray" ];
+  "Position.Info.update" [ label = "update" ];
+}
+
+subgraph "clusterbalance0Before" {
+  graph [ label = "balance0Before", color = "lightgray" ];
+  "balance0Before.add" [ label = "add" ];
+}
+
+subgraph "clusterbalance1Before" {
+  graph [ label = "balance1Before", color = "lightgray" ];
+  "balance1Before.add" [ label = "add" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "lightgray" ];
+  "token.call" [ label = "call" ];
+}
+
+  "UniswapV3Factory.<Constructor>";
+  "UniswapV3Factory.address";
+  "UniswapV3Factory.createPool";
+  "UniswapV3Factory.deploy";
+  "UniswapV3PoolDeployer.deploy";
+  "UniswapV3PoolDeployer.address";
+  "UniswapV3Pool.<Constructor>";
+  "Tick.tickSpacingToMaxLiquidityPerTick";
+  "UniswapV3Pool.balance0";
+  "token0.staticcall";
+  "UniswapV3Pool.address";
+  "UniswapV3Pool.balance1";
+  "token1.staticcall";
+  "UniswapV3Pool.snapshotCumulativesInside";
+  "UniswapV3Pool.checkTicks";
+  "UniswapV3Pool._blockTimestamp";
+  "observations.observeSingle";
+  "UniswapV3Pool.observe";
+  "observations.observe";
+  "UniswapV3Pool.increaseObservationCardinalityNext";
+  "observations.grow";
+  "UniswapV3Pool.initialize";
+  "TickMath.getTickAtSqrtRatio";
+  "observations.initialize";
+  "UniswapV3Pool._modifyPosition";
+  "UniswapV3Pool._updatePosition";
+  "SqrtPriceMath.getAmount0Delta";
+  "TickMath.getSqrtRatioAtTick";
+  "observations.write";
+  "SqrtPriceMath.getAmount1Delta";
+  "LiquidityMath.addDelta";
+  "positions.get";
+  "ticks.update";
+  "tickBitmap.flipTick";
+  "ticks.getFeeGrowthInside";
+  "Position.Info.update";
+  "ticks.clear";
+  "UniswapV3Pool.mint";
+  "balance0Before.add";
+  "balance1Before.add";
+  "UniswapV3Pool.collect";
+  "TransferHelper.safeTransfer";
+  "UniswapV3Pool.burn";
+  "UniswapV3Pool.swap";
+  "tickBitmap.nextInitializedTickWithinOneWord";
+  "SwapMath.computeSwapStep";
+  "FullMath.mulDiv";
+  "ticks.cross";
+  "UniswapV3Pool.flash";
+  "FullMath.mulDivRoundingUp";
+  "UniswapV3Pool.collectProtocol";
+  "NoDelegateCall.<Constructor>";
+  "NoDelegateCall.address";
+  "NoDelegateCall.checkNotDelegateCall";
+  "NoDelegateCall.noDelegateCall";
+  "Tick.type";
+  "Tick.update";
+  "TickMath.type";
+  "TickBitmap.flipTick";
+  "TickBitmap.position";
+  "TickBitmap.nextInitializedTickWithinOneWord";
+  "BitMath.mostSignificantBit";
+  "BitMath.leastSignificantBit";
+  "TickBitmap.type";
+  "BitMath.type";
+  "Position.update";
+  "FullMath.type";
+  "Oracle.write";
+  "Oracle.transform";
+  "Oracle.binarySearch";
+  "Oracle.lte";
+  "Oracle.getSurroundingObservations";
+  "Oracle.observeSingle";
+  "Oracle.observe";
+  "token.call";
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp";
+  "UnsafeMath.divRoundingUp";
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown";
+  "SqrtPriceMath.type";
+  "SqrtPriceMath.getNextSqrtPriceFromInput";
+  "SqrtPriceMath.getNextSqrtPriceFromOutput";
+  "UniswapV3Factory.<Constructor>" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.deploy" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3PoolDeployer.deploy" -> "UniswapV3PoolDeployer.address" [ color = "green" ];
+  "UniswapV3Pool.<Constructor>" -> "Tick.tickSpacingToMaxLiquidityPerTick" [ color = "orange" ];
+  "UniswapV3Pool.balance0" -> "token0.staticcall" [ color = "orange" ];
+  "UniswapV3Pool.balance0" -> "UniswapV3Pool.address" [ color = "green" ];
+  "UniswapV3Pool.balance1" -> "token1.staticcall" [ color = "orange" ];
+  "UniswapV3Pool.balance1" -> "UniswapV3Pool.address" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "UniswapV3Pool.checkTicks" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool.observe" -> "observations.observe" [ color = "orange" ];
+  "UniswapV3Pool.observe" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.increaseObservationCardinalityNext" -> "observations.grow" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "TickMath.getTickAtSqrtRatio" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "observations.initialize" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool.checkTicks" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool._updatePosition" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "observations.write" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "positions.get" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._updatePosition" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "tickBitmap.flipTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "tickBitmap.flipTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.getFeeGrowthInside" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "Position.Info.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.clear" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.clear" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool._modifyPosition" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.collect" -> "positions.get" [ color = "orange" ];
+  "UniswapV3Pool.collect" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.collect" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.burn" -> "UniswapV3Pool._modifyPosition" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "tickBitmap.nextInitializedTickWithinOneWord" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "SwapMath.computeSwapStep" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "ticks.cross" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TickMath.getTickAtSqrtRatio" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "observations.write" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.collectProtocol" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.collectProtocol" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "NoDelegateCall.<Constructor>" -> "NoDelegateCall.address" [ color = "green" ];
+  "NoDelegateCall.checkNotDelegateCall" -> "NoDelegateCall.address" [ color = "green" ];
+  "NoDelegateCall.noDelegateCall" -> "NoDelegateCall.checkNotDelegateCall" [ color = "green" ];
+  "Tick.tickSpacingToMaxLiquidityPerTick" -> "Tick.type" [ color = "green" ];
+  "Tick.update" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "TickMath.getSqrtRatioAtTick" -> "TickMath.type" [ color = "green" ];
+  "TickMath.getTickAtSqrtRatio" -> "TickMath.getSqrtRatioAtTick" [ color = "green" ];
+  "TickBitmap.flipTick" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "BitMath.mostSignificantBit" [ color = "orange" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "BitMath.leastSignificantBit" [ color = "orange" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "Position.update" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "Position.update" -> "FullMath.mulDiv" [ color = "orange" ];
+  "Position.update" -> "FullMath.mulDiv" [ color = "orange" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.mulDiv" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.type" [ color = "green" ];
+  "Oracle.write" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.binarySearch" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.binarySearch" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.binarySearch" [ color = "green" ];
+  "Oracle.observeSingle" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.observeSingle" -> "Oracle.getSurroundingObservations" [ color = "green" ];
+  "Oracle.observe" -> "Oracle.observeSingle" [ color = "green" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "SqrtPriceMath.type" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "SqrtPriceMath.type" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ color = "green" ];
+  "SqrtPriceMath.getAmount0Delta" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getAmount1Delta" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount1Delta" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "SqrtPriceMath.getAmount0Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount0Delta" -> "SqrtPriceMath.getAmount0Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount1Delta" -> "SqrtPriceMath.getAmount1Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount1Delta" -> "SqrtPriceMath.getAmount1Delta" [ color = "green" ];
+  "SwapMath.computeSwapStep" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getNextSqrtPriceFromInput" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getNextSqrtPriceFromOutput" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterUniswapV3Factory" {
+  graph [ label = "UniswapV3Factory", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3Factory.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "UniswapV3Factory.createPool" [ label = "createPool", color = "blue" ];
+  "UniswapV3Factory.setOwner" [ label = "setOwner", color = "blue" ];
+  "UniswapV3Factory.enableFeeAmount" [ label = "enableFeeAmount", color = "green" ];
+  "UniswapV3Factory.address" [ label = "address" ];
+  "UniswapV3Factory.deploy" [ label = "deploy" ];
+}
+
+subgraph "clusterIUniswapV3Factory" {
+  graph [ label = "IUniswapV3Factory  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3Factory.owner" [ label = "owner", color = "blue" ];
+  "IUniswapV3Factory.feeAmountTickSpacing" [ label = "feeAmountTickSpacing", color = "blue" ];
+  "IUniswapV3Factory.getPool" [ label = "getPool", color = "blue" ];
+  "IUniswapV3Factory.createPool" [ label = "createPool", color = "blue" ];
+  "IUniswapV3Factory.setOwner" [ label = "setOwner", color = "blue" ];
+  "IUniswapV3Factory.enableFeeAmount" [ label = "enableFeeAmount", color = "blue" ];
+}
+
+subgraph "clusterUniswapV3PoolDeployer" {
+  graph [ label = "UniswapV3PoolDeployer", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3PoolDeployer.deploy" [ label = "deploy", color = "white" ];
+  "UniswapV3PoolDeployer.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV3PoolDeployer" {
+  graph [ label = "IUniswapV3PoolDeployer  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDeployer.parameters" [ label = "parameters", color = "blue" ];
+}
+
+subgraph "clusterUniswapV3Pool" {
+  graph [ label = "UniswapV3Pool", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV3Pool.lock" [ label = "lock", color = "yellow" ];
+  "UniswapV3Pool.onlyFactoryOwner" [ label = "onlyFactoryOwner", color = "yellow" ];
+  "UniswapV3Pool.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "UniswapV3Pool.checkTicks" [ label = "checkTicks" ];
+  "UniswapV3Pool._blockTimestamp" [ label = "_blockTimestamp" ];
+  "UniswapV3Pool.balance0" [ label = "balance0", color = "red" ];
+  "UniswapV3Pool.balance1" [ label = "balance1", color = "red" ];
+  "UniswapV3Pool.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+  "UniswapV3Pool.observe" [ label = "observe", color = "blue" ];
+  "UniswapV3Pool.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+  "UniswapV3Pool.initialize" [ label = "initialize", color = "blue" ];
+  "UniswapV3Pool._modifyPosition" [ label = "_modifyPosition", color = "red" ];
+  "UniswapV3Pool._updatePosition" [ label = "_updatePosition" ];
+  "UniswapV3Pool.mint" [ label = "mint", color = "blue" ];
+  "UniswapV3Pool.collect" [ label = "collect", color = "blue" ];
+  "UniswapV3Pool.burn" [ label = "burn", color = "blue" ];
+  "UniswapV3Pool.swap" [ label = "swap", color = "blue" ];
+  "UniswapV3Pool.flash" [ label = "flash", color = "blue" ];
+  "UniswapV3Pool.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "UniswapV3Pool.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+  "UniswapV3Pool.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV3Pool" {
+  graph [ label = "IUniswapV3Pool  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterIUniswapV3PoolImmutables" {
+  graph [ label = "IUniswapV3PoolImmutables  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolImmutables.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV3PoolImmutables.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV3PoolImmutables.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV3PoolImmutables.fee" [ label = "fee", color = "blue" ];
+  "IUniswapV3PoolImmutables.tickSpacing" [ label = "tickSpacing", color = "blue" ];
+  "IUniswapV3PoolImmutables.maxLiquidityPerTick" [ label = "maxLiquidityPerTick", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolState" {
+  graph [ label = "IUniswapV3PoolState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolState.slot0" [ label = "slot0", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal0X128" [ label = "feeGrowthGlobal0X128", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal1X128" [ label = "feeGrowthGlobal1X128", color = "blue" ];
+  "IUniswapV3PoolState.protocolFees" [ label = "protocolFees", color = "blue" ];
+  "IUniswapV3PoolState.liquidity" [ label = "liquidity", color = "blue" ];
+  "IUniswapV3PoolState.ticks" [ label = "ticks", color = "blue" ];
+  "IUniswapV3PoolState.tickBitmap" [ label = "tickBitmap", color = "blue" ];
+  "IUniswapV3PoolState.positions" [ label = "positions", color = "blue" ];
+  "IUniswapV3PoolState.observations" [ label = "observations", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolDerivedState" {
+  graph [ label = "IUniswapV3PoolDerivedState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDerivedState.observe" [ label = "observe", color = "blue" ];
+  "IUniswapV3PoolDerivedState.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolActions" {
+  graph [ label = "IUniswapV3PoolActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolActions.initialize" [ label = "initialize", color = "blue" ];
+  "IUniswapV3PoolActions.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV3PoolActions.collect" [ label = "collect", color = "blue" ];
+  "IUniswapV3PoolActions.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV3PoolActions.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV3PoolActions.flash" [ label = "flash", color = "blue" ];
+  "IUniswapV3PoolActions.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolOwnerActions" {
+  graph [ label = "IUniswapV3PoolOwnerActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolOwnerActions.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "IUniswapV3PoolOwnerActions.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolEvents" {
+  graph [ label = "IUniswapV3PoolEvents  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterNoDelegateCall" {
+  graph [ label = "NoDelegateCall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "NoDelegateCall.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "NoDelegateCall.checkNotDelegateCall" [ label = "checkNotDelegateCall", color = "red" ];
+  "NoDelegateCall.noDelegateCall" [ label = "noDelegateCall", color = "yellow" ];
+  "NoDelegateCall.address" [ label = "address" ];
+}
+
+subgraph "clusterLowGasSafeMath" {
+  graph [ label = "LowGasSafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LowGasSafeMath.add" [ label = "add", color = "white" ];
+  "LowGasSafeMath.sub" [ label = "sub", color = "white" ];
+  "LowGasSafeMath.mul" [ label = "mul", color = "white" ];
+}
+
+subgraph "clusterSafeCast" {
+  graph [ label = "SafeCast  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SafeCast.toUint160" [ label = "toUint160", color = "white" ];
+  "SafeCast.toInt128" [ label = "toInt128", color = "white" ];
+  "SafeCast.toInt256" [ label = "toInt256", color = "white" ];
+}
+
+subgraph "clusterTick" {
+  graph [ label = "Tick  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Tick.tickSpacingToMaxLiquidityPerTick" [ label = "tickSpacingToMaxLiquidityPerTick", color = "white" ];
+  "Tick.getFeeGrowthInside" [ label = "getFeeGrowthInside", color = "white" ];
+  "Tick.update" [ label = "update", color = "white" ];
+  "Tick.clear" [ label = "clear", color = "white" ];
+  "Tick.cross" [ label = "cross", color = "white" ];
+  "Tick.type" [ label = "type" ];
+}
+
+subgraph "clusterTickMath" {
+  graph [ label = "TickMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickMath.getTickAtSqrtRatio" [ label = "getTickAtSqrtRatio", color = "white" ];
+  "TickMath.getSqrtRatioAtTick" [ label = "getSqrtRatioAtTick", color = "white" ];
+  "TickMath.type" [ label = "type" ];
+}
+
+subgraph "clusterLiquidityMath" {
+  graph [ label = "LiquidityMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LiquidityMath.addDelta" [ label = "addDelta", color = "white" ];
+}
+
+subgraph "clusterTickBitmap" {
+  graph [ label = "TickBitmap  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickBitmap.position" [ label = "position" ];
+  "TickBitmap.flipTick" [ label = "flipTick", color = "white" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" [ label = "nextInitializedTickWithinOneWord", color = "white" ];
+  "TickBitmap.type" [ label = "type" ];
+}
+
+subgraph "clusterBitMath" {
+  graph [ label = "BitMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BitMath.mostSignificantBit" [ label = "mostSignificantBit", color = "white" ];
+  "BitMath.leastSignificantBit" [ label = "leastSignificantBit", color = "white" ];
+  "BitMath.type" [ label = "type" ];
+}
+
+subgraph "clusterPosition" {
+  graph [ label = "Position  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Position.get" [ label = "get", color = "white" ];
+  "Position.update" [ label = "update", color = "white" ];
+}
+
+subgraph "clusterFullMath" {
+  graph [ label = "FullMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "FullMath.mulDiv" [ label = "mulDiv", color = "white" ];
+  "FullMath.mulDivRoundingUp" [ label = "mulDivRoundingUp", color = "white" ];
+  "FullMath.type" [ label = "type" ];
+}
+
+subgraph "clusterFixedPoint128" {
+  graph [ label = "FixedPoint128  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterOracle" {
+  graph [ label = "Oracle  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Oracle.transform" [ label = "transform" ];
+  "Oracle.initialize" [ label = "initialize", color = "white" ];
+  "Oracle.write" [ label = "write", color = "white" ];
+  "Oracle.grow" [ label = "grow", color = "white" ];
+  "Oracle.lte" [ label = "lte" ];
+  "Oracle.binarySearch" [ label = "binarySearch", color = "red" ];
+  "Oracle.getSurroundingObservations" [ label = "getSurroundingObservations", color = "red" ];
+  "Oracle.observeSingle" [ label = "observeSingle", color = "white" ];
+  "Oracle.observe" [ label = "observe", color = "white" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "white" ];
+}
+
+subgraph "clusterIERC20Minimal" {
+  graph [ label = "IERC20Minimal  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20Minimal.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC20Minimal.transfer" [ label = "transfer", color = "blue" ];
+  "IERC20Minimal.allowance" [ label = "allowance", color = "blue" ];
+  "IERC20Minimal.approve" [ label = "approve", color = "blue" ];
+  "IERC20Minimal.transferFrom" [ label = "transferFrom", color = "blue" ];
+}
+
+subgraph "clusterSqrtPriceMath" {
+  graph [ label = "SqrtPriceMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SqrtPriceMath.getAmount0Delta" [ label = "getAmount0Delta", color = "white" ];
+  "SqrtPriceMath.getAmount1Delta" [ label = "getAmount1Delta", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ label = "getNextSqrtPriceFromAmount0RoundingUp", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ label = "getNextSqrtPriceFromAmount1RoundingDown", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" [ label = "getNextSqrtPriceFromInput", color = "white" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" [ label = "getNextSqrtPriceFromOutput", color = "white" ];
+  "SqrtPriceMath.type" [ label = "type" ];
+}
+
+subgraph "clusterUnsafeMath" {
+  graph [ label = "UnsafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UnsafeMath.divRoundingUp" [ label = "divRoundingUp", color = "white" ];
+}
+
+subgraph "clusterFixedPoint96" {
+  graph [ label = "FixedPoint96  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterSwapMath" {
+  graph [ label = "SwapMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapMath.computeSwapStep" [ label = "computeSwapStep", color = "white" ];
+}
+
+subgraph "clusterIUniswapV3MintCallback" {
+  graph [ label = "IUniswapV3MintCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3MintCallback.uniswapV3MintCallback" [ label = "uniswapV3MintCallback", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3FlashCallback" {
+  graph [ label = "IUniswapV3FlashCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3FlashCallback.uniswapV3FlashCallback" [ label = "uniswapV3FlashCallback", color = "blue" ];
+}
+
+subgraph "clustertoken0" {
+  graph [ label = "token0", color = "lightgray" ];
+  "token0.staticcall" [ label = "staticcall" ];
+}
+
+subgraph "clustertoken1" {
+  graph [ label = "token1", color = "lightgray" ];
+  "token1.staticcall" [ label = "staticcall" ];
+}
+
+subgraph "clusterobservations" {
+  graph [ label = "observations", color = "lightgray" ];
+  "observations.observeSingle" [ label = "observeSingle" ];
+  "observations.observe" [ label = "observe" ];
+  "observations.grow" [ label = "grow" ];
+  "observations.initialize" [ label = "initialize" ];
+  "observations.write" [ label = "write" ];
+}
+
+subgraph "clusterpositions" {
+  graph [ label = "positions", color = "lightgray" ];
+  "positions.get" [ label = "get" ];
+}
+
+subgraph "clusterticks" {
+  graph [ label = "ticks", color = "lightgray" ];
+  "ticks.update" [ label = "update" ];
+  "ticks.getFeeGrowthInside" [ label = "getFeeGrowthInside" ];
+  "ticks.clear" [ label = "clear" ];
+  "ticks.cross" [ label = "cross" ];
+}
+
+subgraph "clustertickBitmap" {
+  graph [ label = "tickBitmap", color = "lightgray" ];
+  "tickBitmap.flipTick" [ label = "flipTick" ];
+  "tickBitmap.nextInitializedTickWithinOneWord" [ label = "nextInitializedTickWithinOneWord" ];
+}
+
+subgraph "clusterPosition.Info" {
+  graph [ label = "Position.Info", color = "lightgray" ];
+  "Position.Info.update" [ label = "update" ];
+}
+
+subgraph "clusterbalance0Before" {
+  graph [ label = "balance0Before", color = "lightgray" ];
+  "balance0Before.add" [ label = "add" ];
+}
+
+subgraph "clusterbalance1Before" {
+  graph [ label = "balance1Before", color = "lightgray" ];
+  "balance1Before.add" [ label = "add" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "lightgray" ];
+  "token.call" [ label = "call" ];
+}
+
+  "UniswapV3Factory.<Constructor>";
+  "UniswapV3Factory.address";
+  "UniswapV3Factory.createPool";
+  "UniswapV3Factory.deploy";
+  "UniswapV3PoolDeployer.deploy";
+  "UniswapV3PoolDeployer.address";
+  "UniswapV3Pool.<Constructor>";
+  "Tick.tickSpacingToMaxLiquidityPerTick";
+  "UniswapV3Pool.balance0";
+  "token0.staticcall";
+  "UniswapV3Pool.address";
+  "UniswapV3Pool.balance1";
+  "token1.staticcall";
+  "UniswapV3Pool.snapshotCumulativesInside";
+  "UniswapV3Pool.checkTicks";
+  "UniswapV3Pool._blockTimestamp";
+  "observations.observeSingle";
+  "UniswapV3Pool.observe";
+  "observations.observe";
+  "UniswapV3Pool.increaseObservationCardinalityNext";
+  "observations.grow";
+  "UniswapV3Pool.initialize";
+  "TickMath.getTickAtSqrtRatio";
+  "observations.initialize";
+  "UniswapV3Pool._modifyPosition";
+  "UniswapV3Pool._updatePosition";
+  "SqrtPriceMath.getAmount0Delta";
+  "TickMath.getSqrtRatioAtTick";
+  "observations.write";
+  "SqrtPriceMath.getAmount1Delta";
+  "LiquidityMath.addDelta";
+  "positions.get";
+  "ticks.update";
+  "tickBitmap.flipTick";
+  "ticks.getFeeGrowthInside";
+  "Position.Info.update";
+  "ticks.clear";
+  "UniswapV3Pool.mint";
+  "balance0Before.add";
+  "balance1Before.add";
+  "UniswapV3Pool.collect";
+  "TransferHelper.safeTransfer";
+  "UniswapV3Pool.burn";
+  "UniswapV3Pool.swap";
+  "tickBitmap.nextInitializedTickWithinOneWord";
+  "SwapMath.computeSwapStep";
+  "FullMath.mulDiv";
+  "ticks.cross";
+  "UniswapV3Pool.flash";
+  "FullMath.mulDivRoundingUp";
+  "UniswapV3Pool.collectProtocol";
+  "NoDelegateCall.<Constructor>";
+  "NoDelegateCall.address";
+  "NoDelegateCall.checkNotDelegateCall";
+  "NoDelegateCall.noDelegateCall";
+  "Tick.type";
+  "Tick.update";
+  "TickMath.type";
+  "TickBitmap.flipTick";
+  "TickBitmap.position";
+  "TickBitmap.nextInitializedTickWithinOneWord";
+  "BitMath.mostSignificantBit";
+  "BitMath.leastSignificantBit";
+  "TickBitmap.type";
+  "BitMath.type";
+  "Position.update";
+  "FullMath.type";
+  "Oracle.write";
+  "Oracle.transform";
+  "Oracle.binarySearch";
+  "Oracle.lte";
+  "Oracle.getSurroundingObservations";
+  "Oracle.observeSingle";
+  "Oracle.observe";
+  "token.call";
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp";
+  "UnsafeMath.divRoundingUp";
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown";
+  "SqrtPriceMath.type";
+  "SqrtPriceMath.getNextSqrtPriceFromInput";
+  "SqrtPriceMath.getNextSqrtPriceFromOutput";
+  "UniswapV3Factory.<Constructor>" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.deploy" [ color = "green" ];
+  "UniswapV3Factory.createPool" -> "UniswapV3Factory.address" [ color = "green" ];
+  "UniswapV3PoolDeployer.deploy" -> "UniswapV3PoolDeployer.address" [ color = "green" ];
+  "UniswapV3Pool.<Constructor>" -> "Tick.tickSpacingToMaxLiquidityPerTick" [ color = "orange" ];
+  "UniswapV3Pool.balance0" -> "token0.staticcall" [ color = "orange" ];
+  "UniswapV3Pool.balance0" -> "UniswapV3Pool.address" [ color = "green" ];
+  "UniswapV3Pool.balance1" -> "token1.staticcall" [ color = "orange" ];
+  "UniswapV3Pool.balance1" -> "UniswapV3Pool.address" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "UniswapV3Pool.checkTicks" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.snapshotCumulativesInside" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool.observe" -> "observations.observe" [ color = "orange" ];
+  "UniswapV3Pool.observe" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.increaseObservationCardinalityNext" -> "observations.grow" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "TickMath.getTickAtSqrtRatio" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "observations.initialize" [ color = "orange" ];
+  "UniswapV3Pool.initialize" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool.checkTicks" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool._updatePosition" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "observations.write" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._modifyPosition" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "positions.get" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool._updatePosition" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "tickBitmap.flipTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "tickBitmap.flipTick" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.getFeeGrowthInside" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "Position.Info.update" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.clear" [ color = "orange" ];
+  "UniswapV3Pool._updatePosition" -> "ticks.clear" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool._modifyPosition" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.mint" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.mint" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.collect" -> "positions.get" [ color = "orange" ];
+  "UniswapV3Pool.collect" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.collect" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.burn" -> "UniswapV3Pool._modifyPosition" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool._blockTimestamp" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "tickBitmap.nextInitializedTickWithinOneWord" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "SwapMath.computeSwapStep" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "observations.observeSingle" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "ticks.cross" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TickMath.getTickAtSqrtRatio" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "observations.write" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.swap" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.swap" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance0" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "UniswapV3Pool.balance1" [ color = "green" ];
+  "UniswapV3Pool.flash" -> "balance0Before.add" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "balance1Before.add" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.flash" -> "FullMath.mulDiv" [ color = "orange" ];
+  "UniswapV3Pool.collectProtocol" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "UniswapV3Pool.collectProtocol" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "NoDelegateCall.<Constructor>" -> "NoDelegateCall.address" [ color = "green" ];
+  "NoDelegateCall.checkNotDelegateCall" -> "NoDelegateCall.address" [ color = "green" ];
+  "NoDelegateCall.noDelegateCall" -> "NoDelegateCall.checkNotDelegateCall" [ color = "green" ];
+  "Tick.tickSpacingToMaxLiquidityPerTick" -> "Tick.type" [ color = "green" ];
+  "Tick.update" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "TickMath.getSqrtRatioAtTick" -> "TickMath.type" [ color = "green" ];
+  "TickMath.getTickAtSqrtRatio" -> "TickMath.getSqrtRatioAtTick" [ color = "green" ];
+  "TickBitmap.flipTick" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "BitMath.mostSignificantBit" [ color = "orange" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.position" [ color = "green" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "BitMath.leastSignificantBit" [ color = "orange" ];
+  "TickBitmap.nextInitializedTickWithinOneWord" -> "TickBitmap.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "BitMath.leastSignificantBit" -> "BitMath.type" [ color = "green" ];
+  "Position.update" -> "LiquidityMath.addDelta" [ color = "orange" ];
+  "Position.update" -> "FullMath.mulDiv" [ color = "orange" ];
+  "Position.update" -> "FullMath.mulDiv" [ color = "orange" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.mulDiv" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.type" [ color = "green" ];
+  "Oracle.write" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.binarySearch" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.binarySearch" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.lte" [ color = "green" ];
+  "Oracle.getSurroundingObservations" -> "Oracle.binarySearch" [ color = "green" ];
+  "Oracle.observeSingle" -> "Oracle.transform" [ color = "green" ];
+  "Oracle.observeSingle" -> "Oracle.getSurroundingObservations" [ color = "green" ];
+  "Oracle.observe" -> "Oracle.observeSingle" [ color = "green" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "SqrtPriceMath.type" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "SqrtPriceMath.type" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromInput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount1RoundingDown" [ color = "green" ];
+  "SqrtPriceMath.getNextSqrtPriceFromOutput" -> "SqrtPriceMath.getNextSqrtPriceFromAmount0RoundingUp" [ color = "green" ];
+  "SqrtPriceMath.getAmount0Delta" -> "UnsafeMath.divRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getAmount1Delta" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+  "SqrtPriceMath.getAmount1Delta" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SqrtPriceMath.getAmount0Delta" -> "SqrtPriceMath.getAmount0Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount0Delta" -> "SqrtPriceMath.getAmount0Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount1Delta" -> "SqrtPriceMath.getAmount1Delta" [ color = "green" ];
+  "SqrtPriceMath.getAmount1Delta" -> "SqrtPriceMath.getAmount1Delta" [ color = "green" ];
+  "SwapMath.computeSwapStep" -> "FullMath.mulDiv" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getNextSqrtPriceFromInput" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getNextSqrtPriceFromOutput" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount1Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "SqrtPriceMath.getAmount0Delta" [ color = "orange" ];
+  "SwapMath.computeSwapStep" -> "FullMath.mulDivRoundingUp" [ color = "orange" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+

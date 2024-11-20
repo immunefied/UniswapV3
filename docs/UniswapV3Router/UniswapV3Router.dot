@@ -1,0 +1,2647 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterSwapRouter02" {
+  graph [ label = "SwapRouter02", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapRouter02.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterSwapRouter02" {
+  graph [ label = "SwapRouter02", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapRouter02.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterSwapRouter02" {
+  graph [ label = "SwapRouter02", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapRouter02.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterSelfPermit" {
+  graph [ label = "SelfPermit", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SelfPermit.selfPermit" [ label = "selfPermit", color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "SelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+  "SelfPermit.address" [ label = "address" ];
+  "SelfPermit.type" [ label = "type" ];
+}
+
+subgraph "clusterIERC20" {
+  graph [ label = "IERC20  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC20.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC20.transfer" [ label = "transfer", color = "blue" ];
+  "IERC20.allowance" [ label = "allowance", color = "blue" ];
+  "IERC20.approve" [ label = "approve", color = "blue" ];
+  "IERC20.transferFrom" [ label = "transferFrom", color = "blue" ];
+}
+
+subgraph "clusterIERC20Permit" {
+  graph [ label = "IERC20Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20Permit.permit" [ label = "permit", color = "blue" ];
+  "IERC20Permit.nonces" [ label = "nonces", color = "blue" ];
+  "IERC20Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+}
+
+subgraph "clusterISelfPermit" {
+  graph [ label = "ISelfPermit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ISelfPermit.selfPermit" [ label = "selfPermit", color = "blue" ];
+  "ISelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "ISelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "blue" ];
+  "ISelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC20PermitAllowed" {
+  graph [ label = "IERC20PermitAllowed  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20PermitAllowed.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterPeripheryImmutableState" {
+  graph [ label = "PeripheryImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIPeripheryImmutableState" {
+  graph [ label = "IPeripheryImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryImmutableState.factory" [ label = "factory", color = "blue" ];
+  "IPeripheryImmutableState.WETH9" [ label = "WETH9", color = "blue" ];
+}
+
+subgraph "clusterISwapRouter02" {
+  graph [ label = "ISwapRouter02  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterIV2SwapRouter" {
+  graph [ label = "IV2SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "IV2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+}
+
+subgraph "clusterIV3SwapRouter" {
+  graph [ label = "IV3SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "IV3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "IV3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "IV3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+}
+
+subgraph "clusterIApproveAndCall" {
+  graph [ label = "IApproveAndCall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "IApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "IApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "blue" ];
+  "IApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "IApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+}
+
+subgraph "clusterIMulticallExtended" {
+  graph [ label = "IMulticallExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticallExtended.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterIMulticall" {
+  graph [ label = "IMulticall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticall.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterV2SwapRouter" {
+  graph [ label = "V2SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V2SwapRouter._swap" [ label = "_swap", color = "red" ];
+  "V2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "V2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+  "V2SwapRouter.address" [ label = "address" ];
+  "V2SwapRouter.pay" [ label = "pay" ];
+}
+
+subgraph "clusterLowGasSafeMath" {
+  graph [ label = "LowGasSafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LowGasSafeMath.add" [ label = "add", color = "white" ];
+  "LowGasSafeMath.sub" [ label = "sub", color = "white" ];
+  "LowGasSafeMath.mul" [ label = "mul", color = "white" ];
+}
+
+subgraph "clusterImmutableState" {
+  graph [ label = "ImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIImmutableState" {
+  graph [ label = "IImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IImmutableState.factoryV2" [ label = "factoryV2", color = "blue" ];
+  "IImmutableState.positionManager" [ label = "positionManager", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "PeripheryPaymentsWithFeeExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFee" {
+  graph [ label = "PeripheryPaymentsWithFee", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryPayments" {
+  graph [ label = "PeripheryPayments", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.<Receive Ether>" [ label = "<Receive Ether>", color = "blue" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "green" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "green" ];
+  "PeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "PeripheryPayments.pay" [ label = "pay", color = "white" ];
+  "PeripheryPayments.address" [ label = "address" ];
+}
+
+subgraph "clusterIPeripheryPayments" {
+  graph [ label = "IPeripheryPayments  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "IPeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+}
+
+subgraph "clusterIWETH9" {
+  graph [ label = "IWETH9  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IWETH9.deposit" [ label = "deposit", color = "blue" ];
+  "IWETH9.withdraw" [ label = "withdraw", color = "blue" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TransferHelper.safeTransferETH" [ label = "safeTransferETH", color = "white" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "white" ];
+  "TransferHelper.safeTransferFrom" [ label = "safeTransferFrom", color = "white" ];
+  "TransferHelper.safeApprove" [ label = "safeApprove", color = "white" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFee" {
+  graph [ label = "IPeripheryPaymentsWithFee  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "IPeripheryPaymentsWithFeeExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsExtended" {
+  graph [ label = "IPeripheryPaymentsExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsExtended.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "IPeripheryPaymentsExtended.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "IPeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsExtended" {
+  graph [ label = "PeripheryPaymentsExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "PeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "PeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterConstants" {
+  graph [ label = "Constants  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterUniswapV2Library" {
+  graph [ label = "UniswapV2Library  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV2Library.sortTokens" [ label = "sortTokens", color = "white" ];
+  "UniswapV2Library.pairFor" [ label = "pairFor", color = "white" ];
+  "UniswapV2Library.getAmountOut" [ label = "getAmountOut", color = "white" ];
+  "UniswapV2Library.getAmountsIn" [ label = "getAmountsIn", color = "white" ];
+  "UniswapV2Library.getReserves" [ label = "getReserves", color = "white" ];
+  "UniswapV2Library.getAmountIn" [ label = "getAmountIn", color = "white" ];
+  "UniswapV2Library.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV2Pair" {
+  graph [ label = "IUniswapV2Pair  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV2Pair.getReserves" [ label = "getReserves", color = "blue" ];
+  "IUniswapV2Pair.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV2Pair.name" [ label = "name", color = "blue" ];
+  "IUniswapV2Pair.symbol" [ label = "symbol", color = "blue" ];
+  "IUniswapV2Pair.decimals" [ label = "decimals", color = "blue" ];
+  "IUniswapV2Pair.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IUniswapV2Pair.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IUniswapV2Pair.allowance" [ label = "allowance", color = "blue" ];
+  "IUniswapV2Pair.approve" [ label = "approve", color = "blue" ];
+  "IUniswapV2Pair.transfer" [ label = "transfer", color = "blue" ];
+  "IUniswapV2Pair.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IUniswapV2Pair.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IUniswapV2Pair.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IUniswapV2Pair.nonces" [ label = "nonces", color = "blue" ];
+  "IUniswapV2Pair.permit" [ label = "permit", color = "blue" ];
+  "IUniswapV2Pair.MINIMUM_LIQUIDITY" [ label = "MINIMUM_LIQUIDITY", color = "blue" ];
+  "IUniswapV2Pair.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV2Pair.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV2Pair.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV2Pair.price0CumulativeLast" [ label = "price0CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.price1CumulativeLast" [ label = "price1CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.kLast" [ label = "kLast", color = "blue" ];
+  "IUniswapV2Pair.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV2Pair.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV2Pair.skim" [ label = "skim", color = "blue" ];
+  "IUniswapV2Pair.sync" [ label = "sync", color = "blue" ];
+  "IUniswapV2Pair.initialize" [ label = "initialize", color = "blue" ];
+}
+
+subgraph "clusterV3SwapRouter" {
+  graph [ label = "V3SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V3SwapRouter.getPool" [ label = "getPool", color = "red" ];
+  "V3SwapRouter.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+  "V3SwapRouter.exactInputInternal" [ label = "exactInputInternal", color = "red" ];
+  "V3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "V3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "V3SwapRouter.exactOutputInternal" [ label = "exactOutputInternal" ];
+  "V3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "V3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterSafeCast" {
+  graph [ label = "SafeCast  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SafeCast.toUint160" [ label = "toUint160", color = "white" ];
+  "SafeCast.toInt128" [ label = "toInt128", color = "white" ];
+  "SafeCast.toInt256" [ label = "toInt256", color = "white" ];
+}
+
+subgraph "clusterTickMath" {
+  graph [ label = "TickMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickMath.getSqrtRatioAtTick" [ label = "getSqrtRatioAtTick", color = "white" ];
+  "TickMath.getTickAtSqrtRatio" [ label = "getTickAtSqrtRatio", color = "white" ];
+  "TickMath.type" [ label = "type" ];
+}
+
+subgraph "clusterIUniswapV3Pool" {
+  graph [ label = "IUniswapV3Pool  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3Pool.slot0" [ label = "slot0" ];
+  "IUniswapV3Pool.observations" [ label = "observations" ];
+}
+
+subgraph "clusterIUniswapV3PoolImmutables" {
+  graph [ label = "IUniswapV3PoolImmutables  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolImmutables.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV3PoolImmutables.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV3PoolImmutables.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV3PoolImmutables.fee" [ label = "fee", color = "blue" ];
+  "IUniswapV3PoolImmutables.tickSpacing" [ label = "tickSpacing", color = "blue" ];
+  "IUniswapV3PoolImmutables.maxLiquidityPerTick" [ label = "maxLiquidityPerTick", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolState" {
+  graph [ label = "IUniswapV3PoolState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolState.slot0" [ label = "slot0", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal0X128" [ label = "feeGrowthGlobal0X128", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal1X128" [ label = "feeGrowthGlobal1X128", color = "blue" ];
+  "IUniswapV3PoolState.protocolFees" [ label = "protocolFees", color = "blue" ];
+  "IUniswapV3PoolState.liquidity" [ label = "liquidity", color = "blue" ];
+  "IUniswapV3PoolState.ticks" [ label = "ticks", color = "blue" ];
+  "IUniswapV3PoolState.tickBitmap" [ label = "tickBitmap", color = "blue" ];
+  "IUniswapV3PoolState.positions" [ label = "positions", color = "blue" ];
+  "IUniswapV3PoolState.observations" [ label = "observations", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolDerivedState" {
+  graph [ label = "IUniswapV3PoolDerivedState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDerivedState.observe" [ label = "observe", color = "blue" ];
+  "IUniswapV3PoolDerivedState.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolActions" {
+  graph [ label = "IUniswapV3PoolActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolActions.initialize" [ label = "initialize", color = "blue" ];
+  "IUniswapV3PoolActions.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV3PoolActions.collect" [ label = "collect", color = "blue" ];
+  "IUniswapV3PoolActions.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV3PoolActions.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV3PoolActions.flash" [ label = "flash", color = "blue" ];
+  "IUniswapV3PoolActions.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolOwnerActions" {
+  graph [ label = "IUniswapV3PoolOwnerActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolOwnerActions.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "IUniswapV3PoolOwnerActions.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolEvents" {
+  graph [ label = "IUniswapV3PoolEvents  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterPath" {
+  graph [ label = "Path  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Path.hasMultiplePools" [ label = "hasMultiplePools", color = "white" ];
+  "Path.numPools" [ label = "numPools", color = "white" ];
+  "Path.decodeFirstPool" [ label = "decodeFirstPool", color = "white" ];
+  "Path.getFirstPool" [ label = "getFirstPool", color = "white" ];
+  "Path.skipToken" [ label = "skipToken", color = "white" ];
+}
+
+subgraph "clusterBytesLib" {
+  graph [ label = "BytesLib  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BytesLib.slice" [ label = "slice", color = "white" ];
+  "BytesLib.toAddress" [ label = "toAddress", color = "white" ];
+  "BytesLib.toUint24" [ label = "toUint24", color = "white" ];
+}
+
+subgraph "clusterPoolAddress" {
+  graph [ label = "PoolAddress  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PoolAddress.computeAddress" [ label = "computeAddress", color = "white" ];
+  "PoolAddress.getPoolKey" [ label = "getPoolKey", color = "white" ];
+  "PoolAddress.address" [ label = "address" ];
+}
+
+subgraph "clusterCallbackValidation" {
+  graph [ label = "CallbackValidation  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "CallbackValidation.verifyCallback" [ label = "verifyCallback", color = "white" ];
+  "CallbackValidation.address" [ label = "address" ];
+}
+
+subgraph "clusterOracleSlippage" {
+  graph [ label = "OracleSlippage", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" [ label = "getBlockStartingAndCurrentTick", color = "white" ];
+  "OracleSlippage.getPoolAddress" [ label = "getPoolAddress", color = "white" ];
+  "OracleSlippage.getSyntheticTicks" [ label = "getSyntheticTicks", color = "white" ];
+  "OracleSlippage.toInt24" [ label = "toInt24" ];
+  "OracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+  "OracleSlippage._blockTimestamp" [ label = "_blockTimestamp" ];
+  "OracleSlippage.address" [ label = "address" ];
+}
+
+subgraph "clusterIOracleSlippage" {
+  graph [ label = "IOracleSlippage  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IOracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+}
+
+subgraph "clusterBlockTimestamp" {
+  graph [ label = "BlockTimestamp", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BlockTimestamp._blockTimestamp" [ label = "_blockTimestamp", color = "white" ];
+}
+
+subgraph "clusterOracleLibrary" {
+  graph [ label = "OracleLibrary  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleLibrary.consult" [ label = "consult", color = "white" ];
+  "OracleLibrary.getWeightedArithmeticMeanTick" [ label = "getWeightedArithmeticMeanTick", color = "white" ];
+  "OracleLibrary.getQuoteAtTick" [ label = "getQuoteAtTick", color = "white" ];
+  "OracleLibrary.getOldestObservationSecondsAgo" [ label = "getOldestObservationSecondsAgo", color = "white" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" [ label = "getBlockStartingTickAndLiquidity", color = "white" ];
+  "OracleLibrary.type" [ label = "type" ];
+}
+
+subgraph "clusterFullMath" {
+  graph [ label = "FullMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "FullMath.mulDiv" [ label = "mulDiv", color = "white" ];
+  "FullMath.mulDivRoundingUp" [ label = "mulDivRoundingUp", color = "white" ];
+  "FullMath.type" [ label = "type" ];
+}
+
+subgraph "clusterApproveAndCall" {
+  graph [ label = "ApproveAndCall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ApproveAndCall.tryApprove" [ label = "tryApprove", color = "red" ];
+  "ApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "ApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "ApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "green" ];
+  "ApproveAndCall.balanceOf" [ label = "balanceOf", color = "red" ];
+  "ApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "ApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "ApproveAndCall.address" [ label = "address" ];
+  "ApproveAndCall.type" [ label = "type" ];
+}
+
+subgraph "clusterINonfungiblePositionManager" {
+  graph [ label = "INonfungiblePositionManager  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "INonfungiblePositionManager.MintParams" [ label = "MintParams" ];
+  "INonfungiblePositionManager.IncreaseLiquidityParams" [ label = "IncreaseLiquidityParams" ];
+  "INonfungiblePositionManager.positions" [ label = "positions", color = "blue" ];
+  "INonfungiblePositionManager.mint" [ label = "mint", color = "blue" ];
+  "INonfungiblePositionManager.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.decreaseLiquidity" [ label = "decreaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.collect" [ label = "collect", color = "blue" ];
+  "INonfungiblePositionManager.burn" [ label = "burn", color = "blue" ];
+}
+
+subgraph "clusterIERC721Metadata" {
+  graph [ label = "IERC721Metadata  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Metadata.name" [ label = "name", color = "blue" ];
+  "IERC721Metadata.symbol" [ label = "symbol", color = "blue" ];
+  "IERC721Metadata.tokenURI" [ label = "tokenURI", color = "blue" ];
+}
+
+subgraph "clusterIERC721" {
+  graph [ label = "IERC721  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC721.ownerOf" [ label = "ownerOf", color = "blue" ];
+  "IERC721.safeTransferFrom" [ label = "safeTransferFrom", color = "blue" ];
+  "IERC721.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IERC721.approve" [ label = "approve", color = "blue" ];
+  "IERC721.getApproved" [ label = "getApproved", color = "blue" ];
+  "IERC721.setApprovalForAll" [ label = "setApprovalForAll", color = "blue" ];
+  "IERC721.isApprovedForAll" [ label = "isApprovedForAll", color = "blue" ];
+}
+
+subgraph "clusterIERC165" {
+  graph [ label = "IERC165  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC165.supportsInterface" [ label = "supportsInterface", color = "blue" ];
+}
+
+subgraph "clusterIERC721Enumerable" {
+  graph [ label = "IERC721Enumerable  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Enumerable.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC721Enumerable.tokenOfOwnerByIndex" [ label = "tokenOfOwnerByIndex", color = "blue" ];
+  "IERC721Enumerable.tokenByIndex" [ label = "tokenByIndex", color = "blue" ];
+}
+
+subgraph "clusterIPoolInitializer" {
+  graph [ label = "IPoolInitializer  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPoolInitializer.createAndInitializePoolIfNecessary" [ label = "createAndInitializePoolIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC721Permit" {
+  graph [ label = "IERC721Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Permit.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IERC721Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IERC721Permit.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterMulticallExtended" {
+  graph [ label = "MulticallExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "MulticallExtended.multicall" [ label = "multicall" ];
+}
+
+subgraph "clusterMulticall" {
+  graph [ label = "Multicall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Multicall.multicall" [ label = "multicall", color = "green" ];
+  "Multicall.delegatecall" [ label = "delegatecall" ];
+  "Multicall.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryValidationExtended" {
+  graph [ label = "PeripheryValidationExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" [ label = "checkPreviousBlockhash", color = "yellow" ];
+  "PeripheryValidationExtended.blockhash" [ label = "blockhash" ];
+}
+
+subgraph "clusterPeripheryValidation" {
+  graph [ label = "PeripheryValidation", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidation.checkDeadline" [ label = "checkDeadline", color = "yellow" ];
+  "PeripheryValidation._blockTimestamp" [ label = "_blockTimestamp" ];
+}
+
+subgraph "clusterbalanceWETH9" {
+  graph [ label = "balanceWETH9", color = "lightgray" ];
+  "balanceWETH9.mul" [ label = "mul" ];
+}
+
+subgraph "clusterbalanceToken" {
+  graph [ label = "balanceToken", color = "lightgray" ];
+  "balanceToken.mul" [ label = "mul" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "lightgray" ];
+  "token.call" [ label = "call" ];
+}
+
+subgraph "clusteramountIn" {
+  graph [ label = "amountIn", color = "lightgray" ];
+  "amountIn.mul" [ label = "mul" ];
+  "amountIn.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusteramountInWithFee" {
+  graph [ label = "amountInWithFee", color = "lightgray" ];
+  "amountInWithFee.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveIn" {
+  graph [ label = "reserveIn", color = "lightgray" ];
+  "reserveIn.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveOut" {
+  graph [ label = "reserveOut", color = "lightgray" ];
+  "reserveOut.sub" [ label = "sub" ];
+}
+
+subgraph "clusteramountOut" {
+  graph [ label = "amountOut", color = "lightgray" ];
+  "amountOut.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusterpath" {
+  graph [ label = "path", color = "lightgray" ];
+  "path.toAddress" [ label = "toAddress" ];
+  "path.toUint24" [ label = "toUint24" ];
+  "path.slice" [ label = "slice" ];
+  "path.numPools" [ label = "numPools" ];
+  "path.decodeFirstPool" [ label = "decodeFirstPool" ];
+  "path.skipToken" [ label = "skipToken" ];
+}
+
+subgraph "clusterpositionManager" {
+  graph [ label = "positionManager", color = "lightgray" ];
+  "positionManager.call" [ label = "call" ];
+}
+
+  "SelfPermit.selfPermit";
+  "SelfPermit.address";
+  "SelfPermit.selfPermitIfNecessary";
+  "SelfPermit.selfPermitAllowed";
+  "SelfPermit.selfPermitAllowedIfNecessary";
+  "SelfPermit.type";
+  "V2SwapRouter._swap";
+  "UniswapV2Library.sortTokens";
+  "UniswapV2Library.pairFor";
+  "IUniswapV2Pair.getReserves";
+  "V2SwapRouter.address";
+  "UniswapV2Library.getAmountOut";
+  "IUniswapV2Pair.swap";
+  "V2SwapRouter.swapExactTokensForTokens";
+  "V2SwapRouter.pay";
+  "V2SwapRouter.swapTokensForExactTokens";
+  "UniswapV2Library.getAmountsIn";
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee";
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFee.address";
+  "balanceWETH9.mul";
+  "TransferHelper.safeTransferETH";
+  "PeripheryPaymentsWithFee.sweepTokenWithFee";
+  "balanceToken.mul";
+  "TransferHelper.safeTransfer";
+  "PeripheryPayments.unwrapWETH9";
+  "PeripheryPayments.address";
+  "PeripheryPayments.sweepToken";
+  "PeripheryPayments.refundETH";
+  "PeripheryPayments.pay";
+  "TransferHelper.safeTransferFrom";
+  "token.call";
+  "TransferHelper.safeApprove";
+  "PeripheryPaymentsExtended.pull";
+  "UniswapV2Library.address";
+  "UniswapV2Library.getReserves";
+  "amountIn.mul";
+  "amountInWithFee.mul";
+  "reserveIn.mul";
+  "UniswapV2Library.getAmountIn";
+  "reserveOut.sub";
+  "V3SwapRouter.getPool";
+  "PoolAddress.computeAddress";
+  "PoolAddress.getPoolKey";
+  "V3SwapRouter.uniswapV3SwapCallback";
+  "CallbackValidation.verifyCallback";
+  "V3SwapRouter.exactOutputInternal";
+  "V3SwapRouter.exactInputInternal";
+  "amountIn.toInt256";
+  "V3SwapRouter.exactInputSingle";
+  "V3SwapRouter.exactInput";
+  "amountOut.toInt256";
+  "V3SwapRouter.exactOutputSingle";
+  "V3SwapRouter.exactOutput";
+  "TickMath.getSqrtRatioAtTick";
+  "TickMath.type";
+  "TickMath.getTickAtSqrtRatio";
+  "Path.decodeFirstPool";
+  "path.toAddress";
+  "path.toUint24";
+  "Path.getFirstPool";
+  "path.slice";
+  "Path.skipToken";
+  "PoolAddress.address";
+  "CallbackValidation.address";
+  "OracleSlippage.getBlockStartingAndCurrentTick";
+  "IUniswapV3Pool.slot0";
+  "IUniswapV3Pool.observations";
+  "OracleSlippage._blockTimestamp";
+  "OracleSlippage.getPoolAddress";
+  "OracleSlippage.getSyntheticTicks";
+  "path.numPools";
+  "path.decodeFirstPool";
+  "OracleLibrary.consult";
+  "OracleSlippage.address";
+  "path.skipToken";
+  "OracleSlippage.toInt24";
+  "OracleLibrary.getWeightedArithmeticMeanTick";
+  "OracleSlippage.checkOracleSlippage";
+  "OracleLibrary.type";
+  "OracleLibrary.getQuoteAtTick";
+  "FullMath.mulDiv";
+  "OracleLibrary.getBlockStartingTickAndLiquidity";
+  "FullMath.mulDivRoundingUp";
+  "FullMath.type";
+  "ApproveAndCall.tryApprove";
+  "ApproveAndCall.getApprovalType";
+  "ApproveAndCall.address";
+  "ApproveAndCall.type";
+  "ApproveAndCall.approveMax";
+  "ApproveAndCall.approveMaxMinusOne";
+  "ApproveAndCall.approveZeroThenMax";
+  "ApproveAndCall.approveZeroThenMaxMinusOne";
+  "ApproveAndCall.callPositionManager";
+  "positionManager.call";
+  "ApproveAndCall.balanceOf";
+  "ApproveAndCall.mint";
+  "INonfungiblePositionManager.MintParams";
+  "ApproveAndCall.increaseLiquidity";
+  "INonfungiblePositionManager.IncreaseLiquidityParams";
+  "MulticallExtended.multicall";
+  "Multicall.multicall";
+  "Multicall.delegatecall";
+  "Multicall.address";
+  "PeripheryValidationExtended.checkPreviousBlockhash";
+  "PeripheryValidationExtended.blockhash";
+  "PeripheryValidation.checkDeadline";
+  "PeripheryValidation._blockTimestamp";
+  "SelfPermit.selfPermit" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.selfPermit" [ color = "green" ];
+  "SelfPermit.selfPermitAllowed" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.type" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.selfPermitAllowed" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.sortTokens" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.getReserves" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.getAmountOut" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.swap" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.getAmountsIn" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" -> "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "balanceWETH9.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "balanceToken.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.unwrapWETH9" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.refundETH" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "TransferHelper.safeTransferFrom" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeApprove" -> "token.call" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.unwrapWETH9" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.sweepToken" [ color = "green" ];
+  "PeripheryPaymentsExtended.pull" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "PeripheryPaymentsExtended.pull" -> "PeripheryPayments.address" [ color = "green" ];
+  "UniswapV2Library.sortTokens" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.pairFor" [ color = "green" ];
+  "UniswapV2Library.getAmountOut" -> "amountIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "amountInWithFee.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveOut.sub" [ color = "orange" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getReserves" [ color = "green" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getAmountIn" [ color = "green" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "CallbackValidation.verifyCallback" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "amountIn.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "amountOut.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactOutputSingle" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.exactOutput" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "TickMath.getSqrtRatioAtTick" -> "TickMath.type" [ color = "green" ];
+  "TickMath.getTickAtSqrtRatio" -> "TickMath.getSqrtRatioAtTick" [ color = "green" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toUint24" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.getFirstPool" -> "path.slice" [ color = "orange" ];
+  "Path.skipToken" -> "path.slice" [ color = "orange" ];
+  "PoolAddress.computeAddress" -> "PoolAddress.address" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.verifyCallback" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.address" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.slot0" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "OracleSlippage._blockTimestamp" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.numPools" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.decodeFirstPool" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getPoolAddress" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getBlockStartingAndCurrentTick" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.consult" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.address" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.skipToken" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleLibrary.consult" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" -> "OracleLibrary.type" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.mulDiv" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.type" [ color = "green" ];
+  "ApproveAndCall.tryApprove" -> "token.call" [ color = "orange" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.callPositionManager" -> "positionManager.call" [ color = "orange" ];
+  "ApproveAndCall.balanceOf" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.mint" -> "INonfungiblePositionManager.MintParams" [ color = "orange" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "INonfungiblePositionManager.IncreaseLiquidityParams" [ color = "orange" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.type" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.delegatecall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.address" [ color = "green" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" -> "PeripheryValidationExtended.blockhash" [ color = "green" ];
+  "PeripheryValidation.checkDeadline" -> "PeripheryValidation._blockTimestamp" [ color = "green" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterSwapRouter02" {
+  graph [ label = "SwapRouter02", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapRouter02.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterSelfPermit" {
+  graph [ label = "SelfPermit", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SelfPermit.selfPermit" [ label = "selfPermit", color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "SelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+  "SelfPermit.address" [ label = "address" ];
+  "SelfPermit.type" [ label = "type" ];
+}
+
+subgraph "clusterIERC20" {
+  graph [ label = "IERC20  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC20.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC20.transfer" [ label = "transfer", color = "blue" ];
+  "IERC20.allowance" [ label = "allowance", color = "blue" ];
+  "IERC20.approve" [ label = "approve", color = "blue" ];
+  "IERC20.transferFrom" [ label = "transferFrom", color = "blue" ];
+}
+
+subgraph "clusterIERC20Permit" {
+  graph [ label = "IERC20Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20Permit.permit" [ label = "permit", color = "blue" ];
+  "IERC20Permit.nonces" [ label = "nonces", color = "blue" ];
+  "IERC20Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+}
+
+subgraph "clusterISelfPermit" {
+  graph [ label = "ISelfPermit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ISelfPermit.selfPermit" [ label = "selfPermit", color = "blue" ];
+  "ISelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "ISelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "blue" ];
+  "ISelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC20PermitAllowed" {
+  graph [ label = "IERC20PermitAllowed  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20PermitAllowed.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterPeripheryImmutableState" {
+  graph [ label = "PeripheryImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIPeripheryImmutableState" {
+  graph [ label = "IPeripheryImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryImmutableState.factory" [ label = "factory", color = "blue" ];
+  "IPeripheryImmutableState.WETH9" [ label = "WETH9", color = "blue" ];
+}
+
+subgraph "clusterISwapRouter02" {
+  graph [ label = "ISwapRouter02  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterIV2SwapRouter" {
+  graph [ label = "IV2SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "IV2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+}
+
+subgraph "clusterIV3SwapRouter" {
+  graph [ label = "IV3SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "IV3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "IV3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "IV3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+}
+
+subgraph "clusterIApproveAndCall" {
+  graph [ label = "IApproveAndCall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "IApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "IApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "blue" ];
+  "IApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "IApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+}
+
+subgraph "clusterIMulticallExtended" {
+  graph [ label = "IMulticallExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticallExtended.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterIMulticall" {
+  graph [ label = "IMulticall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticall.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterV2SwapRouter" {
+  graph [ label = "V2SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V2SwapRouter._swap" [ label = "_swap", color = "red" ];
+  "V2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "V2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+  "V2SwapRouter.address" [ label = "address" ];
+  "V2SwapRouter.pay" [ label = "pay" ];
+}
+
+subgraph "clusterLowGasSafeMath" {
+  graph [ label = "LowGasSafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LowGasSafeMath.add" [ label = "add", color = "white" ];
+  "LowGasSafeMath.sub" [ label = "sub", color = "white" ];
+  "LowGasSafeMath.mul" [ label = "mul", color = "white" ];
+}
+
+subgraph "clusterImmutableState" {
+  graph [ label = "ImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIImmutableState" {
+  graph [ label = "IImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IImmutableState.factoryV2" [ label = "factoryV2", color = "blue" ];
+  "IImmutableState.positionManager" [ label = "positionManager", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "PeripheryPaymentsWithFeeExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFee" {
+  graph [ label = "PeripheryPaymentsWithFee", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryPayments" {
+  graph [ label = "PeripheryPayments", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.<Receive Ether>" [ label = "<Receive Ether>", color = "blue" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "green" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "green" ];
+  "PeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "PeripheryPayments.pay" [ label = "pay", color = "white" ];
+  "PeripheryPayments.address" [ label = "address" ];
+}
+
+subgraph "clusterIPeripheryPayments" {
+  graph [ label = "IPeripheryPayments  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "IPeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+}
+
+subgraph "clusterIWETH9" {
+  graph [ label = "IWETH9  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IWETH9.deposit" [ label = "deposit", color = "blue" ];
+  "IWETH9.withdraw" [ label = "withdraw", color = "blue" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TransferHelper.safeTransferETH" [ label = "safeTransferETH", color = "white" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "white" ];
+  "TransferHelper.safeTransferFrom" [ label = "safeTransferFrom", color = "white" ];
+  "TransferHelper.safeApprove" [ label = "safeApprove", color = "white" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFee" {
+  graph [ label = "IPeripheryPaymentsWithFee  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "IPeripheryPaymentsWithFeeExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsExtended" {
+  graph [ label = "IPeripheryPaymentsExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsExtended.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "IPeripheryPaymentsExtended.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "IPeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsExtended" {
+  graph [ label = "PeripheryPaymentsExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "PeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "PeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterConstants" {
+  graph [ label = "Constants  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterUniswapV2Library" {
+  graph [ label = "UniswapV2Library  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV2Library.sortTokens" [ label = "sortTokens", color = "white" ];
+  "UniswapV2Library.pairFor" [ label = "pairFor", color = "white" ];
+  "UniswapV2Library.getAmountOut" [ label = "getAmountOut", color = "white" ];
+  "UniswapV2Library.getAmountsIn" [ label = "getAmountsIn", color = "white" ];
+  "UniswapV2Library.getReserves" [ label = "getReserves", color = "white" ];
+  "UniswapV2Library.getAmountIn" [ label = "getAmountIn", color = "white" ];
+  "UniswapV2Library.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV2Pair" {
+  graph [ label = "IUniswapV2Pair  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV2Pair.getReserves" [ label = "getReserves", color = "blue" ];
+  "IUniswapV2Pair.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV2Pair.name" [ label = "name", color = "blue" ];
+  "IUniswapV2Pair.symbol" [ label = "symbol", color = "blue" ];
+  "IUniswapV2Pair.decimals" [ label = "decimals", color = "blue" ];
+  "IUniswapV2Pair.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IUniswapV2Pair.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IUniswapV2Pair.allowance" [ label = "allowance", color = "blue" ];
+  "IUniswapV2Pair.approve" [ label = "approve", color = "blue" ];
+  "IUniswapV2Pair.transfer" [ label = "transfer", color = "blue" ];
+  "IUniswapV2Pair.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IUniswapV2Pair.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IUniswapV2Pair.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IUniswapV2Pair.nonces" [ label = "nonces", color = "blue" ];
+  "IUniswapV2Pair.permit" [ label = "permit", color = "blue" ];
+  "IUniswapV2Pair.MINIMUM_LIQUIDITY" [ label = "MINIMUM_LIQUIDITY", color = "blue" ];
+  "IUniswapV2Pair.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV2Pair.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV2Pair.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV2Pair.price0CumulativeLast" [ label = "price0CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.price1CumulativeLast" [ label = "price1CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.kLast" [ label = "kLast", color = "blue" ];
+  "IUniswapV2Pair.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV2Pair.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV2Pair.skim" [ label = "skim", color = "blue" ];
+  "IUniswapV2Pair.sync" [ label = "sync", color = "blue" ];
+  "IUniswapV2Pair.initialize" [ label = "initialize", color = "blue" ];
+}
+
+subgraph "clusterV3SwapRouter" {
+  graph [ label = "V3SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V3SwapRouter.getPool" [ label = "getPool", color = "red" ];
+  "V3SwapRouter.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+  "V3SwapRouter.exactInputInternal" [ label = "exactInputInternal", color = "red" ];
+  "V3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "V3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "V3SwapRouter.exactOutputInternal" [ label = "exactOutputInternal" ];
+  "V3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "V3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterSafeCast" {
+  graph [ label = "SafeCast  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SafeCast.toUint160" [ label = "toUint160", color = "white" ];
+  "SafeCast.toInt128" [ label = "toInt128", color = "white" ];
+  "SafeCast.toInt256" [ label = "toInt256", color = "white" ];
+}
+
+subgraph "clusterTickMath" {
+  graph [ label = "TickMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickMath.getSqrtRatioAtTick" [ label = "getSqrtRatioAtTick", color = "white" ];
+  "TickMath.getTickAtSqrtRatio" [ label = "getTickAtSqrtRatio", color = "white" ];
+  "TickMath.type" [ label = "type" ];
+}
+
+subgraph "clusterIUniswapV3Pool" {
+  graph [ label = "IUniswapV3Pool  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3Pool.slot0" [ label = "slot0" ];
+  "IUniswapV3Pool.observations" [ label = "observations" ];
+}
+
+subgraph "clusterIUniswapV3PoolImmutables" {
+  graph [ label = "IUniswapV3PoolImmutables  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolImmutables.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV3PoolImmutables.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV3PoolImmutables.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV3PoolImmutables.fee" [ label = "fee", color = "blue" ];
+  "IUniswapV3PoolImmutables.tickSpacing" [ label = "tickSpacing", color = "blue" ];
+  "IUniswapV3PoolImmutables.maxLiquidityPerTick" [ label = "maxLiquidityPerTick", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolState" {
+  graph [ label = "IUniswapV3PoolState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolState.slot0" [ label = "slot0", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal0X128" [ label = "feeGrowthGlobal0X128", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal1X128" [ label = "feeGrowthGlobal1X128", color = "blue" ];
+  "IUniswapV3PoolState.protocolFees" [ label = "protocolFees", color = "blue" ];
+  "IUniswapV3PoolState.liquidity" [ label = "liquidity", color = "blue" ];
+  "IUniswapV3PoolState.ticks" [ label = "ticks", color = "blue" ];
+  "IUniswapV3PoolState.tickBitmap" [ label = "tickBitmap", color = "blue" ];
+  "IUniswapV3PoolState.positions" [ label = "positions", color = "blue" ];
+  "IUniswapV3PoolState.observations" [ label = "observations", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolDerivedState" {
+  graph [ label = "IUniswapV3PoolDerivedState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDerivedState.observe" [ label = "observe", color = "blue" ];
+  "IUniswapV3PoolDerivedState.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolActions" {
+  graph [ label = "IUniswapV3PoolActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolActions.initialize" [ label = "initialize", color = "blue" ];
+  "IUniswapV3PoolActions.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV3PoolActions.collect" [ label = "collect", color = "blue" ];
+  "IUniswapV3PoolActions.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV3PoolActions.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV3PoolActions.flash" [ label = "flash", color = "blue" ];
+  "IUniswapV3PoolActions.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolOwnerActions" {
+  graph [ label = "IUniswapV3PoolOwnerActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolOwnerActions.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "IUniswapV3PoolOwnerActions.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolEvents" {
+  graph [ label = "IUniswapV3PoolEvents  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterPath" {
+  graph [ label = "Path  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Path.hasMultiplePools" [ label = "hasMultiplePools", color = "white" ];
+  "Path.numPools" [ label = "numPools", color = "white" ];
+  "Path.decodeFirstPool" [ label = "decodeFirstPool", color = "white" ];
+  "Path.getFirstPool" [ label = "getFirstPool", color = "white" ];
+  "Path.skipToken" [ label = "skipToken", color = "white" ];
+}
+
+subgraph "clusterBytesLib" {
+  graph [ label = "BytesLib  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BytesLib.slice" [ label = "slice", color = "white" ];
+  "BytesLib.toAddress" [ label = "toAddress", color = "white" ];
+  "BytesLib.toUint24" [ label = "toUint24", color = "white" ];
+}
+
+subgraph "clusterPoolAddress" {
+  graph [ label = "PoolAddress  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PoolAddress.computeAddress" [ label = "computeAddress", color = "white" ];
+  "PoolAddress.getPoolKey" [ label = "getPoolKey", color = "white" ];
+  "PoolAddress.address" [ label = "address" ];
+}
+
+subgraph "clusterCallbackValidation" {
+  graph [ label = "CallbackValidation  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "CallbackValidation.verifyCallback" [ label = "verifyCallback", color = "white" ];
+  "CallbackValidation.address" [ label = "address" ];
+}
+
+subgraph "clusterOracleSlippage" {
+  graph [ label = "OracleSlippage", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" [ label = "getBlockStartingAndCurrentTick", color = "white" ];
+  "OracleSlippage.getPoolAddress" [ label = "getPoolAddress", color = "white" ];
+  "OracleSlippage.getSyntheticTicks" [ label = "getSyntheticTicks", color = "white" ];
+  "OracleSlippage.toInt24" [ label = "toInt24" ];
+  "OracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+  "OracleSlippage._blockTimestamp" [ label = "_blockTimestamp" ];
+  "OracleSlippage.address" [ label = "address" ];
+}
+
+subgraph "clusterIOracleSlippage" {
+  graph [ label = "IOracleSlippage  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IOracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+}
+
+subgraph "clusterBlockTimestamp" {
+  graph [ label = "BlockTimestamp", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BlockTimestamp._blockTimestamp" [ label = "_blockTimestamp", color = "white" ];
+}
+
+subgraph "clusterOracleLibrary" {
+  graph [ label = "OracleLibrary  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleLibrary.consult" [ label = "consult", color = "white" ];
+  "OracleLibrary.getWeightedArithmeticMeanTick" [ label = "getWeightedArithmeticMeanTick", color = "white" ];
+  "OracleLibrary.getQuoteAtTick" [ label = "getQuoteAtTick", color = "white" ];
+  "OracleLibrary.getOldestObservationSecondsAgo" [ label = "getOldestObservationSecondsAgo", color = "white" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" [ label = "getBlockStartingTickAndLiquidity", color = "white" ];
+  "OracleLibrary.type" [ label = "type" ];
+}
+
+subgraph "clusterFullMath" {
+  graph [ label = "FullMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "FullMath.mulDiv" [ label = "mulDiv", color = "white" ];
+  "FullMath.mulDivRoundingUp" [ label = "mulDivRoundingUp", color = "white" ];
+  "FullMath.type" [ label = "type" ];
+}
+
+subgraph "clusterApproveAndCall" {
+  graph [ label = "ApproveAndCall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ApproveAndCall.tryApprove" [ label = "tryApprove", color = "red" ];
+  "ApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "ApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "ApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "green" ];
+  "ApproveAndCall.balanceOf" [ label = "balanceOf", color = "red" ];
+  "ApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "ApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "ApproveAndCall.address" [ label = "address" ];
+  "ApproveAndCall.type" [ label = "type" ];
+}
+
+subgraph "clusterINonfungiblePositionManager" {
+  graph [ label = "INonfungiblePositionManager  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "INonfungiblePositionManager.MintParams" [ label = "MintParams" ];
+  "INonfungiblePositionManager.IncreaseLiquidityParams" [ label = "IncreaseLiquidityParams" ];
+  "INonfungiblePositionManager.positions" [ label = "positions", color = "blue" ];
+  "INonfungiblePositionManager.mint" [ label = "mint", color = "blue" ];
+  "INonfungiblePositionManager.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.decreaseLiquidity" [ label = "decreaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.collect" [ label = "collect", color = "blue" ];
+  "INonfungiblePositionManager.burn" [ label = "burn", color = "blue" ];
+}
+
+subgraph "clusterIERC721Metadata" {
+  graph [ label = "IERC721Metadata  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Metadata.name" [ label = "name", color = "blue" ];
+  "IERC721Metadata.symbol" [ label = "symbol", color = "blue" ];
+  "IERC721Metadata.tokenURI" [ label = "tokenURI", color = "blue" ];
+}
+
+subgraph "clusterIERC721" {
+  graph [ label = "IERC721  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC721.ownerOf" [ label = "ownerOf", color = "blue" ];
+  "IERC721.safeTransferFrom" [ label = "safeTransferFrom", color = "blue" ];
+  "IERC721.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IERC721.approve" [ label = "approve", color = "blue" ];
+  "IERC721.getApproved" [ label = "getApproved", color = "blue" ];
+  "IERC721.setApprovalForAll" [ label = "setApprovalForAll", color = "blue" ];
+  "IERC721.isApprovedForAll" [ label = "isApprovedForAll", color = "blue" ];
+}
+
+subgraph "clusterIERC165" {
+  graph [ label = "IERC165  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC165.supportsInterface" [ label = "supportsInterface", color = "blue" ];
+}
+
+subgraph "clusterIERC721Enumerable" {
+  graph [ label = "IERC721Enumerable  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Enumerable.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC721Enumerable.tokenOfOwnerByIndex" [ label = "tokenOfOwnerByIndex", color = "blue" ];
+  "IERC721Enumerable.tokenByIndex" [ label = "tokenByIndex", color = "blue" ];
+}
+
+subgraph "clusterIPoolInitializer" {
+  graph [ label = "IPoolInitializer  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPoolInitializer.createAndInitializePoolIfNecessary" [ label = "createAndInitializePoolIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC721Permit" {
+  graph [ label = "IERC721Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Permit.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IERC721Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IERC721Permit.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterMulticallExtended" {
+  graph [ label = "MulticallExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "MulticallExtended.multicall" [ label = "multicall" ];
+}
+
+subgraph "clusterMulticall" {
+  graph [ label = "Multicall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Multicall.multicall" [ label = "multicall", color = "green" ];
+  "Multicall.delegatecall" [ label = "delegatecall" ];
+  "Multicall.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryValidationExtended" {
+  graph [ label = "PeripheryValidationExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" [ label = "checkPreviousBlockhash", color = "yellow" ];
+  "PeripheryValidationExtended.blockhash" [ label = "blockhash" ];
+}
+
+subgraph "clusterPeripheryValidation" {
+  graph [ label = "PeripheryValidation", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidation.checkDeadline" [ label = "checkDeadline", color = "yellow" ];
+  "PeripheryValidation._blockTimestamp" [ label = "_blockTimestamp" ];
+}
+
+subgraph "clusterbalanceWETH9" {
+  graph [ label = "balanceWETH9", color = "lightgray" ];
+  "balanceWETH9.mul" [ label = "mul" ];
+}
+
+subgraph "clusterbalanceToken" {
+  graph [ label = "balanceToken", color = "lightgray" ];
+  "balanceToken.mul" [ label = "mul" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "lightgray" ];
+  "token.call" [ label = "call" ];
+}
+
+subgraph "clusteramountIn" {
+  graph [ label = "amountIn", color = "lightgray" ];
+  "amountIn.mul" [ label = "mul" ];
+  "amountIn.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusteramountInWithFee" {
+  graph [ label = "amountInWithFee", color = "lightgray" ];
+  "amountInWithFee.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveIn" {
+  graph [ label = "reserveIn", color = "lightgray" ];
+  "reserveIn.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveOut" {
+  graph [ label = "reserveOut", color = "lightgray" ];
+  "reserveOut.sub" [ label = "sub" ];
+}
+
+subgraph "clusteramountOut" {
+  graph [ label = "amountOut", color = "lightgray" ];
+  "amountOut.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusterpath" {
+  graph [ label = "path", color = "lightgray" ];
+  "path.toAddress" [ label = "toAddress" ];
+  "path.toUint24" [ label = "toUint24" ];
+  "path.slice" [ label = "slice" ];
+  "path.numPools" [ label = "numPools" ];
+  "path.decodeFirstPool" [ label = "decodeFirstPool" ];
+  "path.skipToken" [ label = "skipToken" ];
+}
+
+subgraph "clusterpositionManager" {
+  graph [ label = "positionManager", color = "lightgray" ];
+  "positionManager.call" [ label = "call" ];
+}
+
+  "SelfPermit.selfPermit";
+  "SelfPermit.address";
+  "SelfPermit.selfPermitIfNecessary";
+  "SelfPermit.selfPermitAllowed";
+  "SelfPermit.selfPermitAllowedIfNecessary";
+  "SelfPermit.type";
+  "V2SwapRouter._swap";
+  "UniswapV2Library.sortTokens";
+  "UniswapV2Library.pairFor";
+  "IUniswapV2Pair.getReserves";
+  "V2SwapRouter.address";
+  "UniswapV2Library.getAmountOut";
+  "IUniswapV2Pair.swap";
+  "V2SwapRouter.swapExactTokensForTokens";
+  "V2SwapRouter.pay";
+  "V2SwapRouter.swapTokensForExactTokens";
+  "UniswapV2Library.getAmountsIn";
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee";
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFee.address";
+  "balanceWETH9.mul";
+  "TransferHelper.safeTransferETH";
+  "PeripheryPaymentsWithFee.sweepTokenWithFee";
+  "balanceToken.mul";
+  "TransferHelper.safeTransfer";
+  "PeripheryPayments.unwrapWETH9";
+  "PeripheryPayments.address";
+  "PeripheryPayments.sweepToken";
+  "PeripheryPayments.refundETH";
+  "PeripheryPayments.pay";
+  "TransferHelper.safeTransferFrom";
+  "token.call";
+  "TransferHelper.safeApprove";
+  "PeripheryPaymentsExtended.pull";
+  "UniswapV2Library.address";
+  "UniswapV2Library.getReserves";
+  "amountIn.mul";
+  "amountInWithFee.mul";
+  "reserveIn.mul";
+  "UniswapV2Library.getAmountIn";
+  "reserveOut.sub";
+  "V3SwapRouter.getPool";
+  "PoolAddress.computeAddress";
+  "PoolAddress.getPoolKey";
+  "V3SwapRouter.uniswapV3SwapCallback";
+  "CallbackValidation.verifyCallback";
+  "V3SwapRouter.exactOutputInternal";
+  "V3SwapRouter.exactInputInternal";
+  "amountIn.toInt256";
+  "V3SwapRouter.exactInputSingle";
+  "V3SwapRouter.exactInput";
+  "amountOut.toInt256";
+  "V3SwapRouter.exactOutputSingle";
+  "V3SwapRouter.exactOutput";
+  "TickMath.getSqrtRatioAtTick";
+  "TickMath.type";
+  "TickMath.getTickAtSqrtRatio";
+  "Path.decodeFirstPool";
+  "path.toAddress";
+  "path.toUint24";
+  "Path.getFirstPool";
+  "path.slice";
+  "Path.skipToken";
+  "PoolAddress.address";
+  "CallbackValidation.address";
+  "OracleSlippage.getBlockStartingAndCurrentTick";
+  "IUniswapV3Pool.slot0";
+  "IUniswapV3Pool.observations";
+  "OracleSlippage._blockTimestamp";
+  "OracleSlippage.getPoolAddress";
+  "OracleSlippage.getSyntheticTicks";
+  "path.numPools";
+  "path.decodeFirstPool";
+  "OracleLibrary.consult";
+  "OracleSlippage.address";
+  "path.skipToken";
+  "OracleSlippage.toInt24";
+  "OracleLibrary.getWeightedArithmeticMeanTick";
+  "OracleSlippage.checkOracleSlippage";
+  "OracleLibrary.type";
+  "OracleLibrary.getQuoteAtTick";
+  "FullMath.mulDiv";
+  "OracleLibrary.getBlockStartingTickAndLiquidity";
+  "FullMath.mulDivRoundingUp";
+  "FullMath.type";
+  "ApproveAndCall.tryApprove";
+  "ApproveAndCall.getApprovalType";
+  "ApproveAndCall.address";
+  "ApproveAndCall.type";
+  "ApproveAndCall.approveMax";
+  "ApproveAndCall.approveMaxMinusOne";
+  "ApproveAndCall.approveZeroThenMax";
+  "ApproveAndCall.approveZeroThenMaxMinusOne";
+  "ApproveAndCall.callPositionManager";
+  "positionManager.call";
+  "ApproveAndCall.balanceOf";
+  "ApproveAndCall.mint";
+  "INonfungiblePositionManager.MintParams";
+  "ApproveAndCall.increaseLiquidity";
+  "INonfungiblePositionManager.IncreaseLiquidityParams";
+  "MulticallExtended.multicall";
+  "Multicall.multicall";
+  "Multicall.delegatecall";
+  "Multicall.address";
+  "PeripheryValidationExtended.checkPreviousBlockhash";
+  "PeripheryValidationExtended.blockhash";
+  "PeripheryValidation.checkDeadline";
+  "PeripheryValidation._blockTimestamp";
+  "SelfPermit.selfPermit" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.selfPermit" [ color = "green" ];
+  "SelfPermit.selfPermitAllowed" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.type" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.selfPermitAllowed" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.sortTokens" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.getReserves" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.getAmountOut" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.swap" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.getAmountsIn" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" -> "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "balanceWETH9.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "balanceToken.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.unwrapWETH9" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.refundETH" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "TransferHelper.safeTransferFrom" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeApprove" -> "token.call" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.unwrapWETH9" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.sweepToken" [ color = "green" ];
+  "PeripheryPaymentsExtended.pull" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "PeripheryPaymentsExtended.pull" -> "PeripheryPayments.address" [ color = "green" ];
+  "UniswapV2Library.sortTokens" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.pairFor" [ color = "green" ];
+  "UniswapV2Library.getAmountOut" -> "amountIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "amountInWithFee.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveOut.sub" [ color = "orange" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getReserves" [ color = "green" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getAmountIn" [ color = "green" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "CallbackValidation.verifyCallback" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "amountIn.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "amountOut.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactOutputSingle" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.exactOutput" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "TickMath.getSqrtRatioAtTick" -> "TickMath.type" [ color = "green" ];
+  "TickMath.getTickAtSqrtRatio" -> "TickMath.getSqrtRatioAtTick" [ color = "green" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toUint24" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.getFirstPool" -> "path.slice" [ color = "orange" ];
+  "Path.skipToken" -> "path.slice" [ color = "orange" ];
+  "PoolAddress.computeAddress" -> "PoolAddress.address" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.verifyCallback" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.address" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.slot0" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "OracleSlippage._blockTimestamp" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.numPools" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.decodeFirstPool" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getPoolAddress" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getBlockStartingAndCurrentTick" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.consult" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.address" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.skipToken" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleLibrary.consult" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" -> "OracleLibrary.type" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.mulDiv" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.type" [ color = "green" ];
+  "ApproveAndCall.tryApprove" -> "token.call" [ color = "orange" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.callPositionManager" -> "positionManager.call" [ color = "orange" ];
+  "ApproveAndCall.balanceOf" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.mint" -> "INonfungiblePositionManager.MintParams" [ color = "orange" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "INonfungiblePositionManager.IncreaseLiquidityParams" [ color = "orange" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.type" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.delegatecall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.address" [ color = "green" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" -> "PeripheryValidationExtended.blockhash" [ color = "green" ];
+  "PeripheryValidation.checkDeadline" -> "PeripheryValidation._blockTimestamp" [ color = "green" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterSwapRouter02" {
+  graph [ label = "SwapRouter02", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SwapRouter02.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterSelfPermit" {
+  graph [ label = "SelfPermit", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SelfPermit.selfPermit" [ label = "selfPermit", color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "SelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+  "SelfPermit.address" [ label = "address" ];
+  "SelfPermit.type" [ label = "type" ];
+}
+
+subgraph "clusterIERC20" {
+  graph [ label = "IERC20  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC20.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC20.transfer" [ label = "transfer", color = "blue" ];
+  "IERC20.allowance" [ label = "allowance", color = "blue" ];
+  "IERC20.approve" [ label = "approve", color = "blue" ];
+  "IERC20.transferFrom" [ label = "transferFrom", color = "blue" ];
+}
+
+subgraph "clusterIERC20Permit" {
+  graph [ label = "IERC20Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20Permit.permit" [ label = "permit", color = "blue" ];
+  "IERC20Permit.nonces" [ label = "nonces", color = "blue" ];
+  "IERC20Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+}
+
+subgraph "clusterISelfPermit" {
+  graph [ label = "ISelfPermit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ISelfPermit.selfPermit" [ label = "selfPermit", color = "blue" ];
+  "ISelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "blue" ];
+  "ISelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "blue" ];
+  "ISelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC20PermitAllowed" {
+  graph [ label = "IERC20PermitAllowed  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC20PermitAllowed.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterPeripheryImmutableState" {
+  graph [ label = "PeripheryImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIPeripheryImmutableState" {
+  graph [ label = "IPeripheryImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryImmutableState.factory" [ label = "factory", color = "blue" ];
+  "IPeripheryImmutableState.WETH9" [ label = "WETH9", color = "blue" ];
+}
+
+subgraph "clusterISwapRouter02" {
+  graph [ label = "ISwapRouter02  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterIV2SwapRouter" {
+  graph [ label = "IV2SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "IV2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+}
+
+subgraph "clusterIV3SwapRouter" {
+  graph [ label = "IV3SwapRouter  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IV3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "IV3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "IV3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "IV3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+}
+
+subgraph "clusterIApproveAndCall" {
+  graph [ label = "IApproveAndCall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "IApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "IApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "IApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "IApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "blue" ];
+  "IApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "IApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+}
+
+subgraph "clusterIMulticallExtended" {
+  graph [ label = "IMulticallExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticallExtended.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterIMulticall" {
+  graph [ label = "IMulticall  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IMulticall.multicall" [ label = "multicall", color = "blue" ];
+}
+
+subgraph "clusterV2SwapRouter" {
+  graph [ label = "V2SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V2SwapRouter._swap" [ label = "_swap", color = "red" ];
+  "V2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "blue" ];
+  "V2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "blue" ];
+  "V2SwapRouter.address" [ label = "address" ];
+  "V2SwapRouter.pay" [ label = "pay" ];
+}
+
+subgraph "clusterLowGasSafeMath" {
+  graph [ label = "LowGasSafeMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "LowGasSafeMath.add" [ label = "add", color = "white" ];
+  "LowGasSafeMath.sub" [ label = "sub", color = "white" ];
+  "LowGasSafeMath.mul" [ label = "mul", color = "white" ];
+}
+
+subgraph "clusterImmutableState" {
+  graph [ label = "ImmutableState", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ImmutableState.<Constructor>" [ label = "<Constructor>", color = "green" ];
+}
+
+subgraph "clusterIImmutableState" {
+  graph [ label = "IImmutableState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IImmutableState.factoryV2" [ label = "factoryV2", color = "blue" ];
+  "IImmutableState.positionManager" [ label = "positionManager", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "PeripheryPaymentsWithFeeExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee" ];
+}
+
+subgraph "clusterPeripheryPaymentsWithFee" {
+  graph [ label = "PeripheryPaymentsWithFee", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "green" ];
+  "PeripheryPaymentsWithFee.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryPayments" {
+  graph [ label = "PeripheryPayments", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.<Receive Ether>" [ label = "<Receive Ether>", color = "blue" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "green" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "green" ];
+  "PeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "PeripheryPayments.pay" [ label = "pay", color = "white" ];
+  "PeripheryPayments.address" [ label = "address" ];
+}
+
+subgraph "clusterIPeripheryPayments" {
+  graph [ label = "IPeripheryPayments  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPayments.refundETH" [ label = "refundETH", color = "blue" ];
+  "IPeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+}
+
+subgraph "clusterIWETH9" {
+  graph [ label = "IWETH9  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IWETH9.deposit" [ label = "deposit", color = "blue" ];
+  "IWETH9.withdraw" [ label = "withdraw", color = "blue" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TransferHelper.safeTransferETH" [ label = "safeTransferETH", color = "white" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "white" ];
+  "TransferHelper.safeTransferFrom" [ label = "safeTransferFrom", color = "white" ];
+  "TransferHelper.safeApprove" [ label = "safeApprove", color = "white" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFee" {
+  graph [ label = "IPeripheryPaymentsWithFee  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFee.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFee.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsWithFeeExtended" {
+  graph [ label = "IPeripheryPaymentsWithFeeExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ label = "unwrapWETH9WithFee", color = "blue" ];
+  "IPeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ label = "sweepTokenWithFee", color = "blue" ];
+}
+
+subgraph "clusterIPeripheryPaymentsExtended" {
+  graph [ label = "IPeripheryPaymentsExtended  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPeripheryPaymentsExtended.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "IPeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "IPeripheryPaymentsExtended.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "IPeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterPeripheryPaymentsExtended" {
+  graph [ label = "PeripheryPaymentsExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryPayments.unwrapWETH9" [ label = "unwrapWETH9", color = "blue" ];
+  "PeripheryPaymentsExtended.wrapETH" [ label = "wrapETH", color = "blue" ];
+  "PeripheryPayments.sweepToken" [ label = "sweepToken", color = "blue" ];
+  "PeripheryPaymentsExtended.pull" [ label = "pull", color = "blue" ];
+}
+
+subgraph "clusterConstants" {
+  graph [ label = "Constants  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterUniswapV2Library" {
+  graph [ label = "UniswapV2Library  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "UniswapV2Library.sortTokens" [ label = "sortTokens", color = "white" ];
+  "UniswapV2Library.pairFor" [ label = "pairFor", color = "white" ];
+  "UniswapV2Library.getAmountOut" [ label = "getAmountOut", color = "white" ];
+  "UniswapV2Library.getAmountsIn" [ label = "getAmountsIn", color = "white" ];
+  "UniswapV2Library.getReserves" [ label = "getReserves", color = "white" ];
+  "UniswapV2Library.getAmountIn" [ label = "getAmountIn", color = "white" ];
+  "UniswapV2Library.address" [ label = "address" ];
+}
+
+subgraph "clusterIUniswapV2Pair" {
+  graph [ label = "IUniswapV2Pair  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV2Pair.getReserves" [ label = "getReserves", color = "blue" ];
+  "IUniswapV2Pair.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV2Pair.name" [ label = "name", color = "blue" ];
+  "IUniswapV2Pair.symbol" [ label = "symbol", color = "blue" ];
+  "IUniswapV2Pair.decimals" [ label = "decimals", color = "blue" ];
+  "IUniswapV2Pair.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IUniswapV2Pair.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IUniswapV2Pair.allowance" [ label = "allowance", color = "blue" ];
+  "IUniswapV2Pair.approve" [ label = "approve", color = "blue" ];
+  "IUniswapV2Pair.transfer" [ label = "transfer", color = "blue" ];
+  "IUniswapV2Pair.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IUniswapV2Pair.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IUniswapV2Pair.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IUniswapV2Pair.nonces" [ label = "nonces", color = "blue" ];
+  "IUniswapV2Pair.permit" [ label = "permit", color = "blue" ];
+  "IUniswapV2Pair.MINIMUM_LIQUIDITY" [ label = "MINIMUM_LIQUIDITY", color = "blue" ];
+  "IUniswapV2Pair.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV2Pair.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV2Pair.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV2Pair.price0CumulativeLast" [ label = "price0CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.price1CumulativeLast" [ label = "price1CumulativeLast", color = "blue" ];
+  "IUniswapV2Pair.kLast" [ label = "kLast", color = "blue" ];
+  "IUniswapV2Pair.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV2Pair.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV2Pair.skim" [ label = "skim", color = "blue" ];
+  "IUniswapV2Pair.sync" [ label = "sync", color = "blue" ];
+  "IUniswapV2Pair.initialize" [ label = "initialize", color = "blue" ];
+}
+
+subgraph "clusterV3SwapRouter" {
+  graph [ label = "V3SwapRouter", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "V3SwapRouter.getPool" [ label = "getPool", color = "red" ];
+  "V3SwapRouter.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "blue" ];
+  "V3SwapRouter.exactInputInternal" [ label = "exactInputInternal", color = "red" ];
+  "V3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "blue" ];
+  "V3SwapRouter.exactInput" [ label = "exactInput", color = "blue" ];
+  "V3SwapRouter.exactOutputInternal" [ label = "exactOutputInternal" ];
+  "V3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "blue" ];
+  "V3SwapRouter.exactOutput" [ label = "exactOutput", color = "blue" ];
+}
+
+subgraph "clusterSafeCast" {
+  graph [ label = "SafeCast  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "SafeCast.toUint160" [ label = "toUint160", color = "white" ];
+  "SafeCast.toInt128" [ label = "toInt128", color = "white" ];
+  "SafeCast.toInt256" [ label = "toInt256", color = "white" ];
+}
+
+subgraph "clusterTickMath" {
+  graph [ label = "TickMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "TickMath.getSqrtRatioAtTick" [ label = "getSqrtRatioAtTick", color = "white" ];
+  "TickMath.getTickAtSqrtRatio" [ label = "getTickAtSqrtRatio", color = "white" ];
+  "TickMath.type" [ label = "type" ];
+}
+
+subgraph "clusterIUniswapV3Pool" {
+  graph [ label = "IUniswapV3Pool  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3Pool.slot0" [ label = "slot0" ];
+  "IUniswapV3Pool.observations" [ label = "observations" ];
+}
+
+subgraph "clusterIUniswapV3PoolImmutables" {
+  graph [ label = "IUniswapV3PoolImmutables  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolImmutables.factory" [ label = "factory", color = "blue" ];
+  "IUniswapV3PoolImmutables.token0" [ label = "token0", color = "blue" ];
+  "IUniswapV3PoolImmutables.token1" [ label = "token1", color = "blue" ];
+  "IUniswapV3PoolImmutables.fee" [ label = "fee", color = "blue" ];
+  "IUniswapV3PoolImmutables.tickSpacing" [ label = "tickSpacing", color = "blue" ];
+  "IUniswapV3PoolImmutables.maxLiquidityPerTick" [ label = "maxLiquidityPerTick", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolState" {
+  graph [ label = "IUniswapV3PoolState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolState.slot0" [ label = "slot0", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal0X128" [ label = "feeGrowthGlobal0X128", color = "blue" ];
+  "IUniswapV3PoolState.feeGrowthGlobal1X128" [ label = "feeGrowthGlobal1X128", color = "blue" ];
+  "IUniswapV3PoolState.protocolFees" [ label = "protocolFees", color = "blue" ];
+  "IUniswapV3PoolState.liquidity" [ label = "liquidity", color = "blue" ];
+  "IUniswapV3PoolState.ticks" [ label = "ticks", color = "blue" ];
+  "IUniswapV3PoolState.tickBitmap" [ label = "tickBitmap", color = "blue" ];
+  "IUniswapV3PoolState.positions" [ label = "positions", color = "blue" ];
+  "IUniswapV3PoolState.observations" [ label = "observations", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolDerivedState" {
+  graph [ label = "IUniswapV3PoolDerivedState  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolDerivedState.observe" [ label = "observe", color = "blue" ];
+  "IUniswapV3PoolDerivedState.snapshotCumulativesInside" [ label = "snapshotCumulativesInside", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolActions" {
+  graph [ label = "IUniswapV3PoolActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolActions.initialize" [ label = "initialize", color = "blue" ];
+  "IUniswapV3PoolActions.mint" [ label = "mint", color = "blue" ];
+  "IUniswapV3PoolActions.collect" [ label = "collect", color = "blue" ];
+  "IUniswapV3PoolActions.burn" [ label = "burn", color = "blue" ];
+  "IUniswapV3PoolActions.swap" [ label = "swap", color = "blue" ];
+  "IUniswapV3PoolActions.flash" [ label = "flash", color = "blue" ];
+  "IUniswapV3PoolActions.increaseObservationCardinalityNext" [ label = "increaseObservationCardinalityNext", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolOwnerActions" {
+  graph [ label = "IUniswapV3PoolOwnerActions  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IUniswapV3PoolOwnerActions.setFeeProtocol" [ label = "setFeeProtocol", color = "blue" ];
+  "IUniswapV3PoolOwnerActions.collectProtocol" [ label = "collectProtocol", color = "blue" ];
+}
+
+subgraph "clusterIUniswapV3PoolEvents" {
+  graph [ label = "IUniswapV3PoolEvents  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+}
+
+subgraph "clusterPath" {
+  graph [ label = "Path  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Path.hasMultiplePools" [ label = "hasMultiplePools", color = "white" ];
+  "Path.numPools" [ label = "numPools", color = "white" ];
+  "Path.decodeFirstPool" [ label = "decodeFirstPool", color = "white" ];
+  "Path.getFirstPool" [ label = "getFirstPool", color = "white" ];
+  "Path.skipToken" [ label = "skipToken", color = "white" ];
+}
+
+subgraph "clusterBytesLib" {
+  graph [ label = "BytesLib  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BytesLib.slice" [ label = "slice", color = "white" ];
+  "BytesLib.toAddress" [ label = "toAddress", color = "white" ];
+  "BytesLib.toUint24" [ label = "toUint24", color = "white" ];
+}
+
+subgraph "clusterPoolAddress" {
+  graph [ label = "PoolAddress  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PoolAddress.computeAddress" [ label = "computeAddress", color = "white" ];
+  "PoolAddress.getPoolKey" [ label = "getPoolKey", color = "white" ];
+  "PoolAddress.address" [ label = "address" ];
+}
+
+subgraph "clusterCallbackValidation" {
+  graph [ label = "CallbackValidation  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "CallbackValidation.verifyCallback" [ label = "verifyCallback", color = "white" ];
+  "CallbackValidation.address" [ label = "address" ];
+}
+
+subgraph "clusterOracleSlippage" {
+  graph [ label = "OracleSlippage", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" [ label = "getBlockStartingAndCurrentTick", color = "white" ];
+  "OracleSlippage.getPoolAddress" [ label = "getPoolAddress", color = "white" ];
+  "OracleSlippage.getSyntheticTicks" [ label = "getSyntheticTicks", color = "white" ];
+  "OracleSlippage.toInt24" [ label = "toInt24" ];
+  "OracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+  "OracleSlippage._blockTimestamp" [ label = "_blockTimestamp" ];
+  "OracleSlippage.address" [ label = "address" ];
+}
+
+subgraph "clusterIOracleSlippage" {
+  graph [ label = "IOracleSlippage  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IOracleSlippage.checkOracleSlippage" [ label = "checkOracleSlippage", color = "blue" ];
+}
+
+subgraph "clusterBlockTimestamp" {
+  graph [ label = "BlockTimestamp", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "BlockTimestamp._blockTimestamp" [ label = "_blockTimestamp", color = "white" ];
+}
+
+subgraph "clusterOracleLibrary" {
+  graph [ label = "OracleLibrary  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "OracleLibrary.consult" [ label = "consult", color = "white" ];
+  "OracleLibrary.getWeightedArithmeticMeanTick" [ label = "getWeightedArithmeticMeanTick", color = "white" ];
+  "OracleLibrary.getQuoteAtTick" [ label = "getQuoteAtTick", color = "white" ];
+  "OracleLibrary.getOldestObservationSecondsAgo" [ label = "getOldestObservationSecondsAgo", color = "white" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" [ label = "getBlockStartingTickAndLiquidity", color = "white" ];
+  "OracleLibrary.type" [ label = "type" ];
+}
+
+subgraph "clusterFullMath" {
+  graph [ label = "FullMath  (lib)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "FullMath.mulDiv" [ label = "mulDiv", color = "white" ];
+  "FullMath.mulDivRoundingUp" [ label = "mulDivRoundingUp", color = "white" ];
+  "FullMath.type" [ label = "type" ];
+}
+
+subgraph "clusterApproveAndCall" {
+  graph [ label = "ApproveAndCall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "ApproveAndCall.tryApprove" [ label = "tryApprove", color = "red" ];
+  "ApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "blue" ];
+  "ApproveAndCall.approveMax" [ label = "approveMax", color = "blue" ];
+  "ApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "blue" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "blue" ];
+  "ApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "green" ];
+  "ApproveAndCall.balanceOf" [ label = "balanceOf", color = "red" ];
+  "ApproveAndCall.mint" [ label = "mint", color = "blue" ];
+  "ApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "ApproveAndCall.address" [ label = "address" ];
+  "ApproveAndCall.type" [ label = "type" ];
+}
+
+subgraph "clusterINonfungiblePositionManager" {
+  graph [ label = "INonfungiblePositionManager  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "INonfungiblePositionManager.MintParams" [ label = "MintParams" ];
+  "INonfungiblePositionManager.IncreaseLiquidityParams" [ label = "IncreaseLiquidityParams" ];
+  "INonfungiblePositionManager.positions" [ label = "positions", color = "blue" ];
+  "INonfungiblePositionManager.mint" [ label = "mint", color = "blue" ];
+  "INonfungiblePositionManager.increaseLiquidity" [ label = "increaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.decreaseLiquidity" [ label = "decreaseLiquidity", color = "blue" ];
+  "INonfungiblePositionManager.collect" [ label = "collect", color = "blue" ];
+  "INonfungiblePositionManager.burn" [ label = "burn", color = "blue" ];
+}
+
+subgraph "clusterIERC721Metadata" {
+  graph [ label = "IERC721Metadata  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Metadata.name" [ label = "name", color = "blue" ];
+  "IERC721Metadata.symbol" [ label = "symbol", color = "blue" ];
+  "IERC721Metadata.tokenURI" [ label = "tokenURI", color = "blue" ];
+}
+
+subgraph "clusterIERC721" {
+  graph [ label = "IERC721  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC721.ownerOf" [ label = "ownerOf", color = "blue" ];
+  "IERC721.safeTransferFrom" [ label = "safeTransferFrom", color = "blue" ];
+  "IERC721.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IERC721.approve" [ label = "approve", color = "blue" ];
+  "IERC721.getApproved" [ label = "getApproved", color = "blue" ];
+  "IERC721.setApprovalForAll" [ label = "setApprovalForAll", color = "blue" ];
+  "IERC721.isApprovedForAll" [ label = "isApprovedForAll", color = "blue" ];
+}
+
+subgraph "clusterIERC165" {
+  graph [ label = "IERC165  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC165.supportsInterface" [ label = "supportsInterface", color = "blue" ];
+}
+
+subgraph "clusterIERC721Enumerable" {
+  graph [ label = "IERC721Enumerable  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Enumerable.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC721Enumerable.tokenOfOwnerByIndex" [ label = "tokenOfOwnerByIndex", color = "blue" ];
+  "IERC721Enumerable.tokenByIndex" [ label = "tokenByIndex", color = "blue" ];
+}
+
+subgraph "clusterIPoolInitializer" {
+  graph [ label = "IPoolInitializer  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IPoolInitializer.createAndInitializePoolIfNecessary" [ label = "createAndInitializePoolIfNecessary", color = "blue" ];
+}
+
+subgraph "clusterIERC721Permit" {
+  graph [ label = "IERC721Permit  (iface)", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "IERC721Permit.PERMIT_TYPEHASH" [ label = "PERMIT_TYPEHASH", color = "blue" ];
+  "IERC721Permit.DOMAIN_SEPARATOR" [ label = "DOMAIN_SEPARATOR", color = "blue" ];
+  "IERC721Permit.permit" [ label = "permit", color = "blue" ];
+}
+
+subgraph "clusterMulticallExtended" {
+  graph [ label = "MulticallExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "MulticallExtended.multicall" [ label = "multicall" ];
+}
+
+subgraph "clusterMulticall" {
+  graph [ label = "Multicall", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Multicall.multicall" [ label = "multicall", color = "green" ];
+  "Multicall.delegatecall" [ label = "delegatecall" ];
+  "Multicall.address" [ label = "address" ];
+}
+
+subgraph "clusterPeripheryValidationExtended" {
+  graph [ label = "PeripheryValidationExtended", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" [ label = "checkPreviousBlockhash", color = "yellow" ];
+  "PeripheryValidationExtended.blockhash" [ label = "blockhash" ];
+}
+
+subgraph "clusterPeripheryValidation" {
+  graph [ label = "PeripheryValidation", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "PeripheryValidation.checkDeadline" [ label = "checkDeadline", color = "yellow" ];
+  "PeripheryValidation._blockTimestamp" [ label = "_blockTimestamp" ];
+}
+
+subgraph "clusterbalanceWETH9" {
+  graph [ label = "balanceWETH9", color = "lightgray" ];
+  "balanceWETH9.mul" [ label = "mul" ];
+}
+
+subgraph "clusterbalanceToken" {
+  graph [ label = "balanceToken", color = "lightgray" ];
+  "balanceToken.mul" [ label = "mul" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "lightgray" ];
+  "token.call" [ label = "call" ];
+}
+
+subgraph "clusteramountIn" {
+  graph [ label = "amountIn", color = "lightgray" ];
+  "amountIn.mul" [ label = "mul" ];
+  "amountIn.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusteramountInWithFee" {
+  graph [ label = "amountInWithFee", color = "lightgray" ];
+  "amountInWithFee.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveIn" {
+  graph [ label = "reserveIn", color = "lightgray" ];
+  "reserveIn.mul" [ label = "mul" ];
+}
+
+subgraph "clusterreserveOut" {
+  graph [ label = "reserveOut", color = "lightgray" ];
+  "reserveOut.sub" [ label = "sub" ];
+}
+
+subgraph "clusteramountOut" {
+  graph [ label = "amountOut", color = "lightgray" ];
+  "amountOut.toInt256" [ label = "toInt256" ];
+}
+
+subgraph "clusterpath" {
+  graph [ label = "path", color = "lightgray" ];
+  "path.toAddress" [ label = "toAddress" ];
+  "path.toUint24" [ label = "toUint24" ];
+  "path.slice" [ label = "slice" ];
+  "path.numPools" [ label = "numPools" ];
+  "path.decodeFirstPool" [ label = "decodeFirstPool" ];
+  "path.skipToken" [ label = "skipToken" ];
+}
+
+subgraph "clusterpositionManager" {
+  graph [ label = "positionManager", color = "lightgray" ];
+  "positionManager.call" [ label = "call" ];
+}
+
+  "SelfPermit.selfPermit";
+  "SelfPermit.address";
+  "SelfPermit.selfPermitIfNecessary";
+  "SelfPermit.selfPermitAllowed";
+  "SelfPermit.selfPermitAllowedIfNecessary";
+  "SelfPermit.type";
+  "V2SwapRouter._swap";
+  "UniswapV2Library.sortTokens";
+  "UniswapV2Library.pairFor";
+  "IUniswapV2Pair.getReserves";
+  "V2SwapRouter.address";
+  "UniswapV2Library.getAmountOut";
+  "IUniswapV2Pair.swap";
+  "V2SwapRouter.swapExactTokensForTokens";
+  "V2SwapRouter.pay";
+  "V2SwapRouter.swapTokensForExactTokens";
+  "UniswapV2Library.getAmountsIn";
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee";
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee";
+  "PeripheryPaymentsWithFee.address";
+  "balanceWETH9.mul";
+  "TransferHelper.safeTransferETH";
+  "PeripheryPaymentsWithFee.sweepTokenWithFee";
+  "balanceToken.mul";
+  "TransferHelper.safeTransfer";
+  "PeripheryPayments.unwrapWETH9";
+  "PeripheryPayments.address";
+  "PeripheryPayments.sweepToken";
+  "PeripheryPayments.refundETH";
+  "PeripheryPayments.pay";
+  "TransferHelper.safeTransferFrom";
+  "token.call";
+  "TransferHelper.safeApprove";
+  "PeripheryPaymentsExtended.pull";
+  "UniswapV2Library.address";
+  "UniswapV2Library.getReserves";
+  "amountIn.mul";
+  "amountInWithFee.mul";
+  "reserveIn.mul";
+  "UniswapV2Library.getAmountIn";
+  "reserveOut.sub";
+  "V3SwapRouter.getPool";
+  "PoolAddress.computeAddress";
+  "PoolAddress.getPoolKey";
+  "V3SwapRouter.uniswapV3SwapCallback";
+  "CallbackValidation.verifyCallback";
+  "V3SwapRouter.exactOutputInternal";
+  "V3SwapRouter.exactInputInternal";
+  "amountIn.toInt256";
+  "V3SwapRouter.exactInputSingle";
+  "V3SwapRouter.exactInput";
+  "amountOut.toInt256";
+  "V3SwapRouter.exactOutputSingle";
+  "V3SwapRouter.exactOutput";
+  "TickMath.getSqrtRatioAtTick";
+  "TickMath.type";
+  "TickMath.getTickAtSqrtRatio";
+  "Path.decodeFirstPool";
+  "path.toAddress";
+  "path.toUint24";
+  "Path.getFirstPool";
+  "path.slice";
+  "Path.skipToken";
+  "PoolAddress.address";
+  "CallbackValidation.address";
+  "OracleSlippage.getBlockStartingAndCurrentTick";
+  "IUniswapV3Pool.slot0";
+  "IUniswapV3Pool.observations";
+  "OracleSlippage._blockTimestamp";
+  "OracleSlippage.getPoolAddress";
+  "OracleSlippage.getSyntheticTicks";
+  "path.numPools";
+  "path.decodeFirstPool";
+  "OracleLibrary.consult";
+  "OracleSlippage.address";
+  "path.skipToken";
+  "OracleSlippage.toInt24";
+  "OracleLibrary.getWeightedArithmeticMeanTick";
+  "OracleSlippage.checkOracleSlippage";
+  "OracleLibrary.type";
+  "OracleLibrary.getQuoteAtTick";
+  "FullMath.mulDiv";
+  "OracleLibrary.getBlockStartingTickAndLiquidity";
+  "FullMath.mulDivRoundingUp";
+  "FullMath.type";
+  "ApproveAndCall.tryApprove";
+  "ApproveAndCall.getApprovalType";
+  "ApproveAndCall.address";
+  "ApproveAndCall.type";
+  "ApproveAndCall.approveMax";
+  "ApproveAndCall.approveMaxMinusOne";
+  "ApproveAndCall.approveZeroThenMax";
+  "ApproveAndCall.approveZeroThenMaxMinusOne";
+  "ApproveAndCall.callPositionManager";
+  "positionManager.call";
+  "ApproveAndCall.balanceOf";
+  "ApproveAndCall.mint";
+  "INonfungiblePositionManager.MintParams";
+  "ApproveAndCall.increaseLiquidity";
+  "INonfungiblePositionManager.IncreaseLiquidityParams";
+  "MulticallExtended.multicall";
+  "Multicall.multicall";
+  "Multicall.delegatecall";
+  "Multicall.address";
+  "PeripheryValidationExtended.checkPreviousBlockhash";
+  "PeripheryValidationExtended.blockhash";
+  "PeripheryValidation.checkDeadline";
+  "PeripheryValidation._blockTimestamp";
+  "SelfPermit.selfPermit" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitIfNecessary" -> "SelfPermit.selfPermit" [ color = "green" ];
+  "SelfPermit.selfPermitAllowed" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.address" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.type" [ color = "green" ];
+  "SelfPermit.selfPermitAllowedIfNecessary" -> "SelfPermit.selfPermitAllowed" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.sortTokens" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.getReserves" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.getAmountOut" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter._swap" -> "IUniswapV2Pair.swap" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapExactTokensForTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.getAmountsIn" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.pay" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "UniswapV2Library.pairFor" [ color = "orange" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter.address" [ color = "green" ];
+  "V2SwapRouter.swapTokensForExactTokens" -> "V2SwapRouter._swap" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFeeExtended.unwrapWETH9WithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" -> "PeripheryPaymentsWithFeeExtended.sweepTokenWithFee" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "balanceWETH9.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.unwrapWETH9WithFee" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "balanceToken.mul" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPaymentsWithFee.sweepTokenWithFee" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.unwrapWETH9" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.refundETH" -> "TransferHelper.safeTransferETH" [ color = "orange" ];
+  "PeripheryPayments.refundETH" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "PeripheryPayments.address" [ color = "green" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransfer" [ color = "orange" ];
+  "PeripheryPayments.pay" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "TransferHelper.safeTransferFrom" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "orange" ];
+  "TransferHelper.safeApprove" -> "token.call" [ color = "orange" ];
+  "PeripheryPayments.unwrapWETH9" -> "PeripheryPayments.unwrapWETH9" [ color = "green" ];
+  "PeripheryPayments.sweepToken" -> "PeripheryPayments.sweepToken" [ color = "green" ];
+  "PeripheryPaymentsExtended.pull" -> "TransferHelper.safeTransferFrom" [ color = "orange" ];
+  "PeripheryPaymentsExtended.pull" -> "PeripheryPayments.address" [ color = "green" ];
+  "UniswapV2Library.sortTokens" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.pairFor" -> "UniswapV2Library.address" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.sortTokens" [ color = "green" ];
+  "UniswapV2Library.getReserves" -> "UniswapV2Library.pairFor" [ color = "green" ];
+  "UniswapV2Library.getAmountOut" -> "amountIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "amountInWithFee.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountOut" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveIn.mul" [ color = "orange" ];
+  "UniswapV2Library.getAmountIn" -> "reserveOut.sub" [ color = "orange" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getReserves" [ color = "green" ];
+  "UniswapV2Library.getAmountsIn" -> "UniswapV2Library.getAmountIn" [ color = "green" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "V3SwapRouter.getPool" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "CallbackValidation.verifyCallback" [ color = "orange" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.uniswapV3SwapCallback" -> "PeripheryPayments.pay" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactInputInternal" -> "amountIn.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInputSingle" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "V3SwapRouter.exactInputInternal" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactInput" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "PeripheryPaymentsWithFee.address" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "V3SwapRouter.getPool" [ color = "green" ];
+  "V3SwapRouter.exactOutputInternal" -> "amountOut.toInt256" [ color = "orange" ];
+  "V3SwapRouter.exactOutputSingle" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "V3SwapRouter.exactOutput" -> "V3SwapRouter.exactOutputInternal" [ color = "green" ];
+  "TickMath.getSqrtRatioAtTick" -> "TickMath.type" [ color = "green" ];
+  "TickMath.getTickAtSqrtRatio" -> "TickMath.getSqrtRatioAtTick" [ color = "green" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toUint24" [ color = "orange" ];
+  "Path.decodeFirstPool" -> "path.toAddress" [ color = "orange" ];
+  "Path.getFirstPool" -> "path.slice" [ color = "orange" ];
+  "Path.skipToken" -> "path.slice" [ color = "orange" ];
+  "PoolAddress.computeAddress" -> "PoolAddress.address" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.verifyCallback" [ color = "green" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "CallbackValidation.verifyCallback" -> "CallbackValidation.address" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.slot0" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "OracleSlippage._blockTimestamp" [ color = "green" ];
+  "OracleSlippage.getBlockStartingAndCurrentTick" -> "IUniswapV3Pool.observations" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.computeAddress" [ color = "orange" ];
+  "OracleSlippage.getPoolAddress" -> "PoolAddress.getPoolKey" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.numPools" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.decodeFirstPool" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getPoolAddress" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getBlockStartingAndCurrentTick" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.consult" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.address" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "path.skipToken" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleSlippage.toInt24" [ color = "green" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.getSyntheticTicks" -> "OracleLibrary.getWeightedArithmeticMeanTick" [ color = "orange" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleSlippage.checkOracleSlippage" -> "OracleSlippage.getSyntheticTicks" [ color = "green" ];
+  "OracleLibrary.consult" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "TickMath.getSqrtRatioAtTick" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "OracleLibrary.type" [ color = "green" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getQuoteAtTick" -> "FullMath.mulDiv" [ color = "orange" ];
+  "OracleLibrary.getBlockStartingTickAndLiquidity" -> "OracleLibrary.type" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.mulDiv" [ color = "green" ];
+  "FullMath.mulDivRoundingUp" -> "FullMath.type" [ color = "green" ];
+  "ApproveAndCall.tryApprove" -> "token.call" [ color = "orange" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.getApprovalType" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMax" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.tryApprove" [ color = "green" ];
+  "ApproveAndCall.approveZeroThenMaxMinusOne" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.callPositionManager" -> "positionManager.call" [ color = "orange" ];
+  "ApproveAndCall.balanceOf" -> "ApproveAndCall.address" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.mint" -> "INonfungiblePositionManager.MintParams" [ color = "orange" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.mint" -> "ApproveAndCall.type" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.callPositionManager" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "INonfungiblePositionManager.IncreaseLiquidityParams" [ color = "orange" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.balanceOf" [ color = "green" ];
+  "ApproveAndCall.increaseLiquidity" -> "ApproveAndCall.type" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "MulticallExtended.multicall" -> "MulticallExtended.multicall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.delegatecall" [ color = "green" ];
+  "Multicall.multicall" -> "Multicall.address" [ color = "green" ];
+  "PeripheryValidationExtended.checkPreviousBlockhash" -> "PeripheryValidationExtended.blockhash" [ color = "green" ];
+  "PeripheryValidation.checkDeadline" -> "PeripheryValidation._blockTimestamp" [ color = "green" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i2">Custom Error Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+key:i2:e -> key2:i2:w [color="red"]
+}
+}
+
